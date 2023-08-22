@@ -1,0 +1,214 @@
+{% extends 'rotina_modulo/base.html' %}
+{% load shared_components %}
+
+{% block body %}
+
+{% Form titulo=form.instance.titulo form=form enctype="multipart/form-data" %}
+
+
+<div class="d-flex flex-row-reverse bd-highlight mb-3">
+  <div class="justify-content-end">
+    {% if form.instance.anterior %}
+      {% if form.instance.de_modulo %}
+          <a class="btn btn-secondary" href="{% url 'rotina_modulo:livro-imprime-data' form.instance.modulo.uuid  %}" target=”_blank”>Imprimir por Data <i class="fa-regular fa-calendar"></i></a>
+      {% else %}
+          <a class="btn btn-secondary" href="{% url 'rotina_modulo:livro-c2-imprime-data' form.instance.unidade.uuid  %}" target=”_blank”>Imprimir por Data <i class="fa-regular fa-calendar"></i></a>
+      {% endif %}
+
+      <a class="btn btn-secondary" href="{% url 'livro:livro-report' form.instance.anterior.uuid  %}" target=”_blank” >Imprimir Livro Anterior <i class="fa-solid fa-print"></i> </a>
+    {% endif %}
+    <a class="btn btn-secondary" href="{% url 'livro:livro-report' form.instance.uuid  %}" target=”_blank” >Imprimir Livro <i class="fa-solid fa-print"></i> </a>
+    
+    
+    {% if 'livro.incluir_livro_modulos' in perms %}
+        <button type="submit" name="novo_plantao" value="Save&Next"class="btn btn-primary">Passar Plantão <i class="fa-solid fa-door-open"></i> </button>
+    {% endif %}
+    
+    {% if 'livro.editar_livro_modulos' in perms %}
+        <button type="submit" class="btn btn-success">Salvar</button>
+    {% endif %}
+  </div>
+</div>
+
+<fieldset class="border rounded p-3 bg-light my-3">
+  <div class="row ">
+    <div class="col-md-4">
+      {% LabeledInput field=form.servidor_passagem_anterior%} {% /LabeledInput %}
+    </div>
+    <div class="col-md-4">
+      {% LabeledInput field=form.servidor_recebimento %} {% /LabeledInput %}
+    </div>
+    <div class="col-md-4">
+      {% LabeledInput field=form.data_abertura %} {% /LabeledInput %}
+    </div>
+</div>
+</fieldset>
+
+<fieldset class="border rounded p-3 bg-light my-3">
+  <div class="row ">
+    <div class="col-md-12">
+      {% LabeledInput field=form.plantonistas %} {% /LabeledInput %}
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-md-12">
+      {% LabeledInput field=form.ausencias %} {% /LabeledInput %}
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-md-12">
+      {% LabeledInput field=form.expediente %} {% /LabeledInput %}
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-md-12">
+      {% LabeledInput field=form.observacoes %} {% /LabeledInput %}
+    </div>
+  </div>
+</fieldset>
+
+
+
+  {% Fieldset legenda="Acompanhamento do Plantão" class="col-lg-12 border rounded my-2 p-3 bg-light mb-3 "%}
+
+  {% InlineFormset formset=acompanhamentos inline_permission='livro.editar_livro_modulos' %}
+  {% arg empty_form %}
+  <div class="row justify-content-center">
+    {{ acompanhamentos.empty_form.id }}
+    <div class="col-md-3 mb-2">
+      {% LabeledInput field=acompanhamentos.empty_form.data_hora %}{% /LabeledInput %}
+      {{acompanhamentos.empty_form.livro}}
+    </div>
+    <div class="col-md-8 mb-2">
+      {% LabeledInput field=acompanhamentos.empty_form.descricao %}{% /LabeledInput %}
+    </div>
+    <div class="col-md-1 mt-auto">
+      {{acompanhamentos.empty_form.DELETE}} <small class="text-danger fw-bold">apagar</small>
+    </div>
+
+  </div>
+  {% endarg %}
+
+  {% for acompanhamento in acompanhamentos %}
+  
+  {{ acompanhamento.id }}
+  {{acompanhamento.livro }}
+  <div class="row justify-content-center">
+    <div class="col-md-3 mb-2">
+      {% LabeledInput field=acompanhamento.data_hora %}{% /LabeledInput %}
+    </div>
+    <div class="col-md-8 mb-2">
+      {% LabeledInput field=acompanhamento.descricao %}{% /LabeledInput %}
+    </div>
+    {% if 'livro.editar_livro_modulos' in perms %}
+      <div class="col-md-1 mt-auto">
+        {{acompanhamento.DELETE}} <small class="text-danger fw-bold">apagar</small>
+      </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+
+  {% /InlineFormset%}
+  {% /Fieldset %}
+
+  <fieldset class="border rounded p-3 bg-light my-3">
+
+    <ul class="nav nav-tabs mb-2" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="avisos-tab" data-bs-toggle="tab" data-bs-target="#avisos" type="button" role="tab" aria-controls="avisos" aria-selected="true">Avisos</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="patrimonio-tab" data-bs-toggle="tab" data-bs-target="#patrimonio" type="button" role="tab" aria-controls="patrimonio" aria-selected="false">Patrimônio</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="instalacoes-tab" data-bs-toggle="tab" data-bs-target="#instalacoes" type="button" role="tab" aria-controls="instalacoes" aria-selected="false">Instalações</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="medicacoes-tab" data-bs-toggle="tab" data-bs-target="#medicacoes" type="button" role="tab" aria-controls="medicacoes" aria-selected="false">Medicações</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="evasoes-tab" data-bs-toggle="tab" data-bs-target="#evasoes" type="button" role="tab" aria-controls="evasoes" aria-selected="false">Evasões</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="vigilancia_noturna-tab" data-bs-toggle="tab" data-bs-target="#vigilancia_noturna" type="button" role="tab" aria-controls="vigilancia_noturna" aria-selected="false">Vigilância Noturna</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="alimentacao-tab" data-bs-toggle="tab" data-bs-target="#alimentacao" type="button" role="tab" aria-controls="alimentacao" aria-selected="false">Alimentação</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="avisos" role="tabpanel" aria-labelledby="avisos-tab">
+        <div class="row mt-2">
+          <div class="col-md-12">
+            {% LabeledInput field=form.avisos%} {% /LabeledInput %}
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="patrimonio" role="tabpanel" aria-labelledby="patrimonio-tab">
+        <div class="row mt-2">
+          <div class="col-md-12">
+            {% LabeledInput field=form.patrimonio%} {% /LabeledInput %}
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="instalacoes" role="tabpanel" aria-labelledby="instalacoes-tab">
+        <div class="row mt-2">
+          <div class="col-md-12">
+            {% LabeledInput field=form.instalacoes%} {% /LabeledInput %}
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="medicacoes" role="tabpanel" aria-labelledby="medicacoes-tab">
+        <div class="row mt-2">
+          <div class="col-md-12">
+            {% LabeledInput field=form.medicacoes%} {% /LabeledInput %}
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="evasoes" role="tabpanel" aria-labelledby="evasoes-tab">
+        <div class="row mt-2">
+          <div class="col-md-12">
+            {% LabeledInput field=form.evasoes%} {% /LabeledInput %}
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="vigilancia_noturna" role="tabpanel" aria-labelledby="vigilancia_noturna-tab">
+        <div class="row mt-2">
+          <div class="col-md-12">
+            {% LabeledInput field=form.vigilancia_noturna%} {% /LabeledInput %}
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="alimentacao" role="tabpanel" aria-labelledby="alimentacao-tab">
+        <div class="row mt-2">
+          <div class="col-md-12">
+            {% LabeledInput field=form.alimentacao%} {% /LabeledInput %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+      
+  </fieldset>
+
+  {% arg botao_salvar %}
+    {% if 'livro.editar_livro_modulos' in perms %}
+        <button type="submit" class="btn btn-success">Salvar</button>
+    {% endif %}
+  {% endarg %}
+
+{% /Form %}
+
+
+
+{% endblock %}
+
+
+
+{% block js %}
+<script>
+  $(function(){
+    $("#id_plantonistas").bsMultiSelect();
+  });
+</script>
+{% endblock %}

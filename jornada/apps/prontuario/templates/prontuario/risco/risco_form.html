@@ -1,0 +1,53 @@
+{% extends "prontuario/base.html" %}
+{% load shared_components %}
+
+
+
+{% block body %}
+
+
+
+{% Form form=form enctype="multipart/form-data" url_name_prefix="prontuario:risco" %}
+{{form.errors}}
+
+<fieldset class="border rounded p-3 bg-light my-3">
+  <div class="row ">
+    <div class="col-md-3">
+      {% LabeledInput field=form.data_registro %} {% /LabeledInput %}
+    </div>
+    <div class="col-md-3 ">
+      {% LabeledInput field=form.tipo_risco%} {% /LabeledInput %}
+    </div>
+    <div class="col-md-3 my-auto">
+      {% LabeledInput field=form.ativo%} {% /LabeledInput %}
+    </div>
+  </div>
+</fieldset>
+
+
+<fieldset class="border rounded p-3 bg-light my-3">
+  <div class="row ">
+    <div class="col-md-12">
+      {% LabeledInput field=form.descricao%} {% /LabeledInput %}
+    </div>
+  </div>
+</fieldset>
+
+{% arg botao_voltar %}
+
+    {% url 'prontuario:risco-list' adolescente.uuid as voltar_url %}
+    {% BotaoVoltar url=voltar_url %}{% /BotaoVoltar %}
+
+{% endarg %}
+
+
+{% /Form %}
+
+
+{% endblock %}
+
+{% block js %}
+<script>
+  $("#id_tipo_risco").bsMultiSelect();
+</script>
+{% endblock %}

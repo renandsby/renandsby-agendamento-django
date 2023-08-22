@@ -1,0 +1,67 @@
+	<div>
+			<div class="card border-rounded color-background-links">
+					<div class="row m-2">
+							<div class="col-md-12 d-flex justify-content-around">
+									<div class="text-link-estatistica">
+											<a href="{% url 'estatistica:dashboard_estatistica'%}"><i class="fa-solid fa-house"></i> Home</a>
+									</div>
+									<!-- início links -->
+									<div class="dropdown">
+											<span class="text-link-estatistica"><i class="fa-solid fa-chart-column"></i> Dados Gerais</span>
+											<div class="dropdown-content">
+													<div class="text-link-estatistica">
+															<a href="{% url 'estatistica:dashboard_esp_tipo_entrada' %}"><i class="fa-solid fa-chart-gantt"></i> Entradas</a>
+													</div>
+													<div class="text-link-estatistica">
+														<a href="{% url 'estatistica:dashboard_esp_atividades' %}"><i class="fa-solid fa-chart-gantt"></i> Atividades realizadas</a>
+													</div>
+													<div class="text-link-estatistica">
+														<a href="{% url 'estatistica:dashboard_avancado_por_idade' %}"><i class="fa-solid fa-chart-gantt"></i> Adolescentes por idade</a>
+													</div>
+													<!-- <div class="text-link-estatistica">
+														<a href="{% url 'estatistica:dashboard_esp_situacao_escolar' %}"><i class="fa-solid fa-chart-gantt"></i> Situação escolar</a>
+													</div> -->
+													<div class="text-link-estatistica">
+															<a href="{% url 'estatistica:adolescente_por_ra' %}"><i class="fa-solid fa-chart-gantt"></i> Adolescentes por RA </a>
+													</div>
+													<div class="text-link-estatistica">
+						<a href="{% url 'estatistica:adolescente_por_genero' %}"><i class="fa-solid fa-chart-gantt"></i>
+							Adolescentes por Gênero </a>
+					</div>
+						
+											</div>
+									</div>
+									<!-- Fim links -->
+									<!-- início links -->
+									<div class="dropdown">
+											<span class="text-link-estatistica"><i class="fa-solid fa-chart-column"></i> Internação</span>
+											<div class="dropdown-content">
+													<div class="text-link-estatistica">
+															<a href="{% url 'estatistica:dashboard_esp_internacao_unidades' %}"><i class="fa-solid fa-chart-gantt"></i> Adolescentes</a>
+													</div>
+											</div>
+									</div>
+									<!-- Fim links -->
+									<!-- início links -->
+									<div class="dropdown">
+											<span class="text-link-estatistica"><i class="fa-solid fa-chart-column"></i> Semiliberdade</span>
+											<div class="dropdown-content">
+													<div class="text-link-estatistica">
+															<a href="#"><i class="fa-solid fa-chart-gantt"></i> Adolescentes</a>
+													</div>
+											</div>
+									</div>
+									<!-- Fim links -->
+									<!-- início links -->
+									<div class="dropdown">
+											<span class="text-link-estatistica"><i class="fa-solid fa-chart-column"></i> Meio Aberto</span>
+											<div class="dropdown-content">
+												<div class="text-link-estatistica">
+															<a href="#"><i class="fa-solid fa-chart-gantt"></i> Adolescentes</a>
+													</div>
+											</div>
+									</div>
+									<!-- Fim links -->
+							</div>
+					</div>
+	</div>

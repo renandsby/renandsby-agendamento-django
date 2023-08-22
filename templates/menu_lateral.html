@@ -1,0 +1,46 @@
+<li class="nav-item menu-item justify-content-center">
+    <a href="/" class="text-truncate menu-item-text">
+        Home
+    </a>
+</li> 
+ 
+{% if 'solicitacoes.ver' in perms %}
+    <li class="nav-item menu-item justify-content-center">
+        <a href="{% url 'central:solicitacao-list' %}" class="text-truncate menu-item-text">
+            Solicitações
+        </a>
+    </li> 
+{% endif %}
+{% if 'alteracoes_vinculo.ver_vinculacoes' in perms %}
+    <li class="nav-item menu-item justify-content-center">
+        <a href="{% url 'central:vinculacao-list' %}" class="text-truncate menu-item-text">
+            Vinculações
+        </a>
+    </li> 
+{% endif %}
+{% if 'alteracoes_vinculo.ver_transferencias' in perms %}
+    <li class="nav-item menu-item justify-content-center">
+        <a href="{% url 'central:transferencia-list' %}" class="text-truncate menu-item-text">
+            Transferências
+        </a>
+    </li> 
+{% endif %}
+{% if 'alteracoes_vinculo.ver_desvinculacoes' in perms %}
+    <li class="nav-item menu-item justify-content-center">
+        <a href="{% url 'central:desvinculacao-list' %}" class="text-truncate menu-item-text">
+            Desvinculações
+        </a>
+    </li> 
+{% endif %}
+
+<li class="nav-item menu-item justify-content-center">
+    <a href="{% url 'prontuario:adolescente-list' %}" class="text-truncate menu-item-text">
+        Prontuários
+    </a>
+</li> 
+
+<li class="nav-item menu-item justify-content-center">
+    <a href="{% url 'rede_de_apoio:rede-list' %}" class="text-truncate menu-item-text">
+        Rede de Apoio
+    </a>
+</li> 

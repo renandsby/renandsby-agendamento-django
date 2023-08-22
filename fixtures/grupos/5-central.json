@@ -1,0 +1,25 @@
+[
+    {
+        "model": "auth.group",
+        "fields": {
+            "name": "Central",
+            "permissions": [
+                [
+                    "editar_todos",
+                    "adolescentes",
+                    "adolescente"
+                ],
+                [
+                    "ver_todos",
+                    "adolescentes",
+                    "adolescente"
+                ],
+                [
+                    "acessar_todas",
+                    "unidades",
+                    "unidade"
+                ]
+            ]
+        }
+    }
+]

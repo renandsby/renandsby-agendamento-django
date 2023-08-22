@@ -1,0 +1,49 @@
+{% load shared_components %}
+<form 
+  {% if method %} method = "{{method}}" 
+  {% else %} method="POST" 
+  {% endif %}
+  enctype="{{enctype}}" 
+  {% if class %}class="{{class}}"{% endif %}
+  {% if novalidate %} novalidate  {% endif %}
+>
+{% Fieldset titulo=titulo legenda=legenda %}
+
+  {% csrf_token %}
+    
+  {% FormErrors form=form %}{% /FormErrors %}
+<!--   
+  {% if form.errors or form.non_field_errors %}
+  <div class="alert alert-danger">
+      {% for field, errors in form|nice_errors %}
+        <div class="row">
+          <div class="col-12">
+            
+              <strong>{{ field }}:</strong>&nbsp;
+              
+              {% for error in errors %}
+              {{error}}{% if not forloop.last %}, {% endif %}
+              {% endfor %}
+            
+          </div>
+        </div>
+      {% endfor %}
+  </div>
+  {% endif %} -->
+      
+  {{children}}
+  
+  <div class="d-flex flex-row-reverse gap-2 my-4">
+    {% if botao_salvar%}
+      {{ botao_salvar }}
+    {% else %}
+      <button class="btn btn-primary">Salvar</button>
+    {% endif %}
+
+    {{ botao_voltar }}
+    {{ botao_deletar }}
+    {{ botoes_extra }}
+  </div>
+  {% /Fieldset %}
+
+</form>

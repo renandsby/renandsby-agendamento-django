@@ -1,0 +1,107 @@
+[
+    {
+        "model": "auth.group",
+        "fields": {
+            "name": "Gestor Semiliberdade",
+            "permissions": [
+                [
+                    "editar_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ],
+                [
+                    "ver_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ],
+                [
+                    "ver_chegadas",
+                    "unidades",
+                    "entradaadolescente"
+                ],
+                [
+                    "ver_saidas",
+                    "unidades",
+                    "entradaadolescente"
+                ],
+                [
+                    "editar_entradas",
+                    "unidades",
+                    "entradaadolescente"
+                ],
+                [
+                    "incluir_livro_modulos",
+                    "livro",
+                    "livro"
+                ],
+                [
+                    "editar",
+                    "atividades",
+                    "atividade"
+                ],
+                [
+                    "ver",
+                    "solicitacoes",
+                    "solicitacao"
+                ]
+            ]
+        }
+    },
+    {
+        "model": "auth.group",
+        "fields": {
+            "name": "Servidor Semiliberdade",
+            "permissions": [
+                [
+                    "editar_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ],
+                [
+                    "ver_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ],
+                [
+                    "ver_chegadas",
+                    "unidades",
+                    "entradaadolescente"
+                ],
+                [
+                    "ver_saidas",
+                    "unidades",
+                    "entradaadolescente"
+                ],
+                [
+                    "incluir_livro_modulos",
+                    "livro",
+                    "livro"
+                ],
+                [
+                    "editar_entradas",
+                    "unidades",
+                    "entradaadolescente"
+                ]
+
+            ]
+        }
+    },
+    {
+        "model": "auth.group",
+        "fields": {
+            "name": "Administrativo Semiliberdade",
+            "permissions": [
+                [
+                    "editar_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ],
+                [
+                    "ver_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ]
+            ]
+        }
+    }
+]

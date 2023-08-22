@@ -1,0 +1,20 @@
+[
+    {
+        "model": "auth.group",
+        "fields": {
+            "name": "TJDFT",
+            "permissions": [
+                [
+                    "ver",
+                    "solicitacoes",
+                    "solicitacao"
+                ],
+                [
+                    "editar",
+                    "solicitacoes",
+                    "solicitacao"
+                ]
+            ]
+        }
+    }
+]

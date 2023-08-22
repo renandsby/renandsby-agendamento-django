@@ -1,0 +1,448 @@
+{% extends "prontuario/base.html" %}
+{% load shared_components %}
+
+
+
+{% block body %}
+
+
+
+{% Form form=form enctype="multipart/form-data" novalidate=True %}
+
+    {{form.errors}}
+    {{form.unidade}}
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="atendimento-tab" data-bs-toggle="tab" data-bs-target="#atendimento-tab-pane" type="button" role="tab" aria-controls="atendimento-tab-pane" aria-selected="true">Atendimento</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="saude-tab" data-bs-toggle="tab" data-bs-target="#saude-tab-pane" type="button" role="tab" aria-controls="saude-tab-pane" aria-selected="false">Saúde</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="educao-tab" data-bs-toggle="tab" data-bs-target="#educao-tab-pane" type="button" role="tab" aria-controls="educao-tab-pane" aria-selected="false">Educação</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="profissional-tab" data-bs-toggle="tab" data-bs-target="#profissional-tab-pane" type="button" role="tab" aria-controls="profissional-tab-pane" aria-selected="false">Profissional</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="religiao-tab" data-bs-toggle="tab" data-bs-target="#religiao-tab-pane" type="button" role="tab" aria-controls="religiao-tab-pane" aria-selected="false">Religião e Relações</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="lazer-tab" data-bs-toggle="tab" data-bs-target="#lazer-tab-pane" type="button" role="tab" aria-controls="lazer-tab-pane" aria-selected="false">Cultura/Lazer</button>
+        </li>
+
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="esporte-tab" data-bs-toggle="tab" data-bs-target="#esporte-tab-pane" type="button" role="tab" aria-controls="esporte-tab-pane" aria-selected="false">Esporte e Habilidades</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="governo-tab" data-bs-toggle="tab" data-bs-target="#governo-tab-pane" type="button" role="tab" aria-controls="governo-tab-pane" aria-selected="false">Programas do Gov</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="acompanhamento-tab" data-bs-toggle="tab" data-bs-target="#acompanhamento-tab-pane" type="button" role="tab" aria-controls="acompanhamento-tab-pane" aria-selected="false">Acompanhamento</button>
+        </li>
+    
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="atendimento-tab-pane" role="tabpanel" aria-labelledby="atendimento-tab" tabindex="0">
+            <fieldset class="border rounded p-3 bg-light my-3">
+                <legend  class="row justify-content-center">Atendimento  </legend>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                    {% LabeledInput field=form.levantamento_contexto_familiar %} {% /LabeledInput %}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-3">
+                    {% LabeledInput field=form.data_atendimento %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-3">
+                        {% LabeledInput field=form.uf %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-3">
+                        {% LabeledInput field=form.cidade %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.tecnico_1 %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.tecnico_2 %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.tecnico_3 %} {% /LabeledInput %}
+                    </div> 
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.servidor_referencia %} {% /LabeledInput %}
+                    </div>
+                    <!-- <div class="col-md-10">
+                        {% LabeledInput field=form.equipe_referencia %} {% /LabeledInput %}
+                    </div> -->
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                    {% LabeledInput field=form.composicao_familiar %} {% /LabeledInput %}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                    {% LabeledInput field=form.renda_familiar %} {% /LabeledInput %}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                    {% LabeledInput field=form.qtd_integrantes_familiar %} {% /LabeledInput %}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                    {% LabeledInput field=form.qtd_filhos_adolescente %} {% /LabeledInput %}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                    {% LabeledInput field=form.historico_infracional %} {% /LabeledInput %}
+                    </div>
+                </div>
+            </fieldset>
+            
+        </div>
+        <div class="tab-pane fade" id="saude-tab-pane" role="tabpanel" aria-labelledby="saude-tab" tabindex="0">
+            <fieldset class="border rounded p-3 bg-light my-3">
+                <legend  class="row justify-content-center">Saúde</legend>
+                <div class="row justify-content-center">
+                    <div class="col-md-3">
+                    {% LabeledInput field=form.avaliacao_de_especialista %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-7">
+                        {% LabeledInput field=form.descricao_avaliacao_especialista %} {% /LabeledInput %}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-3">
+                    {% LabeledInput field=form.uso_de_drogas %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-7">
+                        {% LabeledInput field=form.descricao_uso_de_drogas %} {% /LabeledInput %}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                    {% LabeledInput field=form.historico_clinico %} {% /LabeledInput %}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                    {% LabeledInput field=form.diagnostico_da_equipe_saude %} {% /LabeledInput %}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                    {% LabeledInput field=form.metas_e_objetivos_adolescente_saude %} {% /LabeledInput %}
+                    </div>
+                </div>
+        
+            </fieldset>
+
+        </div>
+        <div class="tab-pane fade" id="educao-tab-pane" role="tabpanel" aria-labelledby="educao-tab" tabindex="0">
+            <fieldset class="border rounded p-3 bg-light my-3" >
+                <legend  class="row justify-content-center">Educação</legend>
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        {% LabeledInput field=form.alfabetizado %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-5">
+                        {% LabeledInput field=form.matriculado %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-5">
+                        {% LabeledInput field=form.situacao_escolar %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-5">
+                        {% LabeledInput field=form.escolaridade %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-5">
+                        {% LabeledInput field=form.escolaridade %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-5">
+                        {% LabeledInput field=form.tem_carteirinha %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-3">
+                        {% LabeledInput field=form.desistencia %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-7">
+                        {% LabeledInput field=form.motivo_desistencia %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.historico_escolar %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.avaliacao_pedagica %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.diagnostico_situacional_da_equipe_educacao %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.metas_e_objetivos_profissionais_adolescente_educacao %} {% /LabeledInput %}
+                    </div>
+            </fieldset>
+            
+        </div>
+        <div class="tab-pane fade" id="profissional-tab-pane" role="tabpanel" aria-labelledby="profissional-tab" tabindex="0">
+            <fieldset class="border rounded p-3 bg-light my-3" >
+                <legend  class="row justify-content-center">Iniciação Profissional</legend>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.situacao_profissional %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-3">
+                        {% LabeledInput field=form.ja_participou_de_curso %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-7">
+                        {% LabeledInput field=form.descricao_cursos %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.diagnostico_situacional_da_equipe_profissionalizacao %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.metas_e_objetivos_profissionais_adolescente_profissionalizacao %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-3">
+                        {% LabeledInput field=form.tem_curriculo %} {% /LabeledInput %}
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="border rounded p-3 bg-light mb-3">
+
+                {% InlineFormset formset=anexos %}
+                    {{anexos.non_form_errors}}
+                    {% arg empty_form %}
+                        {{ anexos.empty_form.id }}
+                        {{ anexos.empty_form.anexo_pia }}
+                        
+                        <div class="row justify-content-center">
+                            <div class="col-md-6 mt-auto mb-2">
+                                {% LabeledInput field=anexos.empty_form.anexo %}{% /LabeledInput %}
+                            </div>
+                            <div class="col-md-2 mt-auto mb-2">
+                                {% LabeledInput field=anexos.empty_form.DELETE %}{% /LabeledInput %}
+                            </div>
+                        </div>
+
+                    {% endarg %}
+
+                    {% for anexo in anexos %}
+                        {% FormErrors form=anexo %}{% /FormErrors %}
+                        {{anexo.errors}}
+                        {{ anexo.id }}
+                        {{anexo.anexo_pia }}
+                    
+                        <div class="row justify-content-center">
+                            <div class="col-md-6 mt-auto mb-2">
+                                {% LabeledInput field=anexo.anexo %}{% /LabeledInput %}
+                            </div>
+                            <div class="col-md-2 mt-auto mb-2">
+                                {% if anexo.instance.criado_por == request.user or not anexo.instance.pk %}
+                                    {% LabeledInput field=anexo.DELETE %}{% /LabeledInput %}
+                                {% else %}
+                                    <small class="fst-italic" style="color: #777474;"> criado por: {{anexo.instance.criado_por}} </small>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+              
+                {% /InlineFormset%}
+              </fieldset>
+                
+
+        </div>
+        <div class="tab-pane fade" id="religiao-tab-pane" role="tabpanel" aria-labelledby="religiao-tab" tabindex="0">
+            <fieldset class="border rounded p-3 bg-light my-3" >
+                <legend  class="row justify-content-center">Crença Religiosa </legend>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                    {% LabeledInput field=form.crenca %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.diagnostico_situacional_da_equipe_religiao %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.metas_e_objetivos_profissionais_adolescente_religiao %} {% /LabeledInput %}
+                    </div>
+                </div>
+            </fieldset>  
+            <fieldset class="border rounded p-3 bg-light my-3" >
+                <legend  class="row justify-content-center">Relação Afetiva De Amizade E De Gênero</legend>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                    {% LabeledInput field=form.relacao_afetiva %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.diagnostico_situacional_da_equipe_relacao_afetiva %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.metas_e_objetivos_profissionais_adolescente_relacao_afetiva %} {% /LabeledInput %}
+                    </div>
+                </div>
+            </fieldset>      
+        </div>
+        <div class="tab-pane fade" id="lazer-tab-pane" role="tabpanel" aria-labelledby="lazer-tab" tabindex="0">
+            <fieldset class="border rounded p-3 bg-light my-3" >
+                <legend  class="row justify-content-center">Lazer</legend>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                    {% LabeledInput field=form.lazer %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.diagnostico_situacional_da_equipe_lazer %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.metas_e_objetivos_profissionais_adolescente_lazer %} {% /LabeledInput %}
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="border rounded p-3 bg-light my-3" >
+                <legend  class="row justify-content-center">Cultura</legend>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                    {% LabeledInput field=form.cultura %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.diagnostico_situacional_da_equipe_cultura %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.metas_e_objetivos_profissionais_adolescente_cultura %} {% /LabeledInput %}
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="tab-pane fade" id="cultura-tab-pane" role="tabpanel" aria-labelledby="cultura-tab" tabindex="0">
+            
+        </div>
+        <div class="tab-pane fade" id="esporte-tab-pane" role="tabpanel" aria-labelledby="esporte-tab" tabindex="0">
+            <fieldset class="border rounded p-3 bg-light my-3" >
+                <legend  class="row justify-content-center">Esporte</legend>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                    {% LabeledInput field=form.esporte %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.diagnostico_situacional_da_equipe_esporte %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.metas_e_objetivos_profissionais_adolescente_esporte %} {% /LabeledInput %}
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="border rounded p-3 bg-light my-3" >
+       
+                <legend  class="row justify-content-center">Sondagaaaaaaem De Apitidões, Habilidades e Motivações</legend>
+            </fieldset>
+        
+        
+        </div>
+        <div class="tab-pane fade" id="habilidade-tab-pane" role="tabpanel" aria-labelledby="habilidade-tab" tabindex="0">
+  
+        
+        </div>
+        <div class="tab-pane fade" id="governo-tab-pane" role="tabpanel" aria-labelledby="governo-tab" tabindex="0">
+          
+            <fieldset class="border rounded p-3 bg-light my-3" >
+                <legend  class="row justify-content-center">Atividade De Integração Familiar</legend>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                    {% LabeledInput field=form.integracao_familiar %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.diagnostico_situacional_da_equipe_integracao_familiar %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.metas_e_objetivos_profissionais_adolescente_integracao_familiar %}aaaaaaaa {% /LabeledInput %}
+                    </div>
+                </div>
+                <legend  class="row justify-content-center"></legend>
+            </fieldset>
+            <fieldset class="border rounded p-3 bg-light my-3" >
+                <legend  class="row justify-content-center">Inclusão Da Família Em Programas Do Governo</legend>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                    {% LabeledInput field=form.programas_governo %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.diagnostico_situacional_da_equipe_governo %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.metas_e_objetivos_profissionais_adolescente_governo %} {% /LabeledInput %}
+                    </div>
+                </div>
+            </fieldset>
+        
+        </div>
+        <div class="tab-pane fade" id="acompanhamento-tab-pane" role="tabpanel" aria-labelledby="acompanhamento-tab" tabindex="0">
+            <fieldset class="border rounded p-3 bg-light my-3" >
+                <legend  class="row justify-content-center">Acompanhamento Do Percurso Do Adolescente</legend>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.consideracao_equipe_referencia %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.registro_de_incidente %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.visita_familiares_domiciliares %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.registro_fatos_positivos %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.atividades_interna_regras_institucionais %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.atividade_externa_participacao_atividadess %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.atividade_integracao_familiar %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.medidades_saude %} {% /LabeledInput %}
+                    </div>
+                    <div class="col-md-10">
+                        {% LabeledInput field=form.parecer_tecnico %} {% /LabeledInput %}
+                    </div>
+                </div>
+            </fieldset>
+            
+        </div>
+      </div>
+      
+
+    {% arg botao_voltar %}
+
+        {% url 'prontuario:pia-list' adolescente.uuid as voltar_url %}
+        {% BotaoVoltar url=voltar_url %}{% /BotaoVoltar %}
+
+    {% endarg %}
+
+
+
+{% /Form %}
+
+
+{% endblock %}
+
+
+{% block js %}
+
+{% comment %} https://www.jqueryscript.net/form/Bootstrap-4-Multi-Select-BsMultiSelect.html {% endcomment %}
+<script>
+  $(function(){
+    $("#id_agente_referencia").bsMultiSelect();
+    $("#id_orientador").bsMultiSelect();
+  });
+
+
+  $(document).ready(function () {
+//    alert('teste')
+  });
+
+</script>
+{% endblock %}

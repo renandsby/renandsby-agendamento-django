@@ -1,0 +1,24 @@
+volumes:
+  jornada_pg_data:
+    name: jornada_pg_data
+
+networks:
+  jornada_backend:
+    external: true
+
+services:
+  db:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.pg
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - 5432:5432
+    volumes:
+      - "jornada_pg_data:/var/lib/postgresql/data"
+    networks:
+      - jornada_backend

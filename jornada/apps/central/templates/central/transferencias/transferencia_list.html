@@ -1,0 +1,162 @@
+{% extends "central/base.html" %}
+{% load shared_components %}
+
+{% block body %}
+
+
+{% Fieldset titulo="Transferências" %}
+{% if 'alteracoes_vinculo.criar_transferencias' in perms %}
+    <a 
+    class="btn btn-primary color-white"
+    href="{% url 'central:transferencia-create'%}"
+    > 
+    <i class="fas fa-plus-circle"></i>
+    Nova Transferência
+  </a>
+{% endif %}
+  {% Filtros %}{% /Filtros %}
+<div class="table-responsive-xl">
+
+  <table class="table border table-hover align-middle">
+    <thead class='table-blue'>
+      <tr>
+        <th scope="col">Data</th>
+        <th scope="col">Adolescente</th>
+        <th scope="col">Processo</th>
+        <th scope="col">Unidade Origem</th>
+        <th scope="col">Unidade Destino</th>
+        <th scope="col">Status</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for transferencia in page_obj %}
+        <tr>
+          <td>
+            <small>
+              {{transferencia.criado_em|date:"d/m/Y"}}
+            </small>
+          </td>
+
+          <td>
+              {% if transferencia.adolescente %}
+                {{transferencia.adolescente.nome}}
+                <a href="{% url 'prontuario:adolescente-update' transferencia.adolescente.uuid %}" class="mx-1" data-bs-toggle="tooltip"
+                data-bs-placement="top" title="Prontuário">
+                <i class="text-info fs-8 fa-solid fa-clipboard"></i>
+                </a>
+              {% endif %}
+              
+          </td>
+
+          <td>
+            <small>
+              {% if transferencia.processo %}
+                {{transferencia.processo.str_sem_nome}}
+              {% endif %}
+            </small>
+          </td>
+          
+          <td>
+            <small class="text-center">
+            {{transferencia.unidade_origem.sigla|default:""}}
+            </small>
+          </td>
+
+          <td>
+            <small class="text-center">
+            {{transferencia.unidade_destino.sigla|default:""}}
+            </small>
+          </td>
+
+            <td>
+              {% if transferencia.get_status_display == "Pendente" %}
+                <span class="badge bg-warning">{{transferencia.get_status_display}}</span>
+              {% elif transferencia.get_status_display == "Realizada" %}
+                <span class="badge bg-success">{{transferencia.get_status_display}}</span>
+                
+                
+                {% if transferencia.entrada_antiga.status == 3 %}
+                  <span class="badge bg-warning">Saída Pendente em {{transferencia.entrada_antiga.unidade.sigla}}</span>
+                {% elif transferencia.entrada_criada.status == 1 %}
+                  <span class="badge bg-warning">Entrada Pendente em {{transferencia.entrada_criada.unidade.sigla}}</span>
+                {% elif transferencia.entrada_criada.status > 1 %}
+                  <span class="badge bg-primary">Saída Realizada em {{transferencia.entrada_criada.unidade.sigla}}</span>
+                {% endif %}
+
+              {% elif transferencia.get_status_display == "Cancelado" %}
+                <span class="badge bg-danger">{{transferencia.get_status_display}}</span>
+              {% endif %}
+            </td>
+            
+            <td>
+              
+              {% if transferencia.status == 2 %}
+                {% if not transferencia.entrada_criada.status > 1 and transferencia.entrada_antiga.status == 3%}
+                  <a class="mx-1"
+                    href="{% url 'central:transferencia-desfazer' transferencia.uuid %}"
+                    data-bs-toggle="tooltip" data-bs-placement="top" title="Desfazer"
+                    > 
+                    <i class="text-primary fs-5 fa-solid fa-rotate-left"></i>
+                  </a>
+                {% endif %}
+              {% endif %}
+              
+              {% if transferencia.get_status_display == "Pendente" %}
+                <a class="mx-1"
+                href="{% url 'central:transferencia-transferir' transferencia.uuid %}"
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Transferir"
+                > 
+                  <i class="text-primary fs-5 fa-solid fa-arrow-right-arrow-left"></i>
+                </a>
+            
+
+                <a class="mx-1"
+                href="{% url 'central:transferencia-update' transferencia.uuid %}"
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Editar"
+                > 
+                
+                    <i class="text-primary fs-5 fa-solid fa-pen-to-square"></i>
+                  
+                </a>
+              {% endif %}
+
+              {% if transferencia.status is not 2 %}
+                  
+                  <a data-bs-toggle="modal" data-bs-placement="top" title="Deletar"
+                    data-bs-target="#cancelar{{transferencia.id}}">
+                    <i class="text-danger fs-5 fa-solid fa-trash-can"></i>
+                  </a>
+                  
+                    {% Modal %}
+                      {% arg id %}cancelar{{transferencia.id}}{% endarg %}
+                      
+                      Tem certeza que deseja <b>DELETAR</b> {{transferencia}}?
+                      <br>
+                      
+                      {% arg botoes %}
+                        
+                        <form method="POST" action="{% url 'central:transferencia-delete' transferencia.uuid %}">
+                          {% csrf_token %}
+                          <input type="submit" class="btn btn-danger btn-foto" value="Deletar">
+                        </form>
+                      
+                      {% endarg %}
+                  
+                    {% /Modal %}
+
+              
+              {% endif %}
+            </td>
+          
+        </tr>
+      {% endfor %}
+  
+      
+    </tbody>
+  </table>
+</div>
+{% Paginacao %}{% /Paginacao %}
+{% /Fieldset %}
+{% endblock %}
+

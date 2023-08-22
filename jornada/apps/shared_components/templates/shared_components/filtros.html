@@ -1,0 +1,22 @@
+{% load shared_components %}
+
+<form class="p-1 mb-1" action="" method="get">
+  <div class="fs-6 fw-bold mb-1 w-100 text-center d-md-none d-block" style="color:rgb(20, 42, 60);">
+    Filtros
+  </div>
+  <div class="row mb-1 g-1 justify-content-md-end justify-content-center align-items-end">
+    
+    {% for field in filterset.form %}
+    <div class="col-auto col-form-label-sm m-0">
+      {% LabeledInput field=field %} {% /LabeledInput %}
+    </div> 
+    {% endfor %}
+    
+    {{filtros_extra}}
+
+    <div class="col-auto col-form-label-sm">
+      <input class="btn btn-secondary ms-2 w-md-100 p-2 btm-sm" type="submit" value="Filtrar" />
+    </div>
+  </div>
+
+</form>

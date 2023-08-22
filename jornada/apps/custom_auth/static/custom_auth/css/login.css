@@ -1,0 +1,29 @@
+.login-card {
+    min-width:300px;
+  }
+
+.login-row {
+    min-height: 500px;
+}
+
+.form-login {
+    min-width:270px;    
+}
+
+.invalid-feedback {
+    display: block !important;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #a21e2c;
+    text-align: center;
+}
+
+.invalid-feedback ul {
+    margin: 0 auto;
+    padding: 0;
+}
+
+.login-user, .login-password {
+    width: 85%;
+    margin: 0 auto;
+}

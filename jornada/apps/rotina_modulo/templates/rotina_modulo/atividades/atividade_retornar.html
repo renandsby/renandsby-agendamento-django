@@ -1,0 +1,87 @@
+{% extends 'rotina_modulo/base.html' %}
+
+{% load shared_components %}
+
+{% block body %}
+<div class="row justify-content-center mt-4">
+    {% Fieldset class="bg-light px-3 py-4 mb-2 col-md-6 "%}
+    <div class="mt-5 row justify-content-center">
+        <div class="col text-center">
+            <h4 class="mb-4">
+                Retornar Adolescente de: {{atividade.descricao}}
+            </h4>
+        </div>
+    </div>
+
+    <form class="px-4" action="{% url 'rotina_modulo:modulo-atividade-retornar-multiplos-adolescentes' modulo.uuid atividade.uuid %}" method="get">
+        <div class="row justify-content-center">    
+            <div class="d-flex justify-content-start">
+                <input class="form-check cursor-pointer check_all mx-1" type="checkbox">
+                <div class="me-4">Marcar todos</div> 
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="table-responsive">
+            <table class="table border table-hover table-sm align-middle" >
+                <thead class="table-blue">
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Adolescentes</th>
+                        <th scope="col">Data/Hora Ida</th>
+                    </tr>
+        </thead>
+        <tbody>
+        {% for historico in historicos %}
+            <tr>
+                <td>
+                    <input class="form-check cursor-pointer check_adolescente" type="checkbox" name="historicos" value="{{historico.uuid}}" id="id_historico_{{historico.uuid}}">
+                </td>
+                <td class="clickable cursor-pointer">
+                    {{historico.adolescente.nome}}
+                </td>
+                <td class="clickable cursor-pointer">
+                    {{historico.data_ida}}
+                </td>
+            </tr>
+            
+        {% endfor %}
+        {% if not historicos %}
+            <tr>
+                <th>
+                    
+                </th>
+                <th class="clickable cursor-pointer">
+                    Nenhum adolescente na atividade
+                </th>
+            </tr>
+        {% endif %}
+            </tbody>
+        </table>
+    </div>
+    {% if historicos %}
+    <div class="row justify-content-center mb-4">
+        <div class="col-4 text-center">
+            <input class="btn btn-primary" type="submit" value="Retornar Adolescentes">
+        </div>
+    </div>
+    {% endif %}
+    </form>
+{% /Fieldset %}
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+    $('.clickable').click(function () {
+        var checkbox = $(this).parent().find('input:first');
+        checkbox.prop("checked", !checkbox.prop("checked"));
+        });
+    
+    $('.check_all').click(function () {
+        var checkboxes = $('.check_adolescente');
+        checkboxes.prop("checked", $(this).prop("checked"));
+    });
+</script>
+{% endblock%}
+

@@ -1,0 +1,42 @@
+{% extends "rotina_modulo/base.html" %}
+{% load shared_components %}
+
+{% block body %}
+<div class="row justify-content-center mt-4">
+
+  
+    {% Fieldset class="bg-light py-4 px-5 col-md-6" %}
+      {% arg titulo %}
+      <small>Realizando Saída de:</small> {{form.instance.adolescente.nome}}
+      {% endarg %}
+      <small>
+        {% if form.instance.observacoes_saida %}
+        "{{form.instance.observacoes_saida}}" 
+        {% endif %}
+      </small>
+    </p>
+        <form method="POST">
+
+          {% csrf_token %}
+          {{form.errors}}
+            <div class="row">
+              <div class="col-12 py-1 mb-2">
+                {% LabeledInput field=form.tipo_saida %}{% /LabeledInput %}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 py-1">
+                {% LabeledInput field=form.data_saida %}{% /LabeledInput %}
+              </div>
+            </div>
+      
+            <div class="d-flex flex-start gap-2 my-3">
+              <input type="submit" value="Realizar Saída" class="btn btn-primary">
+            </div>
+          </form>
+      {% /Fieldset %}
+
+  </div>
+
+{% endblock %}
+

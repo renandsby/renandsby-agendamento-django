@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <style>
+    {% block style %}
+    body {
+      background-color: white;
+      overflow-wrap: break-word;
+    }
+
+    @page {
+      margin: 1cm;
+      margin-top: 3.5cm;
+      margin-bottom: 1cm;
+      size: portrait;
+
+      @bottom-center {
+        content: "Página " counter(page) " de " counter(pages);
+        font-size: 0.5rem;
+      }
+    }
+
+    @media screen {
+      div.divHeader {
+        display: none;
+      }
+    }
+
+    @media print {
+      div.divHeader {
+        position: fixed;
+        top: 0;
+        margin-top: -2.7cm;
+        width: 100%;
+      }
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      margin-bottom: -1cm;
+    }
+    body {
+      font-size: .8em;
+    }
+    .conteudo {
+      font-size: .9em;
+    }
+
+    {% endblock %}
+</style>
+</head>
+
+<body>
+    <div class="divHeader">
+        <div class="d-flex justify-content-between">
+            <div>
+                <img src="/static/images/LogoSocioeducativo.png" alt="logo socioeducativo" style="height:72px;width:63px;">
+            </div>
+
+            <div style="text-align: center;">
+                <span><strong>GOVERNO DO DISTRITO FEDERAL</strong></span><br>
+                <span>SECRETARIA DE JUSTIÇA E CIDADANIA DO DISTRITO FEDERAL</span><br>
+                <span>SUBSECRETARIA DO SISTEMA SOCIOEDUCATIVO</span><br>
+                <span style="text-transform:uppercase;">{{modulo.unidade.nome}}</span><br>
+            </div>
+
+            <div>
+                <img src="/static/images/brasao-gdf.png" alt="Brasão GDF" style="height:72px;width:63px">
+            </div>
+
+        </div>
+        <div style="margin-top:10px; border-top: 1.5px solid #000000;"></div>
+    </div>
+
+    <div class="conteudo">
+        {% block body %}
+    
+        {% endblock %}
+    </div>
+
+
+    <div class="footer">
+        <div class="d-flex justify-content-between" style="border-top: solid 1.5px #000000;">
+        <div style="font-size: 0.6rem;">Impresso {% now "d/m/Y" %} às {% now "G:i" %}<br>por {{request.user.username}}</div>
+        <div style="font-size: 0.6rem;">Brasília - Patrimônio Cultural da Humanidade</div>
+        </div>
+    </div>
+
+    </body>
+
+</html>

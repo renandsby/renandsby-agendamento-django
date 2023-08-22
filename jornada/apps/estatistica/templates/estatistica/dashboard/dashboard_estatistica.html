@@ -1,0 +1,151 @@
+{% extends "estatistica/base.html" %} 
+{% block extra_head %} 
+{% load plotly_dash%} 
+{% plotly_header %} 
+{% endblock %} 
+{% block js %} 
+{% plotly_footer %} 
+{%endblock %} 
+{% block body %}
+<!-- Início do Grupo de Dados Adolescentes -->
+<div class="card mt-2">
+  <div class="row">
+    <div class="col-md-12 p-2">
+      <h2 class="text-muted text-center">
+        <i class="fa-solid fa-square-poll-vertical"></i> Sistema Socioeducativo
+        - Estatística
+      </h2>
+      <!-- <h3 class="text-muted" style="padding-left:2rem" > Adolescentes </h3> -->
+    </div>
+  </div>
+  <div class="row pt-2 pb-2 text-white">
+    <div class="col-md-3">
+      <!-- Início da Informação -->
+      <div class="card border-0" style="background-color: #3498db">
+        <div class="card-body">
+          <div class="row align-items-center gx-0">
+            <div class="col text-center">
+              <!-- Icon -->
+              <i class="h2 fa-solid fa-people-group"></i>
+              <!-- Title -->
+              <h6 class="text-uppercase mb-2">Total de Adolescentes</h6>
+              <!-- Heading -->
+              <span class="h2 mb-0"> {{ total_adolescentes }} </span>
+            </div>
+          </div>
+          <!-- / .row -->
+        </div>
+      </div>
+    </div>
+    <!-- Final da Informação -->
+    <div class="col-md-2">
+      <!-- Início da Informação -->
+      <div class="card border-0" style="background-color: #3498db">
+        <div class="card-body">
+          <div class="row align-items-center gx-0">
+            <div class="col text-center">
+              <!-- Icon -->
+              <i class="h2 fa-solid fa-people-roof"></i>
+              <!-- Title -->
+              <h6 class="text-uppercase mb-2">Internação</h6>
+              <!-- Heading -->
+              <span class="h2 mb-0"> {{ internacao }} </span>
+            </div>
+          </div>
+          <!-- / .row -->
+        </div>
+      </div>
+    </div>
+    <!-- Final da Informação -->
+    <div class="col-md-2">
+      <!-- Início da Informação -->
+      <div class="card border-0" style="background-color: #3498db">
+        <div class="card-body">
+          <div class="row align-items-center gx-0">
+            <div class="col text-center">
+              <!-- Icon -->
+              <i class="h2 fa-solid fa-person-walking-arrow-loop-left"></i>
+              <!-- Title -->
+              <h6 class="text-uppercase mb-2">Semiliberdade</h6>
+              <!-- Heading -->
+              <span class="h2 mb-0"> {{ semiliberdade }} </span>
+            </div>
+          </div>
+          <!-- / .row -->
+        </div>
+      </div>
+    </div>
+    <!-- Final da Informação -->
+    <div class="col-md-2">
+      <!-- Início da Informação -->
+      <div class="card border-0" style="background-color: #3498db">
+        <div class="card-body">
+          <div class="row align-items-center gx-0">
+            <div class="col text-center">
+              <!-- Icon -->
+              <i class="h2 fa-solid fa-person-walking"></i>
+              <!-- Title -->
+              <h6 class="text-uppercase mb-2">Meio Aberto</h6>
+              <!-- Heading -->
+              <span class="h2 mb-0"> {{ meio_aberto }} </span>
+            </div>
+          </div>
+          <!-- / .row -->
+        </div>
+      </div>
+    </div>
+    <!-- Final da Informação -->
+    <div class="col-md-3">
+      <!-- Início da Informação -->
+      <div class="card border-0" style="background-color: #3498db">
+        <div class="card-body">
+          <div class="row align-items-center gx-0">
+            <div class="col text-center">
+              <!-- Icon -->
+              <i class="h2 fa-solid fa-person-shelter"></i>
+              <!-- Title -->
+              <h6 class="text-uppercase mb-2">Atendimento Inicial</h6>
+              <!-- Heading -->
+              <span class="h2 mb-0"> {{ atendimento_inicial }} </span>
+            </div>
+          </div>
+          <!-- / .row -->
+        </div>
+      </div>
+    </div>
+    <!-- Final da Informação -->
+  </div>
+	<div class="row">
+		<div class="col-md-12">
+      {% plotly_app name="AdolescentesLotados" ratio=0.46 %}
+		</div>
+	</div>
+  <div class="row">
+    <div class="col-md-12 p-2">
+      <h3 class="text-muted text-center">
+        <i class="fa-solid fa-square-poll-vertical"></i> Educação - Situação Escolar
+      </h3>
+    </div>
+  </div>
+	<div class="row">
+    <div class="col-md-12">
+      {% plotly_app name="SituacaoEscolar" ratio=0.46 %}
+		</div>
+	</div>
+  <div class="row">
+    <div class="col-md-12 p-2">
+      <h3 class="text-muted text-center">
+        <i class="fa-solid fa-square-poll-vertical"></i> TJDFT - Solicitações
+      </h3>
+      <!-- <h3 class="text-muted" style="padding-left:2rem" > Adolescentes </h3> -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      {% plotly_app name="Solicitacoes" ratio=0.46 %}
+    </div>
+  </div>
+
+</div>
+<!-- Fim do Grupo de Dados -->
+{% endblock %}

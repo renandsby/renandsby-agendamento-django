@@ -1,0 +1,91 @@
+
+  <div class="card">
+    <div class="card-body p-0">
+        <div class="d-flex flex-wrap" >
+            <div class="fs-6 p-2" style="color: rgb(20, 42, 60); margin-left: 20px;">
+              <a href="{% url 'prontuario:adolescente-list' %}">  
+                  <i class="fa-solid fa-backward me-1"></i>
+                  <span class="fw-bold">Prontuários</span>
+              </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3">
+
+  <div class="col-md-12">
+        <div class="d-flex justify-content-start flex-wrap submenu">
+          
+          <div class="d-flex justify-content-center item-submenu {% if request.resolver_match.url_name == 'adolescente-update' %} atual {% endif %}">
+            <a href="{% url 'prontuario:adolescente-update' adolescente.uuid %}" class=""><i
+                class="fa-solid fa-address-card me-2"></i>Identificação</a>
+          </div>
+
+          <div class="d-flex justify-content-center item-submenu {% if 'endereco' in request.resolver_match.url_name %} atual {% endif %}">
+            <a href="{% url 'prontuario:endereco-list' adolescente.uuid %}" class=""><i
+                class="fa-solid fa-location-dot me-2"></i>Endereços</a>
+          </div>
+
+          <div class="d-flex justify-content-center item-submenu {% if 'telefone' in request.resolver_match.url_name %} atual {% endif %}">
+            <a href="{% url 'prontuario:telefone-list' adolescente.uuid %}" class=""><i
+                class="fa-solid fa-mobile-retro me-2"></i>Telefones</a>
+          </div>
+          
+
+          <div class="d-flex justify-content-center item-submenu {% if 'familiar' in request.resolver_match.url_name %} atual {% endif %}">
+            <a href="{% url 'prontuario:familiar-list' adolescente.uuid %}" class=""><i
+                class="fa-solid fa-restroom me-2"></i>Familiares</a>
+          </div>
+
+          <div class="d-flex justify-content-center item-submenu {% if 'historico' in request.resolver_match.url_name %} atual {% endif %}">
+              <a href="{% url 'prontuario:historico-list' adolescente.uuid %}"><i
+                  class="fa-solid fa-box-archive me-2"></i>Histórico</a>
+          </div>
+
+          <div class="d-flex justify-content-center item-submenu {% if 'processo' in request.resolver_match.url_name %} atual {% endif %}">
+            <a href="{% url 'prontuario:processo-list' adolescente.uuid %}" class=""><i
+                class="fa-solid fa-scale-balanced me-2"></i>Processos</a>
+          </div>
+
+
+          <div class="d-flex justify-content-center item-submenu {% if 'educacao' in request.resolver_match.url_name %} atual {% endif %}">
+            <a href="{% url 'prontuario:educacao-list' adolescente.uuid %}" class=""><i
+                class="fa-solid fa-graduation-cap me-2"></i>Educação</a>
+          </div>
+
+          <div class="d-flex justify-content-center item-submenu {% if 'risco' in request.resolver_match.url_name %} atual {% endif %}">
+            <a href="{% url 'prontuario:risco-list' adolescente.uuid %}" class=""><i
+                class="fa-solid fa-triangle-exclamation me-2"></i>Risco</a>
+          </div>
+
+          <div class="d-flex justify-content-center item-submenu {% if 'ocorrencia' in request.resolver_match.url_name %} atual {% endif %}">
+            <a href="{% url 'prontuario:ocorrencia-list' adolescente.uuid %}" class=""><i
+                class="fs-5 fa-solid fa-person-circle-exclamation me-2"></i>Ocorrências</a>
+          </div>
+
+          <div class="d-flex justify-content-center item-submenu {% if 'relatorio' in request.resolver_match.url_name %} atual {% endif %}">
+            <a href="{% url 'prontuario:relatorio-list' adolescente.uuid %}" class=""><i
+                class="fa-solid fa-print me-2"></i>Relatórios</a>
+          </div>
+
+          {% if 'atendimento_psicossocial.ver' in perms %}
+            <div class="d-flex justify-content-center item-submenu {% if 'atendimento-psicossocial' in request.resolver_match.url_name %} atual {% endif %}">
+              <a href="{% url 'prontuario:atendimento-psicossocial-list' adolescente.uuid %}" class=""><i
+                  class="fa-solid fa-comments me-2"></i>Atendimento Socioeducativo</a>
+            </div>
+          {% endif %}
+
+          <div class="d-flex justify-content-center item-submenu {% if 'pia' in request.resolver_match.url_name %} atual {% endif %}">
+            <a href="{% url 'prontuario:pia-list' adolescente.uuid %}" class=""><i
+                class="fa-solid fa-newspaper me-2"></i>PIA</a>
+          </div>
+        
+        </div>
+  </div>
+
+
+
+
+
+</div>

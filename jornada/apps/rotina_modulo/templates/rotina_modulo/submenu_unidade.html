@@ -1,0 +1,75 @@
+<!-- MODULOS -->
+{% if unidade.modulos.count > 1 %}
+    <div class="d-flex justify-content-center item-submenu {% if request.resolver_match.url_name == 'home-modulos' %} atual {% endif %}">
+        <a href="{% url 'rotina_modulo:home-modulos' unidade.uuid %}" class="">
+            <i class="fa-solid fa-house me-1"></i>
+            Módulos
+        </a>
+    </div>
+{% endif %}
+
+<!-- CHEGADAS PREVISTAS -->
+{% if 'unidades.ver_chegadas' in perms %}
+<div class="d-flex justify-content-center item-submenu {% if 'acautelamento' in request.resolver_match.url_name %} atual {% endif %}">
+        <a href="{% url 'rotina_modulo:acautelamento-list' unidade.uuid %}" class="">
+            <i class="fa-solid fa-person-circle-plus me-1 fs-5"></i>
+            Chegadas Previstas
+        </a>
+    </div>
+{% endif %}
+
+<!-- SAIDAS PREVISTAS -->
+{% if 'unidades.ver_saidas' in perms %}
+<div class="d-flex justify-content-center item-submenu {% if 'saida' in request.resolver_match.url_name %} atual {% endif %}">
+        <a href="{% url 'rotina_modulo:saida-list' unidade.uuid %}" class="">
+            <i class="fa-solid fa-person-circle-minus me-1 fs-5"></i>
+            Saídas Previstas
+        </a>
+    </div>
+{% endif %}
+
+<!-- EFETIVO GERAL -->
+{% if 'unidades.editar_entradas' in perms %}
+<div class="d-flex justify-content-center item-submenu {% if 'efetivo-geral' in request.resolver_match.url_name %} atual {% endif %}">
+        <a href="{% url 'rotina_modulo:efetivo-geral-list' unidade.uuid %}" class="">
+            <i class="fa-solid fa-hard-drive me-1"></i>
+            Efetivo Geral
+        </a>
+    </div>
+{% endif %}
+
+<!-- LIVRO C2 -->
+{% if 'livro.ver_livro_c2' in perms %}
+    {% if unidade.modulos.count > 1 %}
+    <div class="d-flex justify-content-center item-submenu {% if 'livro' in request.resolver_match.url_name %} atual {% endif %}">
+        <a href="{% url 'rotina_modulo:livro-c2-redirect' unidade.uuid %}" class="">
+            <i class="fa-solid fa-book me-1"></i>
+            Livro C2
+        </a>
+    </div>
+    {% endif %}
+{% endif %}
+
+<!-- SOLICITACOES CENTRAL -->
+{% if 'solicitacoes.ver_da_unidade' in perms %}
+    <div class="d-flex justify-content-center item-submenu {% if 'solicitacao' in request.resolver_match.url_name %} atual {% endif %}">
+        <a href="{% url 'rotina_modulo:solicitacao-list' unidade.uuid %}" class="">
+            <i class="fa-solid fa-ticket me-1"></i>
+            Solicitações Central
+        </a>
+    </div>
+{% endif %}
+
+<div class="d-flex justify-content-center item-submenu {% if 'historico-unidade' in request.resolver_match.url_name %} atual {% endif %}">
+    <a href="{% url 'rotina_modulo:historico-unidade' unidade.uuid %}" class="">
+        <i class="fa-solid fa-landmark me-1"></i>
+        Histórico Unidade
+    </a>
+</div>
+
+<div class="d-flex justify-content-center item-submenu {% if 'lista-geral' in request.resolver_match.url_name %} atual {% endif %}">
+    <a href="{% url 'rotina_modulo:lista-geral' unidade.uuid %}" class="">
+        <i class="fa-solid fa-table-list"></i>
+        Lista Geral
+    </a>
+</div>

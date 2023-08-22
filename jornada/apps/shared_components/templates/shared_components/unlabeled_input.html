@@ -1,0 +1,19 @@
+
+{% if field.errors %}
+{{ field|add_bootstrap_form_class|add_class:"is-invalid" }}
+
+{% for error in field.errors %}
+<div class="error text-danger">{{error}}</div>
+{% endfor%}
+
+{% else %}
+{% if disabled %}
+{{field|add_bootstrap_form_class|attrs:"disabled=true"}}
+{% else %}
+{% if add_classes %}
+{{ field|add_bootstrap_form_class|add_class:add_classes }}
+{% else %}
+{{ field|add_bootstrap_form_class }}
+{% endif %}
+{% endif %}
+{% endif %}

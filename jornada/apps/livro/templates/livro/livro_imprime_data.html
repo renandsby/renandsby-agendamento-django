@@ -1,0 +1,21 @@
+{% load shared_components %}
+
+<div class="row justify-content-center mt-4">
+    {% Fieldset class="bg-light px-3 py-4 mb-2 col-md-6 "%}
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="col-12">
+            <div class="row justify-content-center my-2">
+                <div class="col-md-8 align-text-bottom">
+                    {% LabeledInput field=form.data %}{%/LabeledInput%}
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col-md-12 align-text-bottom text-center">
+                    <button type="submit" name="Imprir" class="btn btn-primary">Imprimir <i class="fa-solid fa-door-open"></i> </button>
+                </div>
+            </div>
+        </div>
+    </form>    
+    {% /Fieldset %}
+</div>

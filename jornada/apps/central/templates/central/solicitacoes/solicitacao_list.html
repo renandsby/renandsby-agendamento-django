@@ -1,0 +1,120 @@
+{% extends "central/base.html" %}
+{% load shared_components %}
+
+{% block body %}
+
+
+{% Fieldset titulo="Solicitações" %}
+
+  {% Filtros %}{% /Filtros %}
+  <div class="table-responsive-xl">
+
+  <table class="table border table-hover align-middle" >
+    <thead class="table-blue">
+      <tr>
+        <th class="col-1" scope="col">Data</th>
+        <th class="col-1" scope="col">Solicitante</th>
+        <th scope="col">Unidade</th>
+        <th scope="col">Adolescente</th>
+        <th scope="col">Processo</th>
+        <th scope="col">Ação Solicitada</th>     
+        <th scope="col">Status</th>
+        <th class="col-1" scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for solicitacao in page_obj %}
+        <tr>  
+          <td>
+            <small>
+              {{solicitacao.criado_em|date:"d/m/Y"}}
+            </small>
+          </td>
+
+          <td>
+            <small>
+              {{solicitacao.criado_por|default:""}}
+            </small>
+          </td>
+
+          <td>
+            {{solicitacao.unidade.sigla}}
+          </td>
+
+          <td>
+              {% if solicitacao.adolescente %}
+                {{solicitacao.adolescente.nome}}
+                <a href="{% url 'prontuario:adolescente-update' solicitacao.adolescente.uuid %}" class="mx-1" data-bs-toggle="tooltip"
+                data-bs-placement="top" title="Prontuário">
+                <i class="text-info fs-8 fa-solid fa-clipboard"></i>
+                </a>
+              {% else %}
+                {{solicitacao.nome_adolescente}}
+              {% endif %}
+
+              {% if solicitacao.acao_object is not None %}
+                {% if solicitacao.acao_solicitada.descricao  == 'Vinculação' %}
+                  <a href="{% url 'central:vinculacao-update' solicitacao.acao_object.uuid  %}" > &nbsp; <small class="fw-bold text-decoration-underline">Ver Vinculação</small> </a>
+                {% elif solicitacao.acao_solicitada.descricao  == 'Transferência' %}
+                  <a href="{% url 'central:transferencia-update' solicitacao.acao_object.uuid  %}" > &nbsp; <small class="fw-bold text-decoration-underline">Ver Transferência</small> </a>
+                {% elif solicitacao.acao_solicitada.descricao  == 'Desvinculação' %}
+                  <a href="{% url 'central:desvinculacao-update' solicitacao.acao_object.uuid  %}" > &nbsp; <small class="fw-bold text-decoration-underline">Ver Desvinculação</small> </a>
+                {% endif %}
+              {% endif %}
+          </td>
+
+          <td>
+            <small>
+              {% if solicitacao.processo %}
+                {{solicitacao.processo.str_sem_nome|default:""}}
+              {% else %}
+                {{solicitacao.numero_processo|default:""}}
+              {% endif %}
+            </small>
+          </td>
+              
+          <td>
+            {{ solicitacao.acao_solicitada.descricao}}
+          </td>
+          
+          <td>
+            
+            {% if solicitacao.get_status_display == "Aguardando Validação" %}
+              <span class="badge bg-warning">{{solicitacao.get_status_display}}</span>
+            {% elif solicitacao.get_status_display == "Validado" %}
+              <span class="badge bg-primary">{{solicitacao.get_status_display}}</span>
+            {% elif solicitacao.get_status_display == "Em Análise" %}
+              <span class="badge bg-secondary">{{solicitacao.get_status_display}}</span>
+            {% elif solicitacao.get_status_display == "Realizado" %}
+              <span class="badge bg-success">{{solicitacao.get_status_display}}</span>
+            {% elif solicitacao.get_status_display == "Negado" %}
+              <span class="badge bg-danger">{{solicitacao.get_status_display}}</span>
+            {% endif %}
+          </td>
+
+          <td> 
+                  
+                <a 
+                href="{% url 'central:solicitacao-update' solicitacao.uuid %}"
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Editar"
+                > 
+                  <i class=" mx-2 text-primary fs-5 fa-solid fa-pen-to-square"></i>
+                </a>
+            
+          </td>
+            
+          
+        </tr>
+      {% endfor %}
+
+      
+    </tbody>
+  </table>
+  </div>
+  {% Paginacao %}{% /Paginacao %}
+  </fieldset>
+
+{% /Fieldset %}
+
+
+{% endblock %}

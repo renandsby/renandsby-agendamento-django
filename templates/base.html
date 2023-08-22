@@ -1,0 +1,250 @@
+{% load static %}
+{% load shared_components %}
+{% comment %} Baseado no exemplo: https://www.kite.com/blog/python/django-templates-best-practices/ {% endcomment %}
+
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% block page_meta %}
+        {% endblock %}
+
+
+        {% block css_imports %}
+            <link href="{% static 'images/favicon.svg' %}" rel="shortcut icon">
+            <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+            <link href="{% static 'css/bootstrap/bootstrap.min.css'%}" rel="stylesheet" type="text/css">
+            
+            <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500" rel="stylesheet">
+            
+            <link href="{% static 'css/base.css'%}" rel="stylesheet" type="text/css">
+            <link href="{% static 'css/footer.css'%}" rel="stylesheet" type="text/css">
+        {% endblock %}
+        {% components_css %}
+
+        {% autoescape off %}
+            {% block css %}{% endblock %}
+        {% endautoescape %}
+
+        
+
+        {% block extra_head %}
+            {# Extra header stuff (scripts, styles, metadata, etc) #}
+        {% endblock %}
+
+        <title>{% block page_title %}Jornada{% endblock %}</title>
+    </head>
+    <body>
+
+        {% comment %} Sidebar copiado do exemplo: https://www.codeply.com/p/J7fUOhLOy9 {% endcomment %}
+        <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="true">
+            <div class="offcanvas-body px-0 py-1">
+                <i class="menu-sanduiche navbar-brand fa-solid fa-bars" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" role="button" height="25px"></i>
+               
+                <div class="menu-linha"></div>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-start" id="menu">
+                    
+                    {% include 'menu_lateral.html'%}
+                    
+                </ul>
+            </div>
+        </div>
+
+
+        <nav class="navbar">
+            <div class="container-fluid">
+                {% if request.user.is_authenticated %}
+                    <i class="menu-sanduiche navbar-brand fa-solid fa-bars" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" role="button" height="25px"></i>
+                {% endif %}
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="active" aria-current="page" href="/">
+                            <img class="logo-jornada active" src="{% static '/images/Logo Jornada Verde Branco.svg' %}" alt="logo jornada" height="36">
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="navbar-ajuda d-flex">
+                    
+                </div>
+
+
+                <div class="navbar-user-info d-flex">
+                        <div class="dropdown position-relative me-3 nav-menu-button">
+                            <a class="dropdown-toggle text-decoration-none color-white" id="dropdownMenuOffset" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="navbar" role="button">
+                                <div class="d-inline-flex align-items-center">
+                                    <div class="me-2">
+                                        Ajuda
+                                    </div>
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </div>
+                            </a>
+                            
+                            
+                            <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="dropdownMenuOffset">
+                                <li><a target="_blank"  class="dropdown-item" href="/static/documentos/manual.pdf">Manual</a></li>
+                                <li><a target="_blank"  class="dropdown-item" href="/static/documentos/perguntas.pdf">Perguntas mais frequentes</a></li>
+                                <li><a target="_blank"  class="dropdown-item" href="/static/documentos/tutorial.pdf">Tutorial PDF</a></li>
+                                <li><a target="_blank"  class="dropdown-item" href="/static/documentos/livro_modulo_word.docx">Livro Módulo Word</a></li>
+                                <li><a target="_blank"  class="dropdown-item" href="/static/documentos/livro_C2_word.docx">Livro C2 Word</a></li>
+                                <li><a target="_blank"  class="dropdown-item" href="/static/documentos/livro_portaria_word.docx">Livro Portaria Word</a></li>
+                                <li><a target="_blank"  class="dropdown-item" href="{% url 'tutorial:tutorial-list'%}">Tutorial (Vídeos)</a></li>
+                            </ul>
+                        </div>
+
+                        {% if request.user.is_authenticated %}
+                            <div class="dropdown position-relative me-3 nav-menu-button">
+
+                                <a class="dropdown-toggle text-decoration-none color-white" id="dropdownMenuOffset" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="navbar" role="button">
+                                    <div class="d-inline-flex align-items-center">
+                                        {% if request.user.is_authenticated %}
+                                            <div class="me-2">
+                                                {{request.user.username}}
+                                            </div>
+                                        {%endif%}
+                                        <i class="fa-solid fa-user user-button"></i>
+                                    </div>
+                                </a>
+
+                                {% if request.user.is_authenticated %}
+                                    <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="dropdownMenuOffset">
+                                        <li><a class="dropdown-item" href="{% url 'alterar_senha' %}">Alterar Senha</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="{% url 'logout' %}">Sair</a></li>
+                                    </ul>
+
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+            </div>
+        </nav>
+
+
+        <main>
+            <div class="container-sm content-wrapper">
+
+                <div class="row">
+                    <div class="col-12 messages">
+                        {% if request.user.is_authenticated and 'tutorial' not in request.resolver_match.url_name %}
+                            <div class="alert alert-secondary" role="alert">
+                                Para quaisquer dúvidas acesse o nosso <a href="{% url 'tutorial:tutorial-list'%}" class="alert-link">Tutorial em Vídeo</a>. 
+                            </div>
+                        {% endif %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert {% if message.tags %} alert-{{ message.tags|parse_bs_alert }}{% endif %} alert-dismissible">
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                    <strong>{{ message }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    
+                    <div class="col-12">
+                        {% block breadcrumb %}
+                            {% if modulo or unidade %}
+                                <div class="d-flex w-100 text-center" >
+                                    <div style="font-size:1.2em; font-weight: bold ; color: rgb(20, 42, 60);; padding: 5px 0; max-width: 150px; margin-left: 20px;">
+                                        <i class="fa-solid fa-house me-2"></i>
+                                    </div>
+
+                                    <div style="font-size:1.2em; font-weight: bold ; color: rgb(20, 42, 60);; padding: 5px 0;">
+                                        /
+                                        {% if modulo %} 
+                                            {{modulo.unidade}}&nbsp
+                                        {% elif unidade %} 
+                                            {{unidade}}&nbsp
+                                        {% endif %}
+                                    </div>
+                                    
+                                    {% if modulo.unidade.modulos.count > 1 %}
+                                        <div style="font-size:1.2em; font-weight: bold ; color: rgb(20, 42, 60);; padding: 5px 0;">
+                                            / 
+                                            Módulo 
+                                            {{modulo.descricao}}
+                                        </div>
+                                    {% endif %}
+
+                                </div>
+
+                            {% endif %}
+                        {% endblock %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        {% block submenu %}
+                        {% endblock %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        {% block body %}
+                        {% endblock %}
+                    </div>
+                </div>
+
+
+            </div>
+        </main>
+
+
+        {% comment %} FOOTER {% endcomment %}
+        {% include 'footer.html' %}
+
+        
+
+
+
+        {# Modal HTML #}
+        {% block modals %}
+
+        {% endblock %}
+
+
+        {% block js_imports %}
+            <script src="{% static 'js/popper.min.js'%}"></script>
+            <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+            <script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>
+            <script src="{% static 'js/jquery.min.js'%}"></script>
+            <script src="{% static 'js/BsMultiSelect.min.js'%}"></script>
+        {% endblock %}
+        
+        {% autoescape off %}
+            {% block js %}
+            {% endblock %}
+        {% endautoescape %}
+
+        
+        {% components_js %}
+
+        {# Shared data for javascript #}
+        <script type="text/javascript">
+            
+            window._sharedData = {
+                {% autoescape off %}
+                    {% block shared_data %}
+                        'DEBUG': {% if debug %}true{% else %}false{% endif %},
+                    {% endblock %}
+                {% endautoescape %}
+            }
+
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+
+            var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+            var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+                return new bootstrap.Popover(popoverTriggerEl)
+            })
+        
+        </script>
+
+    </body>
+</html>
+

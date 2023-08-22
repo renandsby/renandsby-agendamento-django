@@ -1,0 +1,15 @@
+[
+    {
+        "model": "auth.group",
+        "fields": {
+            "name": "Gestor Geral",
+            "permissions": [
+                [
+                    "ver_todos",
+                    "adolescentes",
+                    "adolescente"
+                ]
+            ]
+        }
+    }
+]

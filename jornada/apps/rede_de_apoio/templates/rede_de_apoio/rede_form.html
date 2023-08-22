@@ -1,0 +1,187 @@
+{% extends "rede_de_apoio/base.html" %}
+{% load shared_components %}
+
+{% block js_imports %}
+{{block.super}}
+{{form.media}}
+{% endblock %}
+
+{% block body %}
+
+ 
+  {% Form form=form enctype="multipart/form-data" url_name_prefix="rede_de_apoio:rede" delete_button="true"%}
+  
+  {% arg botao_voltar %}
+
+      {% url 'rede_de_apoio:rede-list' as voltar_url %}
+      {% BotaoVoltar url=voltar_url %}{% /BotaoVoltar %}
+
+  {% endarg %}
+
+  <fieldset class="border rounded p-3 bg-light mb-3">
+    <div class="row">
+      <div class="col-md-6">
+        {%LabeledInput field=form.descricao %} {% /LabeledInput %}
+      </div>
+      <div class="col-md-6">
+        {%LabeledInput field=form.tipo_rede_apoio %}{% /LabeledInput %}
+      </div>
+      <div class="col-md-12">
+        {%LabeledInput field=form.observacoes %}{% /LabeledInput %}
+      </div>
+    </div>
+    
+  </fieldset>
+
+  <fieldset class="border rounded p-3 bg-light mb-3">
+    <div class="row">
+      <div class="col-md-6">
+        {%LabeledInput field=form.data_agendamento_inicio %} {% /LabeledInput %}
+      </div>
+      <div class="col-md-6">
+        {%LabeledInput field=form.data_agendamento_inicio %}{% /LabeledInput %}
+      </div>
+      <div class="col-md-12">
+        {%LabeledInput field=form.departamento %}{% /LabeledInput %}
+      </div>
+    </div>
+    
+  </fieldset>
+  
+  <fieldset class="border rounded p-3 bg-light mb-3">
+    <div class="row">
+      <div class="col-md-4">
+        {%LabeledInput field=form.uf %} {% /LabeledInput %}
+      </div>
+      <div class="col-md-4">
+        {%LabeledInput field=form.cidade %} {% /LabeledInput %}
+      </div>
+      <div class="col-md-4">
+        {%LabeledInput field=form.bairro %} {% /LabeledInput %}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        {%LabeledInput field=form.cep %}{% /LabeledInput %}
+      </div>
+      <div class="col-md-4">
+        {%LabeledInput field=form.endereco %}{% /LabeledInput %}
+      </div>
+      <div class="col-md-3">
+        {%LabeledInput field=form.complemento %}{% /LabeledInput %}
+      </div>
+      <div class="col-md-2">
+        {%LabeledInput field=form.numero %}{% /LabeledInput %}
+      </div>
+    </div>
+  </fieldset>
+
+
+  <fieldset class="border rounded p-3 bg-light mb-3">
+    <div class="row">
+      <div class="col-md-12">
+        {%LabeledInput field=form.localizacao %}{% /LabeledInput %}
+      </div>
+        
+    </div>
+  </fieldset>
+
+
+  {% /Form %}
+
+{% endblock %}
+
+
+{% block js %}
+
+<script>
+  
+  $("[id$='uf']").change(function () {
+      id_prefix = $(this).attr('id').slice(0,-2);
+      var selectboxCidade = $(`#${id_prefix}cidade`);
+      var selectboxBairro = $(`#${id_prefix}bairro`);
+
+
+      var id_uf = $(this).val();  
+      if(id_uf == "") {
+       
+        selectboxBairro.find('option').remove();
+        selectboxBairro.append("<option value='' selected=''>---------</option>")
+        selectboxCidade.find('option').remove();
+        selectboxCidade.append("<option value='' selected=''>---------</option>")
+      }else{
+
+          $.ajax({                       
+            url: '/api/dominios/cidade/?uf='+id_uf,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+            type: 'GET',
+            dataType: 'json', // added data type
+            success: function(data) {
+          
+              if (data != null) {
+                
+                selectboxBairro.find('option').remove();
+                selectboxBairro.append("<option value='' selected=''> Nenhuma Cidade Selecionada </option>")
+
+             
+                selectboxCidade.find('option').remove();
+                
+                if (data.length > 0){
+                  selectboxCidade.append("<option value='' selected=''> Selecione a Cidade </option>")
+                }else{
+                  selectboxCidade.append("<option value='' selected=''>---------</option>")
+                }
+    
+                $.each(data, function (i, d) {
+                    $('<option>').val(d.codigo).text(d.nome).appendTo(selectboxCidade);
+                });
+            }
+    
+    
+          }
+        });
+      }
+     
+  
+    });
+
+
+    $("[id$='cidade']").change(function () {
+      id_prefix = $(this).attr('id').slice(0,-6);
+      var selectboxBairro = $(`#${id_prefix}bairro`);
+    
+      var id_cidade = $(this).val();  
+      if(id_cidade == "") {
+        selectboxBairro.find('option').remove();
+        selectboxBairro.append("<option value='' selected=''>---------</option>")
+      }else{
+
+          $.ajax({                       
+            url: '/api/dominios/bairro/?cidade='+id_cidade,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+            type: 'GET',
+            dataType: 'json', // added data type
+            success: function(data) {
+              if (data != null) {
+                selectboxBairro.find('option').remove();
+                
+                if (data.length > 0){
+                  selectboxBairro.append("<option value='' selected=''> Selecione o Bairro </option>")
+                }else{
+                  selectboxBairro.append("<option value='' selected=''>---------</option>")
+                }
+    
+                $.each(data, function (i, d) {
+                    $('<option>').val(d.id).text(d.nome).appendTo(selectboxBairro);
+                });
+            }
+    
+    
+          }
+        });
+      }
+     
+  
+    });
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'rotina_modulo/base.html' %}
+{% load shared_components %}
+
+{% block body %}
+<div class="row justify-content-center mt-4">
+
+  {% Fieldset titulo="Ligações" %}
+    <a href="{% url 'rotina_modulo:modulo-ligacao-create' modulo.uuid %}" class="btn btn-primary color-white my-2">
+      <i class="fas fa-plus-circle"></i>
+      &nbsp; Registrar Ligação
+    </a>
+
+    {% Filtros %}{% /Filtros %}
+    
+      <div class="table-responsive">
+      <table class=" table table-hover  text-center">
+        <thead class="table-blue">
+          <tr>
+            <th scope="col" class="col-2 text-start">Data</th>
+            <th scope="col" class="col-3 text-start">Adolescente</th>
+            <th scope="col" class="col-3 text-start">Telefone</th>
+            <th scope="col" class="col-3 text-start">Observações</th>
+            <th scope="col" class="col-1 text-start"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ligacao in ligacoes %}
+          <tr>
+
+            <td class="text-start">
+              {{ligacao.data_ligacao|date:"d/m/Y H:i"}}
+            </td>
+            <td class="text-start">{{ligacao.adolescente}}</td>
+            <td class="text-start">{{ligacao.telefone|default:''}}</td>
+            <td class="text-start">{{ligacao.observacoes|linebreaksbr}}</td>
+            <td>
+              <a class="mr-2" href="{% url 'rotina_modulo:modulo-ligacao-update'  modulo.uuid ligacao.uuid %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
+                <i class="text-primary fs-5 fa-solid fa-pen-to-square"></i></a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% Paginacao %}{% /Paginacao %}
+
+    {% /Fieldset %}
+  </div>
+
+
+{% endblock %}

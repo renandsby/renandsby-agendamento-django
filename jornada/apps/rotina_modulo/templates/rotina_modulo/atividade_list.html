@@ -1,0 +1,83 @@
+{% extends 'rotina_modulo/base.html' %}
+
+{% load shared_components %}
+
+
+{% block body %}
+    <div class="row justify-content-center mt-4">
+        {% Fieldset class="bg-light py-3 px-1 px-sm-5 col-md-8" %}
+    
+            <div class="row justify-content-center ">
+                <div class="table-responsive mt-4 mb-2">
+                <table class="table border table-hover align-middle" >
+                    <thead class="table-blue">
+                        <tr >
+                            <th scope="col">Atividades</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if 'atividades.editar' in perms %}
+                            <a  class="btn btn-primary mb-2"
+                                href="{% url 'rotina_modulo:atividade-list' modulo.unidade.uuid %}">
+                                Editar Atividades
+                            </a>
+                        {% endif %}
+
+
+                        {% for atividade in atividade_list %}
+                            <tr>
+                                <td >
+                                    
+                                    {% call_method atividade 'adolescentes_na_atividade_modulo' modulo as adolescentes_na_atividade %}
+                                    
+                                    <div class="d-flex justify-content-between">
+                                        <div class='fs-6'> {{atividade.descricao}} </div>
+                                        {% if adolescentes_na_atividade.count > 1%}
+                                        <h5><span class="badge bg-success">{{adolescentes_na_atividade.count}} <small>adolescentes</small></span></h5>
+                                        {% endif %}
+                                        {% if adolescentes_na_atividade.count == 1%}
+                                        <h5 class="my-auto"><span class="badge bg-success">1 <small>adolescente</small></span></h5>
+                                        {% endif %}
+                                    </div>
+                                
+                                    
+                                </td>
+
+                                <td class="text-end">
+                                    <a class="mx-2"
+                                        href="{% url 'rotina_modulo:modulo-atividade-enviar-adolescentes' modulo.uuid atividade.uuid %}"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Enviar Adolescentes">
+                                        <i class="text-success fs-5  fa-solid fa-arrow-right-long"></i>
+                                    </a>
+
+                                    <a class="mx-2"
+                                        href="{% url 'rotina_modulo:modulo-atividade-retornar-adolescentes' modulo.uuid atividade.uuid %}"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Retornar Adolescentes">
+                                        <i class="text-warning fs-5  fa-solid fa-arrow-left-long"></i>
+                                    </a>
+                                    
+                                    <a class="mx-2"
+                                        href="{% url 'rotina_modulo:modulo-atividade-historico' modulo.uuid atividade.uuid %}?periodo=today"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Histórico">
+                                        <i class="text-primary fs-5 fa-solid fa-list"></i>
+                                    </a>
+                                </td>
+    
+    
+                            </tr>
+                        {% endfor %}
+    
+    
+    
+                    </tbody>
+                </table>
+            </div>
+    
+    
+            {% /Fieldset %}
+
+    </div>
+
+{% endblock %}
+

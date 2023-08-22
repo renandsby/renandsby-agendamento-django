@@ -1,0 +1,50 @@
+{% extends 'rotina_modulo/base.html' %}
+{% load shared_components %}
+
+{% block body %}
+
+
+<form 
+  method="POST" 
+  enctype="multipart/form-data"
+>
+{% Fieldset titulo="Novo Livro" %}
+
+  {% csrf_token %}
+    
+  {% if form.non_field_errors %}
+    <div class="row mb-1">
+      <div class="col">  
+        <div class="error text-danger">{{form.non_field_errors}}</div>
+      </div>
+    </div>
+  {% endif %}
+
+  <fieldset class="border rounded p-3 bg-light my-3">
+    <div class="row ">
+      <div class="col-md-4">
+        {% LabeledInput field=form.servidor_passagem_anterior %} {% /LabeledInput %}
+      </div>
+      <div class="col-md-4 ">
+        {% LabeledInput field=form.servidor_recebimento%} {% /LabeledInput %}
+      </div>
+      <div class="col-md-4">
+        {% LabeledInput field=form.data_abertura %} {% /LabeledInput %}
+      </div>
+    {{form.modulo}}
+    {{form.unidade}}
+    </div>
+  </fieldset>
+  
+  <div class="d-flex flex-row-reverse gap-2 my-4">
+    {% if 'livro.incluir_livro_c2' in perms %}
+        <button class="btn btn-primary">Salvar</button>
+    {% endif %}
+  </div>
+
+  {% /Fieldset %}
+
+</form>
+
+
+{% endblock %}

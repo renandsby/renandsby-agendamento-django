@@ -1,0 +1,202 @@
+[
+    {
+        "model": "auth.group",
+        "fields": {
+            "name": "Direção Internação",
+            "permissions": [
+                [
+                    "ver_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ]
+            ]
+        }
+    },
+    {
+        "model": "auth.group",
+        "fields": {
+            "name": "Gestor GESEG Internação",
+            "permissions": [
+                [
+                    "editar_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ],
+                [
+                    "ver_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ],
+                [
+                    "ver_chegadas",
+                    "unidades",
+                    "entradaadolescente"
+                ],
+                [
+                    "ver_saidas",
+                    "unidades",
+                    "entradaadolescente"
+                ],
+                [
+                    "editar_entradas",
+                    "unidades",
+                    "entradaadolescente"
+                ],
+                [
+                    "ver_livro_c2",
+                    "livro",
+                    "livro"
+                ],
+                [
+                    "incluir_livro_c2",
+                    "livro",
+                    "livro"
+                ],
+                [
+                    "incluir_livro_modulos",
+                    "livro",
+                    "livro"
+                ],
+                [
+                    "editar_livro_modulos",
+                    "livro",
+                    "livro"
+                ],
+                [
+                    "editar",
+                    "atividades",
+                    "atividade"
+                ],
+                [
+                    "ver",
+                    "solicitacoes",
+                    "solicitacao"
+                ]
+            ]
+        }
+    },
+    {
+        "model": "auth.group",
+        "fields": {
+            "name": "Servidor GESEG Internação",
+            "permissions": [
+                [
+                    "editar_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ],
+                [
+                    "incluir_livro_modulos",
+                    "livro",
+                    "livro"
+                ],
+                [
+                    "ver_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ]
+            ]
+        }
+    },
+    {
+        "model": "auth.group",
+        "fields": {
+            "name": "Gestor GESP Internação",
+            "permissions": [
+                [
+                    "editar_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ],
+                [
+                    "ver_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ]
+            ]
+        }
+    },
+    {
+        "model": "auth.group",
+        "fields": {
+            "name": "Servidor GESP Internação",
+            "permissions": [
+                [
+                    "editar_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ],
+                [
+                    "ver_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ]
+            ]
+        }
+    },
+    {
+        "model": "auth.group",
+        "fields": {
+            "name": "Gestor GEAD Internação",
+            "permissions": [
+                [
+                    "editar_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ],
+                [
+                    "ver_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ]
+            ]
+        }
+    },
+    {
+        "model": "auth.group",
+        "fields": {
+            "name": "Servidor GEAD Internação",
+            "permissions": [
+                [
+                    "editar_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ],
+                [
+                    "ver_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ]
+            ]
+        }
+    },
+    {
+        "model": "auth.group",
+        "fields": {
+            "name": "Atendimento Inicial",
+            "permissions": [
+                [
+                    "editar_todos",
+                    "adolescentes",
+                    "adolescente"
+                ],
+                [
+                    "ver_todos",
+                    "adolescentes",
+                    "adolescente"
+                ],
+                [
+                    "incluir_entradas_na_unidade",
+                    "unidades",
+                    "entradaadolescente"
+                ],
+                [
+                    "incluir",
+                    "adolescentes",
+                    "adolescente"
+                ]
+            ]
+        }
+    }
+
+]

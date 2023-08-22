@@ -1,0 +1,35 @@
+<div class="card p-3 bg-light shadow-sm">
+  <div class="row no-gutters">
+    <div class="col-auto position-relative">
+      {% if adolescente.foto_mais_recente.foto.url %}
+      <img src="{{ adolescente.foto_mais_recente.foto.url }}" class="img-fluid foto-img shadow-sm"
+        alt="foto do adolescente">
+        {% if  request.resolver_match.url_name == 'adolescente-update' %}<button type="button" data-bs-toggle="modal" data-bs-placement="top" title="Editar Foto"
+        data-bs-target="#fotos_modal" class="btn btn-primary btn-foto"><i class="fa-solid fa-images"></i></button>{% endif %}
+      {% else %}
+      <img src="{% static 'images/fotoAdolescente.jpg' %}" class="img-fluid foto-img shadow-sm"
+        alt="foto do adolescente">
+        {% if  request.resolver_match.url_name == 'adolescente-update' %}<button type="button" data-bs-toggle="modal" data-bs-placement="top" title="Inserir Foto"
+        data-bs-target="#fotos_modal" class="btn btn-primary btn-foto"><i class="fa-solid fa-images"></i></button>{% endif %}
+      {% endif %}
+    </div>
+    <div class="col">
+      {% if adolescente %}
+      <h4 class="card-title fs-6">{{adolescente.nome}}</h4>
+      <hr>
+      {% endif %}
+      <div>
+        <p class="card-text fw-bold m-0">Id Jornada: {{ adolescente.id_jornada}}</p>
+        {%if adolescente.data_nascimento %}
+        <p class="card-text m-0">Nascimento: {{ adolescente.data_nascimento|date:"d/m/Y"}}</p>
+        {% endif %}
+        {%if adolescente.genero %}
+        <p class=" card-text m-0">Gênero: {{ adolescente.genero}}</p>
+        {% endif %}
+        {% if adolescente.cor %}
+        <p class="card-text m-0">Cor: {{ adolescente.cor}}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

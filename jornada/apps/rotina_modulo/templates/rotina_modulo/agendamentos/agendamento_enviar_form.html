@@ -1,0 +1,50 @@
+{% extends 'rotina_modulo/base.html' %}
+
+{% load shared_components %}
+
+
+
+{% block body %}
+    <div class="row justify-content-center mt-4">
+        {% Fieldset class="bg-light px-3 py-4 mb-2 col-md-6 "%}
+        
+            <div class="mb-2">
+                <span class="fs-5 fw-bold">Enviando: </span>
+                {{object.adolescente.nome}}
+
+            </div>
+            <div class="my-2">
+                <span class="fs-5 fw-bold">Para a atividade: </span>
+                {{object.atividade.descricao}}
+            </div>
+            <fieldset class="border rounded position-relative bg-white p-4 my-3">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{form.errors}}
+                    <div class="row">
+                        <div class="col py-1">
+                            {% LabeledInput field=form.data_ida %}{% /LabeledInput %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col py-1">
+                            {% LabeledInput field=form.observacoes %}{% /LabeledInput %}
+                        </div>
+                    </div>
+                        <div class="d-flex flex-end mt-2">
+                            {% url 'rotina_modulo:modulo-listar-agendamentos' modulo.uuid as voltar_url %}
+                                
+                            {% BotaoVoltar url=voltar_url class='btn btn-secondary me-2' %}{% /BotaoVoltar %}
+
+                            <input class="btn btn-success me-2" type="submit" value="Enviar">
+                        </div>
+            
+                </form>
+
+            </fieldset>
+    
+        {% /Fieldset %}
+
+    </div>
+{% endblock %}
+

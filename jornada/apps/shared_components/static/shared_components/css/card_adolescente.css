@@ -1,0 +1,13 @@
+.btn-foto {
+    border-radius: 50%;
+    position: absolute;
+    bottom: 4px;
+    right: 16px;
+    font-size: 1.3rem;
+    padding: 3px 6px;
+}
+
+.foto-img {
+    width: 210px;
+    height: 200px;
+}

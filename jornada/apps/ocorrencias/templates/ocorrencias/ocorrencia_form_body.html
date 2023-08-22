@@ -1,0 +1,107 @@
+{% load shared_components %}
+
+{{form.modulo}}
+
+{{form.unidade}}
+
+<fieldset class="border rounded p-3 bg-light mb-3">
+  <div class="row justify-content-center">
+    <div class="col-md-4 py-1">
+      {% LabeledInput field=form.data_hora %}{% /LabeledInput %}
+    </div>
+  </div>
+</fieldset>
+<fieldset class="border rounded p-3 bg-light mb-3">
+  <div class="row">
+    <div class="col-md-12 py-1">
+      {% LabeledInput field=form.infracoes_leves %}{% /LabeledInput %}
+    </div>
+    <div class="col-md-12 py-1">
+      {% LabeledInput field=form.infracoes_medias %}{% /LabeledInput %}
+    </div>
+    <div class="col-md-12 py-1 my-2">
+      {% LabeledInput field=form.infracoes_graves %}{% /LabeledInput %}
+    </div>
+    {% if form.regulamento_infracoes_id == 2 %}
+      <div class="col-md-12 py-1 my-2">
+        {% LabeledInput field=form.infracoes_gravissimas %}{% /LabeledInput %}
+      </div>
+    {% endif %}
+</fieldset>
+<fieldset class="border rounded p-3 bg-light mb-3">
+  <div class="row">
+    <div class="col-md-12 py-1">
+      {% LabeledInput field=form.circunstancias %}{% /LabeledInput %}
+    </div>
+</fieldset>
+<fieldset class="border rounded p-3 bg-light mb-3">
+  <div class="row">
+    <div class="col-md-12 py-1">
+      {% LabeledInput field=form.adolescentes_autores %}{% /LabeledInput %}
+    </div>
+    <div class="col-md-12 py-1">
+      {% LabeledInput field=form.adolescentes_vitimas %}{% /LabeledInput %}
+    </div>
+  </div>
+</fieldset>
+<fieldset class="border rounded p-3 bg-light mb-3">
+  <div class="row">
+    <div class="col-md-12 py-1">
+      {% LabeledInput field=form.servidores_relacionados %}{% /LabeledInput %}
+    </div>
+    <div class="col-md-12 py-1">
+      {% LabeledInput field=form.servidores_envolvidos %}{% /LabeledInput %}
+    </div>
+  </div>
+</fieldset>
+<fieldset class="border rounded p-3 bg-light mb-3">
+  <div class="row">
+    <div class="col-md-12 py-1">
+      {% LabeledInput field=form.descricao %}{% /LabeledInput %}
+    </div>
+  </div>
+</fieldset>
+
+<fieldset class="border rounded p-3 bg-light mb-3">
+  {% InlineFormset formset=anexos %}
+
+      {{anexos.non_form_errors}}
+      
+      {% arg empty_form %}
+        {{ anexos.empty_form.id }}
+        {{ anexos.empty_form.ocorrencia }}
+        <div class="row justify-content-center">
+          <div class="col-md-6 mt-auto mb-2">
+            {% LabeledInput field=anexos.empty_form.anexo %}{% /LabeledInput %}
+          </div>
+          <div class="col-md-2 mt-auto mb-2">
+            {% LabeledInput field=anexos.empty_form.DELETE %}{% /LabeledInput %}
+          </div>
+        </div>
+      {% endarg %}
+
+      {% for anexo in anexos %}
+          {% FormErrors form=anexo %}{% /FormErrors %}
+          {{ anexo.errors }}
+          {{ anexo.id }}
+          {{anexo.ocorrencia }}
+
+          <div class="row justify-content-center">
+            <div class="col-md-6 mt-auto mb-2">
+              {% LabeledInput field=anexo.anexo %}{% /LabeledInput %}
+            </div>
+            <div class="col-md-2 mt-auto mb-2">
+            {% if anexo.instance.criado_por == request.user or not anexo.instance.pk %}
+                {% LabeledInput field=anexo.DELETE %}{% /LabeledInput %}
+            {% else %}
+                <small class="fst-italic" style="color: #777474;"> criado por: {{anexo.instance.criado_por}} </small>
+            {% endif %}
+            </div>
+          </div>
+
+          
+      {% endfor %}
+
+  {% /InlineFormset%}
+</fieldset>
+

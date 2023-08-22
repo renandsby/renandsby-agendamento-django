@@ -1,0 +1,64 @@
+{% extends 'rotina_modulo/base.html' %}
+{% load shared_components %}
+
+{% block body %}
+<div class="row justify-content-center mt-4">
+
+  {% Fieldset titulo="Histórico de Ocorrências" %}
+      
+    <a href="{% url 'rotina_modulo:modulo-ocorrencia-create' modulo.uuid %}" class="btn btn-primary color-white mt-4">
+      <i class="fas fa-plus-circle"></i>
+      Registrar Ocorrência
+    </a>
+  
+      {% Filtros %}{% /Filtros %}
+      <div class="table-responsive">
+      <table class=" table table-hover  text-center">
+        <thead class="table-blue">
+          <tr>
+            <th scope="col">Criado por</th>
+            <th scope="col">Data/Hora Ocorrência</th>
+            <th scope="col">Adolescentes Autores</th>
+            <th scope="col">Infrações</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ocorrencia in ocorrencias %}
+          <tr>
+            <td>{{ocorrencia.criado_por}}</td>
+            <td>{{ ocorrencia.data_hora}}</td>  
+            <td>
+              {% for adolescente in ocorrencia.adolescentes_autores.all%}
+                {{ adolescente }}{% if not forloop.last %},<br> {% endif %}
+              {% endfor %}
+            </td>
+            <td class="col-5 text-start">
+              {% for infra in ocorrencia.infracoes_graves.all %}
+                {{infra|truncatechars:70}}{% if not forloop.last %}, <br>{% endif %}
+              {% endfor %}
+              {% for infra in ocorrencia.infracoes_medias.all %}
+                {{infra|truncatechars:70}}{% if not forloop.last %}, <br>{% endif %}
+              {% endfor %}
+              {% for infra in ocorrencia.infracoes_leves.all %}
+                {{infra|truncatechars:70}}{% if not forloop.last %}, <br>{% endif %}
+              {% endfor %}
+              
+              
+            </td>
+            <td>
+              <a class="mr-2" href="{% url 'rotina_modulo:modulo-ocorrencia-update'  modulo.uuid ocorrencia.uuid %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
+                <i class="text-primary fs-5 fa-solid fa-pen-to-square"></i>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% Paginacao %}{% /Paginacao %}
+
+    {% /Fieldset %}
+  </div>
+
+
+{% endblock %}

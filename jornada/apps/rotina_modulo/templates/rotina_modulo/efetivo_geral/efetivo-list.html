@@ -1,0 +1,103 @@
+{% extends 'rotina_modulo/base.html' %}
+{% load shared_components %}
+
+{% block body %}
+
+{% Fieldset titulo="Adolescentes" %}
+  {% Filtros %}{% /Filtros %}
+  <div class="table-responsive-xl">
+    <strong>Total: {{entradaadolescente_list|length}}</strong>
+    <table class="table border table-hover align-middle text-center">
+      <thead class="table-blue">
+        <tr>
+          <th class="text-start" scope="col">Adolescente</th>
+          <th class="text-start" scope="col">Processo</th>
+          <th class="text-start" scope="col">Equipe Referência</th>
+          <!-- <th class="text-start" scope="col">Atividades Inscrito</th> -->
+          <th class="text-start"> Medidas </th> 
+          <th class="text-start"> Risco </th> 
+          
+           
+          {% if unidade.modulos.count > 1 %}<th scope="col">Módulo</th>{% endif %}
+          {% if unidade.modulos.first.quartos.exists %} <th scope="col">Quarto</th>{% endif %}
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        {% for obj in entradaadolescente_list %}
+            <tr>
+
+                <td  class="col-3 text-start">{{obj.adolescente}} 
+                    <a href="{% url 'prontuario:adolescente-update' obj.adolescente.uuid %}" class="mx-1" data-bs-toggle="tooltip"
+                    data-bs-placement="top" title="Prontuário">
+                      <i class="text-info fs-8 fa-solid fa-clipboard"></i>
+                    </a>
+                    {% if obj.evadido %}
+                    <strong class="bg-danger color-white py-1 px-2">EVADIDO</strong>
+                    {% endif %}
+                </td>
+                <td  class="text-start">{{obj.processo.str_sem_nome}} </td>
+                <td  class="text-start">{% for referencia in obj.equipe_referencia %} <small>{{referencia.nome}}</small>{% if not forloop.last %},{% endif %} {% endfor %}</td>
+                <!-- <td  class="text-start">{% for inscricao in obj.atividades_inscrito.all %} <small>{{inscricao.atividade.descricao}}{% if inscricao.turno%} ({{ inscricao.get_turno_display }}){% endif %}  </small>{% if not forloop.last %}, {% endif %} {% endfor %}</td> -->
+                <td class="text-start" >
+                  <small>
+                          {% if obj.protetiva %}M.P.{% endif %}
+                          
+                          {% if obj.tem_medida_adaptacao %}
+                              {% if obj.protetiva %}, {% endif %}
+                              {% for medida in obj.medidas_adaptacao_ativas %}
+                              M.A. até {{medida.data_fim|date:"d/m/Y"}}{% if not forloop.last %}, {% endif %}
+                              {% endfor %}
+                          {% endif %}
+                          {% if obj.tem_medida_disciplinar %}
+                              
+                              {% if obj.tem_medida_adaptacao %}, {% endif %}
+                              {% if not obj.tem_medida_adaptacao and obj.protetiva %}, {% endif %}
+                              
+                              {% for medida in obj.medidas_disciplinares_ativas %}
+                              M.D. até {{medida.data_fim|date:"d/m/Y"}}{% if not forloop.last %}, {% endif %}
+                              {% endfor %}
+                          {% endif %}
+                  </small>
+              </td>
+              <td>
+                {% if obj.adolescente.tem_risco_ativo %}
+                    <a class="mr-2"
+                        href="{% url 'prontuario:risco-list' obj.adolescente.uuid %}"
+                        data-bs-toggle="tooltip" data-bs-placement="top" title="
+                        Riscos:
+                        {% for risco in obj.adolescente.riscos_ativos.all %} 
+                            {% if not forloop.first %},{% endif %}
+                            {% for tipo in risco.tipo_risco.all %} 
+                                {{tipo}}{% if not forloop.last %},{% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                        ">
+                        <i class="text-danger fs-4 fa-solid fa-triangle-exclamation"></i>
+                    </a>
+                
+                {% endif %}
+              </td>
+
+                {% if unidade.modulos.count > 1 %}<td >{{obj.modulo.descricao|default:""}}</td>{% endif %}
+                {% if unidade.modulos.first.quartos.exists %} <td >{{obj.quarto.numero}}{{obj.quarto.nome|default:''}}</td> {% endif %}
+                <td>
+                    <a class="mx-2"
+                        href="{% url 'rotina_modulo:efetivo-geral-update-entrada' unidade.uuid obj.uuid %}"
+                        data-bs-toggle="tooltip" data-bs-placement="top" title="Editar Entrada">
+                        <i class="text-primary fs-5 fa-solid fa-pen-to-square"></i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+
+
+      </tbody>
+    </table>
+  </div>
+  {% Paginacao %}{% /Paginacao %}
+
+  {% /Fieldset %}
+
+  {% endblock %}

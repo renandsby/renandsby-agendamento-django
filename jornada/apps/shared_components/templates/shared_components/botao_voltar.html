@@ -1,0 +1,9 @@
+{% if request.path in request.META.HTTP_REFERER %} 
+
+    <a href="{{url}}" class="{% if not class %}btn btn-secondary{% else %}{{class}}{% endif %}">Voltar</a>
+
+{%else%}
+
+    <a href="{{request.META.HTTP_REFERER}}" class="{% if not class %}btn btn-secondary{% else %}{{class}}{% endif %}">Voltar</a>
+
+{%endif%}

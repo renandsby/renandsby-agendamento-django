@@ -1,0 +1,61 @@
+<div id="{{formset.prefix}}_formset">
+
+  {{formset.management_form}}
+
+  {% for dict in formset.non_form_errors %}
+      {% for error in dict.values %}
+        <div class="row mb-1">
+          <div class="col-12">
+            <div class="error text-danger">{{error}}</div>
+          </div>
+        </div>
+      {% endfor %}
+  {% endfor %}
+
+  {{ children }}
+</div>
+{% if not disabled %}
+<div class="row justify-content-center">
+  <div class="col-12 align-content-center" align="center">
+
+    {% if inline_permission %}
+        {% if inline_permission in perms %}
+          <button type="button" onclick="add_formset(event,'{{formset.prefix}}')"
+            class="btn btn-primary my-2 mx-auto new-form" id="add_{{formset.prefix}}">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        {% endif %}
+    {% else %}
+      <button type="button" onclick="add_formset(event,'{{formset.prefix}}')"
+      class="btn btn-primary my-2 mx-auto new-form" id="add_{{formset.prefix}}">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+    {% endif %}
+
+  </div>
+</div>
+{% endif %}
+
+<!-- <div id="{{formset.prefix}}_empty_form" class="d-none"> -->
+<!--   {% if formset.empty_form.non_field_errors %} -->
+<!--   <div class="row mb-1"> -->
+<!--     <div class="col-12"> -->
+<!--       <div class="error text-danger">{{formset.empty_form.non_field_errors}}</div> -->
+<!--     </div> -->
+<!--   </div> -->
+<!--   {% endif %} -->
+
+<!--   {{empty_form}} -->
+<!-- </div> -->
+
+<div id="{{formset.prefix}}_empty_form" class="d-none p-0 m-0">
+  {% if formset.empty_form.non_field_errors %}
+  <div class="row mb-1">
+    <div class="col-12">
+      <div class="error text-danger">{{formset.empty_form.non_field_errors}}</div>
+    </div>
+  </div>
+  {% endif %}
+
+  {{empty_form}}
+</div>

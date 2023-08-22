@@ -1,0 +1,77 @@
+{% extends "rotina_modulo/base.html" %}
+{% load shared_components %}
+
+
+{% block body %}
+  {% Fieldset titulo="Saídas previstas" %}
+
+    <div class="table-responsive-xl">
+
+        <table class="table border table-hover align-middle" >
+          <thead class="table-blue">
+            <tr>
+              
+              <th scope="col">Adolescente</th>
+              <th scope="col">Processo</th>
+              <th scope="col">Tipo Saída</th>  
+              <th scope="col">Data Prevista</th> 
+              <th scope="col">Observações</th> 
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for entrada in entradaadolescente_list %}
+              <tr>
+                
+                
+                <td>
+                  {{entrada.adolescente.nome}}
+                  <a href="{% url 'prontuario:adolescente-update' entrada.adolescente.uuid %}" class="mx-1" data-bs-toggle="tooltip"
+                  data-bs-placement="top" title="Prontuário">
+                  <i class="text-info fs-8 fa-solid fa-clipboard"></i>
+                  </a>
+                </td>
+      
+                <td>
+                  <small>
+                    {{entrada.processo.str_sem_nome}}
+                  </small>
+                </td>
+      
+      
+                <td>
+                  {{entrada.tipo_saida|default:""}}
+                </td>
+      
+                <td>
+                  {{entrada.data_prevista_saida|default:""}}
+                </td>
+
+                <td>
+                  {{entrada.observacoes_saida|default:''}}
+                  
+                  {% if entrada.transferencia_saida %}
+                    Sendo transferido para a unidade {{entrada.transferencia_saida.unidade_destino}}
+                  {% endif %}
+                </td>
+
+                <td>
+                  <a class="mr-2" href="{% url 'rotina_modulo:saida' unidade.uuid entrada.uuid %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Realizar Saída">
+                    <i class="text-danger fs-4 fa-solid fa-person-circle-minus"></i>
+                  </a>
+
+                </td>
+
+            {% endfor %}
+        
+            
+          </tbody>
+        </table>
+      </div>
+
+
+
+  {% /Fieldset %}
+    
+    
+{% endblock %}

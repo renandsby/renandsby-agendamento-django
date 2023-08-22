@@ -1,0 +1,68 @@
+{% extends 'rotina_modulo/base.html' %}
+
+{% load shared_components %}
+
+{% block css_imports %}
+    {{block.super}}
+    <link href="{% static 'css/timeline.css'%}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block body %}
+
+    {% Fieldset %}
+    {% url 'rotina_modulo:quartos-modulo' entrada.modulo.uuid as voltar_url %}
+    {% BotaoVoltar url=voltar_url %}{% /BotaoVoltar %}
+    
+    <fieldset class="row border px-4 py-5 mt-4 position-relative">
+        <legend class=" fw-bold legenda-flutuante w-auto">
+            
+        </legend>
+
+        <div class="row justify-content-center">
+            <div class="col-10 text-center mb-4">
+                <small class="fs-6">Atividades realizadas por:</small> <b class="fs-4 fw-bold" style="color:rgb(4, 58, 96)">{{entrada.adolescente.nome}}</b>
+
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-md-9">
+                <div class="timeline">
+                    <ul>
+        
+                        {% if historicoatividade_list.count == 0 %}
+                        <li>
+                            <p class="fw-bold">
+                                O adolescente não realizou nenhuma atividade
+                            </p>
+                        </li>    
+                        {% endif %}
+
+                        {% for his_atividade in page_obj %}
+                            <li>
+                                <span class="ida"> Ida</span>
+                                <span> {{his_atividade.data_ida}}</span>
+                                
+                                {% if his_atividade.data_retorno %}
+                                <span class="retorno"> Retorno</span>
+                                <span>{{his_atividade.data_retorno}}</span>
+                                {% endif %}
+                                <div class="content">
+                                <h3>{{his_atividade.atividade.descricao}}</h3>
+                                <p>
+                                    {{his_atividade.observacoes}}
+                                </p>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                  </div>
+            </div>
+        </div>
+        
+
+        {% Paginacao %}{% /Paginacao %}
+    </fieldset>
+    {% /Fieldset %}
+
+{% endblock %}

@@ -1,0 +1,159 @@
+{% extends "prontuario/base.html" %}
+{% load shared_components %}
+
+
+
+
+{% block body %}
+
+
+  {% Form form=form enctype="multipart/form-data" titulo="Editar Processo" %}
+
+
+  {% Fieldset class="border rounded p-3 bg-light mb-3" %}
+    <div class="row">
+      <div class="col-md-2 py-1">
+        {%LabeledInput field=form.tipo_processo %}{% /LabeledInput %}
+      </div>
+      <div class="col-md-4 py-1">
+        {%LabeledInput field=form.numero %} {% /LabeledInput %}
+      </div>
+      <div class="col-md-4 py-1">
+        {%LabeledInput field=form.nr_pia %}{% /LabeledInput %}
+      </div>
+      <div class="col-md-2 py-1">
+        {%LabeledInput field=form.status %} {% /LabeledInput %}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 py-1">
+        {%LabeledInput field=form.numero_paai %} {% /LabeledInput %}
+      </div>
+      <div class="col-md-3 py-1">
+        {%LabeledInput field=form.origem_paai %} {% /LabeledInput %}
+      </div>
+      <div class="col-md-3 py-1">
+        {% LabeledInput field=form.data_apreensao %}{% /LabeledInput %}
+      </div>
+      <div class="col-md-3 py-1">
+        {% LabeledInput field=form.data_sentenca %}{% /LabeledInput %}
+      </div>
+    </div>
+  {% /Fieldset %}
+
+
+
+  {% Fieldset class="border rounded p-3 bg-light mb-4" %}
+    <div class="row">
+      <div class="col-md-12">
+        {%LabeledInput field=form.vara %}{% /LabeledInput %}
+      </div>
+    </div>
+  {% /Fieldset %}
+
+  {% Fieldset class="border rounded p-3 pt-4 bg-light mb-3 position-relative" legenda="Atos Infracionais" %}
+    <div class="row">
+      {%LabeledInput field=form.atos_infracionais %}{% /LabeledInput %}
+    </div>
+  {% /Fieldset %}
+
+  {% Fieldset class="border rounded p-3 pb-5 bg-light mb-3" %}
+    <div class="row">
+      <div class="col-md-12">
+        {%LabeledInput field=form.observacoes %}{% /LabeledInput %}
+      </div>
+    </div>
+  {% /Fieldset %}
+
+
+  {% Fieldset class="border rounded py-4 bg-light mb-3" %}  
+    {% InlineFormset formset=anexos %}
+    {{anexos.non_form_errors}}
+    
+    {% arg empty_form %}
+      {{ anexos.empty_form.processo }}
+      {{ anexos.empty_form.id }}
+      <div class="row justify-content-center">
+        <div class="col-md-4 mt-auto mb-2">
+          {% LabeledInput field=anexos.empty_form.anexo %}{% /LabeledInput %}
+        </div>
+        <div class="col-md-4 mt-auto mb-2">
+          {% LabeledInput field=anexos.empty_form.descricao %}{% /LabeledInput %}
+        </div> 
+        <div class="col-md-2 mt-auto mb-2">
+          {% LabeledInput field=anexos.empty_form.DELETE %}{% /LabeledInput %}
+        </div> 
+      </div>
+    {% endarg %}
+    
+    {% for anexo in anexos %}
+      {% FormErrors form=anexo %}{% /FormErrors %}
+      {{anexo.errors}}
+      {{ anexo.id }}
+      {{anexo.processo }}
+      <div class="row justify-content-center">
+        <div class="col-md-4 mt-auto mb-2">
+          {% LabeledInput field=anexo.anexo %}{% /LabeledInput %}
+        </div>
+        <div class="col-md-4 mt-auto mb-2">
+          {% LabeledInput field=anexo.descricao %}{% /LabeledInput %}
+        </div>
+        <div class="col-md-2 mt-auto mb-2">
+          {% if anexo.instance.criado_por == request.user or not anexo.instance.pk %}
+              {% LabeledInput field=anexo.DELETE %}{% /LabeledInput %}
+          {% else %}
+              <small class="fst-italic" style="color: #777474;"> criado por: {{anexo.instance.criado_por}} </small>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+    
+    {% /InlineFormset%}
+
+  {% /Fieldset %}
+
+
+  {% arg botoes_extra %}
+  
+    {% url 'prontuario:processo-list' adolescente.uuid as voltar_url %}
+    {% BotaoVoltar url=voltar_url %}{% /BotaoVoltar %}
+    
+
+    {% if form.instance.pk %}    
+      <a class = 'btn btn-danger' data-bs-toggle="modal" data-bs-placement="top" title="Deletar" data-bs-target="#deletar{{processo.id}}">
+        Deletar
+      </a>
+    {% endif %}
+
+  {% endarg %}
+
+
+  {% /Form %}
+
+
+{% endblock %}
+
+
+{% block modals %}
+    {% Modal %}
+      {% arg id %}deletar{{processo.id}}{% endarg %}
+      Tem certeza que deseja <b>DELETAR</b> o processo {{processo.str_sem_nome}}?
+      <br>
+      {% arg botoes %}
+        {% if form.instance.pk %}
+          <form method="POST" action="{% url 'prontuario:processo-delete' adolescente.uuid processo.uuid %}">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-danger btn-foto" value="Deletar">
+          </form>
+        {% endif %}
+      {% endarg %}
+    {% /Modal %}
+{% endblock %}
+
+
+{% block js %}
+<script>
+  $("#id_atos_infracionais").bsMultiSelect();
+</script>
+{% endblock %}

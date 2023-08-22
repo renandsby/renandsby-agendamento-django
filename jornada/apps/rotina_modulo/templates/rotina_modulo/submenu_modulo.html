@@ -1,0 +1,104 @@
+<!-- MODULOS -->
+{% if modulo.unidade.modulos.count > 1 %}
+    <div class="d-flex justify-content-center item-submenu ">
+        <a href="{% url 'rotina_modulo:home-modulos' modulo.unidade.uuid %}" class="">
+            <i class="fa-solid fa-house me-1"></i>
+            Módulos
+        </a>
+    </div>
+{% endif %}
+
+<!-- QUARTOS -->
+{% if modulo.quartos.exists %}
+    <div class="d-flex justify-content-center item-submenu {% if 'quartos' in request.resolver_match.url_name %} atual {% endif %}">
+        <a href="{% url 'rotina_modulo:quartos-modulo' modulo.uuid %}" class="">
+            <i class="fa-solid fa-bed me-1"></i>
+            Quartos
+        </a>
+    </div>
+{% endif %}
+<!-- EFETIVO -->
+{% if modulo.unidade.tipo_unidade.descricao == "Atendimento Inicial" %}
+    <div class="d-flex justify-content-center item-submenu {% if 'efetivo-nai' in request.resolver_match.url_name %} atual {% endif %}">
+        <a href="{% url 'nai:efetivo-nai' modulo.uuid %}" class="">
+            <i class="fa-solid fa-person me-1"></i>
+            Adolescentes
+        </a>
+    </div>
+
+{% elif modulo.unidade.tipo_unidade.descricao == "Meio Aberto" %}
+
+    <div class="d-flex justify-content-center item-submenu {% if 'adolescente-list' in request.resolver_match.url_name %} atual {% endif %}">
+        <a href="{% url 'uama:adolescente-list' modulo.uuid %}" class="">
+            <i class="fa-solid fa-person me-1"></i>
+            Adolescentes
+        </a>
+    </div>
+
+{% else %}
+
+    <div class="d-flex justify-content-center item-submenu {% if 'modulo-entradas' in request.resolver_match.url_name %} atual {% endif %}">
+        <a href="{% url 'rotina_modulo:modulo-entradas' modulo.uuid %}" class="">
+            <i class="fa-solid fa-person me-1"></i>
+            Adolescentes
+        </a>
+    </div>
+
+{% endif %}
+
+<!-- ATIVIDADES -->
+<div class="d-flex justify-content-center item-submenu {% if 'modulo-atividade' in request.resolver_match.url_name %} atual {% endif %}">
+    <a href="{% url 'rotina_modulo:modulo-atividades' modulo.uuid %}" class="">
+        <i class="fa-solid fa-network-wired me-1"></i>
+        Atividades
+    </a>
+</div>
+
+<!-- OCORRÊNCIAS -->
+{% if 'ocorrencias.ver' in perms %}
+    {% if not modulo.unidade.tipo_unidade.descricao == "Meio Aberto" %}
+        <div class="d-flex justify-content-center item-submenu {% if 'ocorrencia' in request.resolver_match.url_name %} atual {% endif %}">
+            <a href="{% url 'rotina_modulo:modulo-ocorrencia-list' modulo.uuid %}" class="">
+                <i class="fa-solid fa-comments me-1"></i>
+                Ocorrências
+            </a>
+        </div>
+    {% endif %}
+{% endif %}
+
+<!-- LIVRO -->
+
+<div class="d-flex justify-content-center item-submenu {% if 'livro' in request.resolver_match.url_name %} atual {% endif %}">
+    <a href="{% url 'rotina_modulo:livro-redirect' modulo.uuid %}" class="">
+        <i class="fa-solid fa-book me-1"></i>
+        Livro
+    </a>
+</div>
+
+
+<!-- AGENDA -->
+<div class="d-flex justify-content-center item-submenu {% if 'agenda' in request.resolver_match.url_name %} atual {% endif %}">
+    <a href="{% url 'rotina_modulo:modulo-listar-agendamentos' modulo.uuid %}?periodo=today" class="">
+        <i class="fa-regular fa-calendar me-1"></i>
+        Agenda
+    </a>
+</div>
+
+<!-- VISITA -->
+{% if modulo.unidade.tipo_unidade.descricao == "Internação" %}
+    <div class="d-flex justify-content-center item-submenu {% if 'visita' in request.resolver_match.url_name %} atual {% endif %}">
+        <a href="{% url 'rotina_modulo:modulo-visita-list' modulo.uuid %}?periodo=today" class="">
+            <i class="fa-solid fa-people-arrows fs-5 me-1"></i>
+            Visita
+        </a>
+    </div>
+{% endif %}
+
+<!-- Ligacao -->
+
+    <div class="d-flex justify-content-center item-submenu {% if 'ligacao' in request.resolver_match.url_name %} atual {% endif %}">
+        <a href="{% url 'rotina_modulo:modulo-ligacao-list' modulo.uuid %}?periodo=today" class="">
+            <i class="fa-solid fa-phone fs-5 me-1"></i>
+            Ligações
+        </a>
+    </div>

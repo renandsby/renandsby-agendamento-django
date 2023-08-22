@@ -1,0 +1,49 @@
+volumes:
+  jornada_pg_data:
+    name: jornada_pg_data
+
+services:
+  db:
+    restart: always
+    build:
+      context: ./postgres/
+      dockerfile: Dockerfile.pg
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - "jornada_pg_data:/var/lib/postgresql/data"
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 3s
+      timeout: 3s
+      retries: 6
+
+  django:
+    image: compose-jornada:latest
+    restart: always
+    build: 
+      context: ..
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - "${DJANGO_PORT}:8000"
+    volumes:
+      - ..:/app
+    environment:
+      - PATH=${PATH}:/home/python/.local/bin
+      - DJANGO_SETTINGS_MODULE=jornada.settings
+      - JORNADA_ENV=${JORNADA_ENV}
+      - DJANGO_SUPERUSER_USERNAME=${DJANGO_SUPERUSER_USERNAME}
+      - DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}
+      - DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL}
+    command:  "django-admin runserver 0.0.0.0:8000"
+    depends_on:  
+      db:
+        condition: service_healthy
+    links:
+      - db
+
+

@@ -1,0 +1,29 @@
+{% extends 'rotina_modulo/base.html' %}
+{% load shared_components %}
+
+{% block body %}
+    {% Form form=form  enctype="multipart/form-data"%}
+      {% include 'ocorrencias/ocorrencia_form_body.html'%}
+      
+      {% arg botao_voltar %}
+        {% url 'rotina_modulo:modulo-ocorrencia-list' modulo.uuid as voltar_url %}
+        {% BotaoVoltar url=voltar_url %}{% /BotaoVoltar %}
+      {% endarg %}
+    {% /Form %}
+{% endblock %}
+
+{% block js %}
+  <script>
+    $(function(){
+      $("#id_infracoes_leves").bsMultiSelect();
+      $("#id_infracoes_medias").bsMultiSelect();
+      $("#id_infracoes_graves").bsMultiSelect();
+      $("#id_infracoes_gravissimas").bsMultiSelect();
+      $("#id_circunstancias").bsMultiSelect();
+      $("#id_circunstancias").bsMultiSelect();
+      $("#id_adolescentes_autores").bsMultiSelect();
+      $("#id_adolescentes_vitimas").bsMultiSelect();
+      $("#id_servidores_relacionados").bsMultiSelect();
+    });
+  </script>   
+{% endblock %}

@@ -1,0 +1,29 @@
+<form class=" form-login {{form_login_classes}}" action="{% url 'login' %}?{% if next %}next={{next}}{% endif %}"
+  method='POST'>
+
+
+
+  {% csrf_token %}
+  <div class="login-user mb-3">
+    <label for="user" class="form-label mb-0 fs-6">Usuário:</label>
+    <input type="text" class="form-control {% if form.errors %} is-invalid {% endif %}" id="user" name="username">
+
+  </div>
+  <div class="login-password mb-1">
+    <label for="password" class="form-label mb-0 fs-6">Senha:</label>
+    <input type="password" class="form-control{% if form.errors %} is-invalid {% endif %}" id="password"
+      name="password">
+  </div>
+  {% if form.errors %}
+  <div class="invalid-feedback">
+    <span>{{ form.non_field_errors}}</span>
+  </div>
+  {% endif %}
+  {% comment %} <div class="mb-4 text-center fs-6">
+    <a href="#">Esqueceu a senha?</a>
+  </div> {% endcomment %}
+
+  <div class="text-center mt-4 mb-4">
+    <button type="submit" class="btn btn-primary w-75" style="height:45px;">Entrar</button>
+  </div>
+</form>

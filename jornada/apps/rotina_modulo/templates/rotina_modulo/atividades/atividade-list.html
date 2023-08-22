@@ -1,0 +1,60 @@
+{% extends 'rotina_modulo/base.html' %}
+
+{% load shared_components %}
+
+{% block body %}
+
+    {% Fieldset titulo="Atividades" %}
+    
+    
+        <a
+            class="btn btn-primary color-white"
+            href="{% url 'rotina_modulo:atividade-create' unidade.uuid %}"
+        >
+            <i class="fas fa-plus-circle"></i>
+            Nova Atividade
+        </a>
+
+        {% Filtros %}{% /Filtros %}
+        <div class="table-responsive-xl">
+            <table class="table border table-hover align-middle" >
+                <thead class="table-blue">
+                    <tr >
+                        <th class="col-6" scope="col">Atividade</th>
+                        <th class="col-6" scope="col">Tipo Atividade</th>
+                        <th class="col-2 text-center">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for atividade in page_obj %}
+                        <tr  >
+                            <td scope="row">{{atividade.descricao}}</td>
+                            <td scope="row">
+                                {% for tipo in atividade.tipo_atividade.all %}
+                                    {{tipo.descricao}}{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td class="text-center">
+                                <a class="mr-2"
+                                    href="{% url 'rotina_modulo:atividade-update' unidade.uuid atividade.uuid %}"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
+                                    <i class="text-primary fs-5 fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </td>
+
+
+                        </tr>
+                    {% endfor %}
+
+
+
+                </tbody>
+            </table>
+        </div>
+        {% Paginacao %}{% /Paginacao %}
+
+        {% /Fieldset %}
+
+{% endblock %}
+

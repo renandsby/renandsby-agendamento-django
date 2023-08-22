@@ -1,0 +1,70 @@
+{% extends "rotina_modulo/base.html" %}
+{% load shared_components %}
+
+{% block body %}
+<fieldset class="border p-4 bg-light">
+  <div class="fs-2 fw-bold text-center my-2">
+    <i class="fa-solid fa-house me-2"></i> {{unidade}}
+    <p class="fs-6 card-text text-center mb-0 fw-light">
+      
+      <strong>{{unidade.quantidade_adolescentes_presentes}}</strong> Adolescentes
+      
+    </p>
+    
+    {% if unidade.quantidade_total_adolescentes != unidade.quantidade_adolescentes_presentes %}
+    <p class="fs-6 card-text text-center mb-0 fw-light">
+      <small>
+        Total: {{unidade.quantidade_total_adolescentes}}, 
+      </small>
+
+      {% if unidade.quantidade_adolescentes_evadidos > 0 %}
+        <small>
+          Evadido(s): {{unidade.quantidade_adolescentes_evadidos}}{% if unidade.quantidade_adolescentes_em_atividade_externa > 0 %},{% endif %} 
+        </small>
+        {% endif %} 
+        {% if unidade.quantidade_adolescentes_em_atividade_externa > 0 %}
+        <small>
+          Em Atividade Externa: {{unidade.quantidade_adolescentes_em_atividade_externa}} 
+        </small>
+        {% endif %}
+    
+      </p>
+      {% endif %}
+
+  </div>
+
+    <div class="container">
+      <div class="row justify-content-center">
+
+        {% for modulo in object_list %}
+
+        <div class="col-md-6 col-lg-3">
+          <div class="card m-2 w-100">
+            <div class="card-body card-shadow">
+              <h5 class="card-title text-center">Módulo {{modulo.descricao}}</h5>
+              <p class="card-text text-center mb-0">{{modulo.quantidade_adolescentes}} Adolescentes</p>
+              <a href="{% url 'rotina_modulo:quartos-modulo' modulo.uuid %}" style="height:0px;"
+                class="stretched-link ">
+              </a>
+            </div>
+          </div>
+        </div>
+
+
+
+        {% endfor %}
+
+
+      </div>
+    </div>
+
+
+
+
+  </fieldset>
+
+
+
+
+</fieldset>
+{% endblock %}

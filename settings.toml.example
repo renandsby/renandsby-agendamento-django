@@ -1,0 +1,33 @@
+[desenvolvimento]
+Debug = true
+ALLOWED_HOSTS = ["*"]
+DATABASES__default__ENGINE = "django.db.backends.postgresql"
+DATABASES__default__NAME="postgres"
+DATABASES__default__USER = "postgres"
+DATABASES__default__PASSWORD = "postgres"
+DATABASES__default__HOST = "db"
+DATABASES__default__PORT = 5432
+
+
+[homologacao]
+Debug = false
+ALLOWED_HOSTS = ["*"]
+DATABASES__default__ENGINE = "django.db.backends.postgresql"
+DATABASES__default__NAME="postgres"
+DATABASES__default__USER = "postgres"
+DATABASES__default__PASSWORD = "postgres"
+DATABASES__default__HOST = "db"
+DATABASES__default__PORT = 5432
+
+[producao]
+Debug = false
+ALLOWED_HOSTS = ["*"]
+DATABASES__default__ENGINE = "django.db.backends.postgresql"
+DATABASES__default__NAME ="postgres"
+DATABASES__default__USER = "postgres"
+DATABASES__default__PASSWORD = "postgres"
+DATABASES__default__HOST = "db"
+DATABASES__default__PORT = 5432
+CACHES__default__BACKEND = "django_redis.cache.RedisCache"
+CACHES__default__LOCATION = "redis://redis:6379/0"
+CACHES__default__OPTIONS__CLIENT_CLASS = "django_redis.client.DefaultClient"

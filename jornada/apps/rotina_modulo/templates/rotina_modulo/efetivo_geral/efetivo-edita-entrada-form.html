@@ -1,0 +1,344 @@
+{% extends "rotina_modulo/base.html" %}
+{% load shared_components %}
+
+{% block body %}
+
+<div class="row justify-content-center mt-4">
+  {% Fieldset %}
+  {% Fieldset class="bg-light p-4" %}
+  {% arg titulo %}
+    <small>{{form.instance.adolescente.nome}}</small>
+  {% endarg %}
+    {{form.errors}}
+    {% if form.non_field_errors %}
+    <div class="row mb-1">
+
+      <div class="col">
+        <div class="error text-danger">{{form.non_field_errors}}</div>
+      </div>
+
+    </div>
+    {% endif %}
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+        <div class="row">
+            <div class="col-md-4 py-1 mb-2">
+              {% LabeledInput field=form.data_entrada %}{% /LabeledInput %}
+            </div>
+            <div class="col-md-4 py-1 mb-2">
+              {% LabeledInput field=form.processo %}{% /LabeledInput %}
+            </div>
+            <div class="col-md-4 py-1 mb-2">
+              {% LabeledInput field=form.tipo_entrada %}{% /LabeledInput %}
+            </div>          
+          </div>
+          
+          
+          <div class="row">
+            <div class="col-md-6 py-1 mb-2">
+            {% LabeledInput field=form.tipo_vaga %}{% /LabeledInput %}
+            </div>
+            <div class="col-md-3 py-1 mb-2 my-auto">
+              {% LabeledInput field=form.protetiva %}{% /LabeledInput %}
+            </div>
+            <div class="col-md-3 py-1 mb-2 my-auto">
+              {% LabeledInput field=form.evadido %}{% /LabeledInput %}
+            </div>
+          </div>
+  
+
+        <div class="row">
+          {% if form.instance.unidade.modulos.count > 1 %}
+          <div class="col-md-6 py-1 mb-2">
+            {% LabeledInput field=form.modulo %}{% /LabeledInput %}
+          </div>
+          {% endif %}
+          {% if form.instance.unidade.modulos.first.quartos.exists %}
+          <div class="col-md-6 py-1 mb-2">
+            {% LabeledInput field=form.quarto %}{% /LabeledInput %}
+          </div>
+          {% endif %}
+        </div>
+        
+        
+        <div class="row">
+          <div class="col-md-6 py-1 mb-2">
+            {% LabeledInput field=form.especialista_referencia %}{% /LabeledInput %} 
+          </div>
+          <div class="col-md-6 py-1 mb-2">
+            {% LabeledInput field=form.agente_referencia %}{% /LabeledInput %} 
+          </div>
+        </div>
+
+      
+
+        {% Fieldset legenda="Anexos" class="border rounded p-2 bg-white my-4"%}
+          {% InlineFormset formset=anexos %}
+            {% arg empty_form %}
+              <div class="row justify-content-center px-2 mb-2 mt-2">
+                {{ anexos.empty_form.id }}
+                {{ anexos.empty_form.entrada }}
+                  <div class="col-lg-5 px-1 mt-auto mb-2">
+                    {% LabeledInput field=anexos.empty_form.anexo %}{% /LabeledInput %}
+                  </div>
+                  <div class="col-lg-5 px-1 mt-auto mb-2">
+                    {% LabeledInput field=anexos.empty_form.descricao %}{% /LabeledInput %}
+                  </div>
+                  <div class="col-lg-2 px-1 mt-auto mb-2">
+                    {% LabeledInput field=anexos.empty_form.DELETE %}{% /LabeledInput %}
+                  </div>
+              </div>
+            {% endarg %}
+
+            {% for anexo in anexos %}
+            {% FormErrors form=anexo %}{% /FormErrors %}
+              <div class="row justify-content-center px-2 mb-2 mt-2">
+                {{ anexo.id }}
+                {{ anexo.entrada}}
+                  <div class="col-lg-5 px-1 mt-auto mb-2">
+                    {% LabeledInput field=anexo.anexo %}{% /LabeledInput %}
+                  </div>
+                  <div class="col-lg-5 px-1 mt-auto mb-2">
+                    {% LabeledInput field=anexo.descricao %}{% /LabeledInput %}
+                  </div>
+                  <div class="col-lg-2 px-1 mt-auto mb-2">
+                    {% if anexo.instance.criado_por == request.user or not anexo.instance.pk %}
+                        {% LabeledInput field=anexo.DELETE %}{% /LabeledInput %}
+                    {% else %}
+                        <small class="fst-italic" style="color: #777474;"> criado por: {{anexo.instance.criado_por}} </small>
+                    {% endif %}
+                  </div>
+              </div>
+            {% endfor %}
+
+          {% /InlineFormset%}
+        {% /Fieldset %}
+
+
+        {% Fieldset legenda="Medidas Adaptativas" class="border rounded p-2 bg-white my-4"%}
+          {% InlineFormset formset=medidas_adaptacao %}
+            {% arg empty_form %}
+              <div class="row justify-content-center px-2 mb-2 mt-2">
+                {{ medidas_adaptacao.empty_form.id }}
+                {{ medidas_adaptacao.empty_form.entrada }}
+                  <div class="col-lg-3 px-1 mt-auto mb-2">
+                    {% LabeledInput field=medidas_adaptacao.empty_form.data_inicio %}{% /LabeledInput %}
+                  </div>
+                  <div class="col-lg-3 px-1 mt-auto mb-2">
+                    {% LabeledInput field=medidas_adaptacao.empty_form.duracao %}{% /LabeledInput %}
+                  </div>
+                  <div class="col-lg-3 px-1 mt-auto mb-2">
+                    {% LabeledInput field=medidas_adaptacao.empty_form.descricao %}{% /LabeledInput %}
+                  </div>
+                  <div class="col-lg-1 px-1 my-auto ">
+                  </div>
+                  <div class="col-lg-2 px-1 mt-auto mb-2">
+                    {% LabeledInput field=medidas_adaptacao.empty_form.DELETE %}{% /LabeledInput %}
+                  </div>
+              </div>
+            {% endarg %}
+
+            {% for medida in medidas_adaptacao %}
+            {% FormErrors form=medida %}{% /FormErrors %}
+              <div class="row justify-content-center px-2 mb-2 mt-2">
+                {{ medida.id }}
+                {{ medida.entrada}}
+                  <div class="col-lg-3 px-1 mt-auto mb-2">
+                    {% LabeledInput field=medida.data_inicio %}{% /LabeledInput %}
+                  </div>
+                  <div class="col-lg-3 px-1 mt-auto mb-2">
+                    {% LabeledInput field=medida.duracao %}{% /LabeledInput %}
+                  </div>
+                  <div class="col-lg-3 px-1 mt-auto mb-2">
+                    {% LabeledInput field=medida.descricao %}{% /LabeledInput %}
+                  </div>
+                  <div class="col-lg-1 px-1 my-auto ">
+                    {%  if medida.instance.pk and medida.instance.ativa %}
+                    <span class="badge bg-success"> Ativa </span>
+                    {% endif %}
+                  </div>
+                  <div class="col-lg-2 px-1 mt-auto mb-2">
+                    {% LabeledInput field=medida.DELETE %}{% /LabeledInput %}
+                  </div>
+              </div>
+            {% endfor %}
+
+          {% /InlineFormset%}
+        {% /Fieldset %}
+
+        {% Fieldset legenda="Medidas Disciplinares" class="border rounded p-2 bg-white my-4"%}
+          {% InlineFormset formset=medidas_disciplinares %}
+            {% arg empty_form %}
+              <div class="row justify-content-center px-2 mb-2 mt-2">
+                {{ medidas_disciplinares.empty_form.id }}
+                {{ medidas_disciplinares.empty_form.entrada }}
+                  <div class="col-lg-3 px-1 mt-auto mb-2">
+                    {% LabeledInput field=medidas_disciplinares.empty_form.data_inicio %}{% /LabeledInput %}
+                  </div>
+                  <div class="col-lg-3 px-1 mt-auto mb-2">
+                    {% LabeledInput field=medidas_disciplinares.empty_form.duracao %}{% /LabeledInput %}
+                  </div>
+                  <div class="col-lg-3 px-1 mt-auto mb-2">
+                    {% LabeledInput field=medidas_disciplinares.empty_form.descricao %}{% /LabeledInput %}
+                  </div>
+                  <div class="col-lg-1 px-1 my-auto">
+                    
+                  </div>
+                  <div class="col-lg-2 px-1 mt-auto mb-2">
+                    {% LabeledInput field=medidas_disciplinares.empty_form.DELETE %}{% /LabeledInput %}
+                  </div>
+              </div>
+            {% endarg %}
+
+            {% for medida in medidas_disciplinares %}
+            {% FormErrors form=medida %}{% /FormErrors %}
+              <div class="row justify-content-center px-2 mb-2 mt-2">
+                {{ medida.id }}
+                {{ medida.entrada}}
+                  <div class="col-lg-3 px-1 mt-auto mb-2">
+                    {% LabeledInput field=medida.data_inicio %}{% /LabeledInput %}
+                  </div>
+                  <div class="col-lg-3 px-1 mt-auto mb-2">
+                    {% LabeledInput field=medida.duracao %}{% /LabeledInput %}
+                  </div>
+                  <div class="col-lg-3 px-1 mt-auto mb-2">
+                    {% LabeledInput field=medida.descricao %}{% /LabeledInput %}
+                  </div>
+                  <div class="col-lg-1 px-1 my-auto ">
+                    {%  if medida.instance.pk and medida.instance.ativa %}
+                    <span class="badge bg-success"> Ativa </span>
+                    {% endif %}
+                  </div>
+                  <div class="col-lg-2 px-1 mt-auto mb-2">
+                    {% LabeledInput field=medida.DELETE %}{% /LabeledInput %}
+                  </div>
+              </div>
+            {% endfor %}
+
+          {% /InlineFormset%}
+        {% /Fieldset %}
+        
+        {% comment %}
+        {% Fieldset legenda="Inscrições em Atividades" class="border rounded p-2 bg-white my-4"%}
+          
+          {% InlineFormset formset=atividades_inscrito %}
+              {% arg empty_form %}
+              <div class="row justify-content-center px-2 mb-2 mt-2">
+                {{ atividades_inscrito.empty_form.id }}
+                {{ atividades_inscrito.empty_form.entrada }}
+
+                <div class="col-lg-5 px-1 mt-auto mb-2">
+                  {% LabeledInput field=atividades_inscrito.empty_form.atividade %}{% /LabeledInput %}
+                </div>
+
+                <div class="col-lg-5 px-1 mt-auto mb-2">
+                  {% LabeledInput field=atividades_inscrito.empty_form.turno %}{% /LabeledInput %}
+                </div>
+
+                <div class="col-lg-2 px-1 mt-auto mb-2">
+                  {% LabeledInput field=atividades_inscrito.empty_form.DELETE %}{% /LabeledInput %}
+                </div>
+
+              </div>
+              {% endarg %}
+
+              {% for atividade in atividades_inscrito %}
+              {% FormErrors form=atividade %}{% /FormErrors %}
+              <div class="row justify-content-center px-2 mb-2 mt-2">
+                    {{ atividade.id }}
+                    {{ atividade.entrada }}
+                    
+                    <div class="col-lg-5 px-1 mt-auto mb-2">
+                      {% LabeledInput field=atividade.atividade %}{% /LabeledInput %}
+                    </div>
+
+                    <div class="col-lg-5 px-1 mt-auto mb-2">
+                      {% LabeledInput field=atividade.turno %}{% /LabeledInput %}
+                    </div>
+                    
+
+                    <div class="col-lg-2 px-1 mt-auto mb-2">
+                      {% LabeledInput field=atividade.DELETE %}{% /LabeledInput %}
+                    </div>
+                    
+                  </div>
+
+              {% endfor %}
+          {% /InlineFormset%}
+
+        {% /Fieldset %}
+        {% endcomment %}
+
+
+
+      <div class="d-flex flex-end gap-2 my-3">
+        <input type="submit" value="Salvar" class="btn btn-primary">
+      </div>
+
+
+      
+      {% /Fieldset %}
+      {% /Fieldset %}
+      
+</form>
+{% endblock %}
+
+
+{% block js %}
+
+<script>
+  $("#id_modulo").change(function () {
+
+    var id_modulo = $(this).val();
+    if (id_modulo == "") {
+      var selectbox = $('#id_quarto');
+      selectbox.find('option').remove();
+      selectbox.append("<option value='' selected=''>---------</option>")
+    } else {
+
+      $.ajax({
+        url: '/api/unidades/quarto/?modulo=' + id_modulo,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        type: 'GET',
+        dataType: 'json', // added data type
+        success: function (data) {
+          if (data != null) {
+            var results = data['results']
+            var selectbox = $('#id_quarto');
+            selectbox.find('option').remove();
+
+            if (results.length > 0) {
+              selectbox.append("<option value='' selected=''>Selecione o Quarto</option>")
+            } else {
+              selectbox.append("<option value='' selected=''>Nenhum Quarto Encontrado</option>")
+            }
+
+            $.each(data['results'], function (i, d) {
+              var descricao = d.numero + d.nome
+              
+              $('<option>').val(d.id).text(descricao).appendTo(selectbox);
+            });
+          }
+
+
+        }
+      });
+    }
+
+
+  });
+
+  $(document).ready(function () {
+    var selected = $('#id_quarto selected');
+    if (!selected) {
+      $('#id_modulo').trigger('change');
+    }
+  });
+
+  $(function(){
+    $("#id_agente_referencia").bsMultiSelect();
+    $("#id_especialista_referencia").bsMultiSelect();
+  });
+
+</script>
+
+{% endblock %}

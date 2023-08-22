@@ -1,0 +1,15 @@
+<fieldset class="border rounded position-relative shadow-sm {% if not class %} bg-white p-1 p-sm-4 mb-3 mt-4 {% else %}{{class}}{% endif %}">
+  {% if legenda %}
+    <legend class="fw-bold legenda-flutuante-transparente w-100 text-center fs-6">
+      {{ legenda }}
+    </legend>
+  {% endif %}
+  
+  {% if titulo %}
+    <div class="fs-5 fw-bold mb-4 w-100 text-center" style="color:rgb(20, 42, 60);">
+      {{ titulo }}
+    </div>
+  {% endif %}
+  
+  {{ children }}
+</fieldset>

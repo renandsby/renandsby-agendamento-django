@@ -1,0 +1,17 @@
+{% extends "estatistica/base.html" %}
+
+{% block extra_head %}
+    {% load plotly_dash %}
+    {% plotly_header %}
+{% endblock %}
+
+{% block body %}
+    {% plotly_direct name="porIdade"%}
+    {{plotly_direct}}
+{% endblock %}
+
+{% block js%}
+    {% plotly_footer %}
+{% endblock %}
+
+

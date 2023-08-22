@@ -1,0 +1,5 @@
+{% if atual %}
+    <li class="breadcrumb-item active" aria-current="page">{{children}}</li>
+{% else %}
+    <li class="breadcrumb-item"><a href="{{link}}">{{children}}</a></li>
+{% endif %}

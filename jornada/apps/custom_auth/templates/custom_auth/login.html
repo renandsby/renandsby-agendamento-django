@@ -1,0 +1,21 @@
+{% extends "base.html" %} 
+{% load static %}
+{% block css_imports %}
+    {{block.super}}
+    <link href="{% static 'custom_auth/css/login.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block body %}
+    <div class="login-row d-flex justify-content-center align-items-center w-100">
+        <div class="col-md-6 col-lg-4">
+            <div class="login-card card align-self-center pt-2 px-2">
+                <img class="logo-jornada mt-4" src="{% static '/images/Logo Jornada Azul Azul.svg' %}" alt="logo jornada">
+
+                <div class="card-body">
+                    {% include 'custom_auth/components/login_form.html' %}
+                </div>
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}

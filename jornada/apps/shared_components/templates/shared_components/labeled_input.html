@@ -1,0 +1,34 @@
+{% if not label_at_end %}
+<label for="{{field.id_for_label}}" class="form-label mb-0">{{field.label}}:</label>
+{% endif %}
+
+{% if field.errors %}
+    {% if class %}
+        {{ field|add_bootstrap_form_class|add_class:class|add_class:"is-invalid" }}
+    {% else %}
+        {{ field|add_bootstrap_form_class|add_class:"is-invalid" }}
+    {% endif %}
+
+    {% for error in field.errors %}
+        <div class="error text-danger">{{error}}</div>
+    {% endfor%}
+
+{% else %}
+    
+    {% if disabled %}
+        {{field|add_bootstrap_form_class|attrs:"disabled=true"}}
+    {% else %}
+    
+        {% if class %}
+            {{ field|add_bootstrap_form_class|add_class:class }}
+        {% else %}
+            {{ field|add_bootstrap_form_class }}
+        {% endif %}
+
+    {% endif %}
+
+{% endif %}
+
+{% if label_at_end %}
+<label for="{{field.id_for_label}}" class="form-label mb-0">{{ field.label}}</label>
+{% endif %}

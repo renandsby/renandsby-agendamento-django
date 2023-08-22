@@ -1,0 +1,60 @@
+{% extends "prontuario/base.html" %}
+{% load shared_components %}
+
+{% block body %}
+
+
+  {% CardAdolescente %}{% /CardAdolescente %}
+  {% Fieldset titulo="Telefones" %} 
+  {% if telefone_list %}
+      <a href="{% url 'prontuario:telefone-report' adolescente.uuid %}" class="btn btn-primary color-white m-2"
+        target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Imprimir Lista de Telefones">
+        <i class="fa-solid fa-print"></i>
+        Imprimir
+      </a>
+  {% endif %}
+  <a class="btn btn-primary color-white m-2" href="{% url 'prontuario:telefone-create' adolescente.uuid %}">
+    <i class="fas fa-plus-circle"></i>
+    Adicionar Telefone
+  </a>
+  
+    <div>
+      <table class="table border table-hover align-middle">
+        <thead class='table-blue'>
+          <tr>
+            <th class="col-5" scope="col">Telefone</th>
+            <th class="col-4" scope="col">Descrição</th>
+            <th class="col-1" scope="col">Autorizado</th>
+            <th class="col-1" scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for telefone in telefone_list %}
+          <tr>
+            <td>{{telefone.telefone}}</td>
+            <td>{{telefone.descricao}}</td>
+            
+            <td class="col-1 text-center">
+              {% if telefone.autorizado %}
+                <i class="fa-solid fa-check"></i>
+              {% endif %}
+            </td>
+
+            <td class="text-center">
+              <a class="mr-2" href="{% url 'prontuario:telefone-update' adolescente.uuid telefone.uuid %}" data-bs-toggle="tooltip"
+                data-bs-placement="top" title="Editar">
+                <i class="text-primary fs-4 fa-solid fa-pen-to-square"></i>
+              </a>
+            </td>
+          </tr>
+
+          {% endfor %}
+
+
+        </tbody>
+      </table>
+    </div>
+    {% /Fieldset %}
+
+{% endblock %}

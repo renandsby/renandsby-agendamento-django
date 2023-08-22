@@ -1,0 +1,101 @@
+[
+    {
+        "model": "auth.group",
+        "fields": {
+            "name": "Gestor Meio Aberto",
+            "permissions": [
+                [
+                    "editar_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ],
+                [
+                    "ver_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ],
+                [
+                    "ver_chegadas",
+                    "unidades",
+                    "entradaadolescente"
+                ],
+                [
+                    "ver_saidas",
+                    "unidades",
+                    "entradaadolescente"
+                ],
+                [
+                    "editar_entradas",
+                    "unidades",
+                    "entradaadolescente"
+                ],
+                [
+                    "ver_livro_c2",
+                    "livro",
+                    "livro"
+                ],
+                [
+                    "incluir_livro_modulos",
+                    "livro",
+                    "livro"
+                ],
+                [
+                    "editar",
+                    "atividades",
+                    "atividade"
+                ],
+                [
+                    "ver",
+                    "solicitacoes",
+                    "solicitacao"
+                ]
+            ]
+        }
+    },
+    {
+        "model": "auth.group",
+        "fields": {
+            "name": "Servidor Meio Aberto",
+            "permissions": [
+                [
+                    "editar_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ],
+                [
+                    "incluir_livro_modulos",
+                    "livro",
+                    "livro"
+                ],
+                [
+                    "ver_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ]
+            ]
+        }
+    },
+    {
+        "model": "auth.group",
+        "fields": {
+            "name": "Administrativo Meio Aberto",
+            "permissions": [
+                [
+                    "editar_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ],
+                [
+                    "incluir_livro_modulos",
+                    "livro",
+                    "livro"
+                ],
+                [
+                    "ver_da_unidade",
+                    "adolescentes",
+                    "adolescente"
+                ]
+            ]
+        }
+    }
+]

@@ -1,0 +1,43 @@
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    min-height: 160px;
+    background: #ccc;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 20px;
+    width: 100vw;
+    background-color: rgb(20, 42, 60);
+}
+
+.sejus {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  text-align: right;
+  min-width: 190px;
+}
+
+@media (max-width: 780px) {
+  .sejus{
+    font-size: .9em;
+  }
+
+  .logo-socioeducativo {
+    height: 80px;
+  }
+
+  .logo-gdf {
+    height: 70px;
+  }
+
+  .footer-item {
+    text-align: center;
+    margin: 0px auto 15px auto;
+  }
+
+}

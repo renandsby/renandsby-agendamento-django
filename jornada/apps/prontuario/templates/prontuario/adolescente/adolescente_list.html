@@ -1,0 +1,89 @@
+{% extends "prontuario/base.html" %}
+{% load shared_components %}
+
+{% block submenu%}
+{% endblock %}
+
+
+{% block body %}
+
+{% Fieldset titulo="Adolescentes" %}
+
+<div>
+	{% if 'adolescentes.incluir' in perms %}
+	<a href="{% url 'prontuario:adolescente-create' %}" class="btn btn-primary color-white">
+		<i class="fas fa-plus-circle"></i>
+		Adicionar Adolescente
+	</a>
+	{% endif %}
+	{% Filtros %}{% /Filtros %}
+	<div class="table-responsive">
+		<table class="table border table-hover">
+			<table class="table table-hover text-center">
+				<thead class="table-blue">
+					<tr>
+						{% if 'adolescentes.ver_todos' in perms %}
+							<th class="col-3 text-start" scope="col">Nome</th>
+							<th class="col-4 text-start" scope="col">Unidade Atual</th>
+							<th class="col-2 text-start" scope="col">Processo</th>
+							<th class="col-2 text-center" scope="col">Data de Nascimento</th>
+							<th class="col-1 text-center" scope="col">Prontuário</th>
+						{% else %}
+							<th class="col-4 text-start" scope="col">Nome</th>
+							<th class="col-4 text-start" scope="col">Nome Mãe</th>
+							<th class="col-2 text-center" scope="col">Data de Nascimento</th>
+							<th class="col-2 text-center" scope="col">Prontuário</th>
+						{% endif %}
+					</tr>
+				</thead>
+				<tbody>
+					{%for adolescente in adolescente_list %}
+						<tr>	
+					
+						{% if 'adolescentes.ver_todos' in perms %}
+						<td class="col-3 text-start">{{adolescente.nome}}</td>
+						<td class="col-4 text-start">
+							{% if adolescente.entrada_em_unidade_atual %}
+							<b>{{adolescente.unidade_atual}} </b>	
+							
+							<small>
+								[{{adolescente.entrada_em_unidade_atual.get_status_display}}]
+							</small>
+							{% endif %}
+						</td>
+						<td class="col-2 text-start">
+							{% if adolescente.entrada_em_unidade_atual %}
+							<small>
+								{{adolescente.entrada_em_unidade_atual.processo.str_sem_nome|default:''}}
+							</small>
+							{% endif %}
+						</td>
+						<td class="col-2 text-center">{{adolescente.data_nascimento|date:"d/m/Y"}}</td>
+						<td class="col-1 text-center">
+							<a href="{% url 'prontuario:adolescente-update' adolescente.uuid %}" class=" mr-2"
+										data-bs-toggle="tooltip" data-bs-placement="top" title="Prontuário">
+										<i class="text-info fs-3 fa-solid fa-clipboard"></i>
+									</a>
+						</td>
+						{% else %}
+								<td class="col-4 text-start">{{adolescente.nome}}</td>
+								<td class="col-4 text-start">{{adolescente.nome_mae|default:'Não informado'}}</td>
+								<td class="col-2 text-center">{{adolescente.data_nascimento|date:"d/m/Y"}}</td>
+								<td class="col-2 text-center">
+									<a href="{% url 'prontuario:adolescente-update' adolescente.uuid %}" class=" mr-2"
+										data-bs-toggle="tooltip" data-bs-placement="top" title="Prontuário">
+										<i class="text-info fs-3 fa-solid fa-clipboard"></i>
+									</a>
+								</td>
+						{% endif %}
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+	</div>
+	{% Paginacao %}{% /Paginacao %}
+
+	{% /Fieldset %}
+
+	{% endblock %}

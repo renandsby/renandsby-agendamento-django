@@ -1,0 +1,121 @@
+{% extends 'rotina_modulo/base.html' %}
+
+{% load shared_components %}
+
+{% block body %}
+
+<div class="row justify-content-center mt-4">
+  {% Fieldset class="bg-light px-3 py-4 mb-2 col-md-6 "%}
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+    <div class="row mb-1">
+
+      <div class="col">
+        <div class="error text-danger">{{form.non_field_errors}}</div>
+      </div>
+
+    </div>
+    {% endif %}
+    <div class="row">
+      <div class="col-md-12 py-1">
+        {% LabeledInput field=form.adolescente %}{% /LabeledInput %}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 py-1">
+        {% LabeledInput field=form.atividade %}{% /LabeledInput %}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 py-1">
+        <div>Data de Agendamento:</div>
+        <div class="d-flex">
+          {% UnlabeledInput field=form.data_prevista_ida %}{% /UnlabeledInput %}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 py-1">
+        {% LabeledInput field=form.servidores_relacionados %}{% /LabeledInput %}
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12 py-1">
+        {% LabeledInput field=form.observacoes_agendamento %}{% /LabeledInput %}
+      </div>
+    </div>
+    {% Fieldset legenda="Anexos" %}
+      {% InlineFormset formset=anexos %}
+      {{anexos.non_form_errors}}
+      {% arg empty_form %}
+      <div class="row justify-content-center">
+        {{ anexos.empty_form.id }}
+        <div class="col-md-8 mt-auto mb-2">
+          {% LabeledInput field=anexos.empty_form.anexo %}{% /LabeledInput %}
+        </div>
+        <div class="col-md-2 mt-auto mb-2">
+          {% LabeledInput field=anexos.empty_form.DELETE %}{% /LabeledInput %}
+        </div>
+      </div>
+      {% endarg %}
+      {% for anexo in anexos %}
+      {% FormErrors form=anexo %}{% /FormErrors %}
+      {{anexo.errors}}
+      {{ anexo.id }}
+      <div class="row justify-content-center">
+        <div class="col-md-8 mt-auto mt-4 mb-2">
+          {% LabeledInput field=anexo.anexo %}{% /LabeledInput %}
+        </div>
+        <div class="col-md-2 mt-auto mt-4 mb-2">
+          {% if anexo.instance.criado_por == request.user or not anexo.instance.pk %}
+              {% LabeledInput field=anexo.DELETE %}{% /LabeledInput %}
+          {% else %}
+              <small class="fst-italic" style="color: #777474;"> criado por: {{anexo.instance.criado_por}} </small>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+
+      {% /InlineFormset%}
+    {% /Fieldset %}
+
+    <div class="row justify-content-center my-4">
+      <div class="d-flex flex-row-reverse gap-2 my-3">
+        <button class="btn btn-primary" type="submit">Salvar</button>
+
+          {% url 'rotina_modulo:modulo-listar-agendamentos' modulo.uuid as voltar_url %}
+          {% BotaoVoltar url=voltar_url %}{% /BotaoVoltar %}
+
+        <button type="button" data-bs-toggle="modal" data-bs-placement="top" data-bs-target="#apagar"
+          class="btn btn-danger btn-foto">Apagar
+        </button>
+      </div>
+
+    </div>
+  </form>
+  {% Modal id="apagar" %}
+  Tem certeza que deseja apagar a ida de {{form.instance.adolescente.nome}} para a Atividade
+  '{{form.instance.atividade.descricao}}'?
+  {% arg botoes %}
+  <form method="POST" action="{% url 'rotina_modulo:modulo-agendamento-delete' modulo.uuid form.instance.uuid %}">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-danger btn-foto" value="Apagar">
+  </form>
+  {% endarg %}
+  {% /Modal %}
+
+  {% /Fieldset %}
+</div>
+
+
+{% endblock %}
+ 
+{% block js %}
+<script type="text/javascript">
+  $("#id_servidores_relacionados").bsMultiSelect();
+</script>
+{% endblock %}
+

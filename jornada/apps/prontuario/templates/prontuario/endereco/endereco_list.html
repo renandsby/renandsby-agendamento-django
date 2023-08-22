@@ -1,0 +1,63 @@
+{% extends "prontuario/base.html" %}
+{% load shared_components %}
+
+{% block body %}
+
+
+  {% CardAdolescente %}{% /CardAdolescente %}
+  {% Fieldset titulo="Endereços" %} 
+  <a class="btn btn-primary color-white mb-2" href="{% url 'prontuario:endereco-create' adolescente.uuid %}">
+    <i class="fas fa-plus-circle"></i>
+    Adicionar Endereço
+  </a>
+  
+    <div>
+      <table class="table border table-hover align-middle">
+        <thead class='table-blue'>
+          <tr>
+            <th class="col-3" scope="col">Criado Por:</th>
+            <th class="col-3" scope="col">Descrição</th>
+            <th class="col-5" scope="col">Endereço </th>
+            <th class="col-1 text-center" scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for endereco in endereco_list %}
+          <tr>
+            <td style="text-transform: none;"> 
+              {{endereco.criado_por|default:''}} <small>em {{endereco.criado_em|date:"d/m/Y"}}</small>
+            </td>
+            
+            
+            <td>
+              {{endereco.descricao|default:""}} 
+                {% if endereco.reside %}
+                    <span class="badge bg-success">Reside Atualmente</span>
+                {% endif %}
+            </td>
+            <td>
+            {{endereco.cidade|default:""}}-{{endereco.uf.sigla|default:""}}, {{endereco.logradouro|default:""}}
+            
+
+            </td>
+            <td class="text-center">
+              <a class="mr-2" href="{% url 'prontuario:endereco-update' adolescente.uuid endereco.uuid %}" data-bs-toggle="tooltip"
+                data-bs-placement="top" title="Editar">
+
+                <i class="text-primary fs-4 fa-solid fa-pen-to-square"></i>
+
+              </a>
+
+            </td>
+          </tr>
+
+          {% endfor %}
+
+
+        </tbody>
+      </table>
+    </div>
+    {% /Fieldset %}
+
+{% endblock %}
