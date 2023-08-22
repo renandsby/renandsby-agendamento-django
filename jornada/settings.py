@@ -76,6 +76,8 @@ INSTALLED_APPS = [
     "visitas",
     "ligacoes",
     "tutorial",
+    "usuario_empresa",
+    "posicao",
 ]
 
 MIDDLEWARE = [

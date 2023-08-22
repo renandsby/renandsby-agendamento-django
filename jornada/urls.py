@@ -27,6 +27,7 @@ urlpatterns = [
     path("uama/", include("uama.urls", namespace="uama")),
     
     path("tutorial/", include("tutorial.urls", namespace="tutorial")),
+    path("posicao/", include("posicao.urls", namespace="posicao")),
     
     path("admin/", admin.site.urls),
     path(settings.MEDIA_URL[1:]+'<path:file>', serve_protected_document, name='media_serve'),
