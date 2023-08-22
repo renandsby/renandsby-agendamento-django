@@ -45,25 +45,20 @@ INSTALLED_APPS = [
     "fontawesomefree",
     "django_extensions",
     "simple_history",
-    
+  
     "core",
     "custom_auth",
     "django_component",
     "geoposition",
-    "adolescentes",
-    "servidores",
+
+
     "unidades",
     "dominios",
-    "processos",
-    "alteracoes_vinculo",
-    "atendimento_psicossocial",
-    "rotina_modulo",
+    "servidores",
+    "painel_indicadores",
     "shared_components",
-    "prontuario",
-    "central",
-    "uama",
+  
     "logs",
-    "visitas",
     "usuario_empresa",
     "posicao",
 ]

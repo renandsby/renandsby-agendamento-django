@@ -5,29 +5,22 @@
             "name": "Gestor Meio Aberto",
             "permissions": [
                 [
-                    "editar_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "editar_da_unidade"
                 ],
                 [
-                    "ver_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "ver_da_unidade"
                 ],
                 [
                     "ver_chegadas",
-                    "unidades",
-                    "entradaadolescente"
+                    "unidades"
                 ],
                 [
                     "ver_saidas",
-                    "unidades",
-                    "entradaadolescente"
+                    "unidades"
                 ],
                 [
                     "editar_entradas",
-                    "unidades",
-                    "entradaadolescente"
+                    "unidades"
                 ]
             ]
         }
@@ -38,14 +31,10 @@
             "name": "Servidor Meio Aberto",
             "permissions": [
                 [
-                    "editar_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "editar_da_unidade"
                 ],
                 [
-                    "ver_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "ver_da_unidade"
                 ]
             ]
         }
@@ -56,14 +45,10 @@
             "name": "Administrativo Meio Aberto",
             "permissions": [
                 [
-                    "editar_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "editar_da_unidade"
                 ],
                 [
-                    "ver_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "ver_da_unidade"
                 ]
             ]
         }

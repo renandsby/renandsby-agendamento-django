@@ -82,12 +82,7 @@
                             </a>
                             
                             
-                            <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="dropdownMenuOffset">
-                                <li><a target="_blank"  class="dropdown-item" href="/static/documentos/manual.pdf">Manual</a></li>
-                                <li><a target="_blank"  class="dropdown-item" href="/static/documentos/perguntas.pdf">Perguntas mais frequentes</a></li>
-                            
-                                
-                            </ul>
+                        
                         </div>
 
                         {% if request.user.is_authenticated %}
@@ -133,38 +128,7 @@
                             {% endfor %}
                         {% endif %}
                     </div>
-                    
-                    <div class="col-12">
-                        {% block breadcrumb %}
-                            {% if modulo or unidade %}
-                                <div class="d-flex w-100 text-center" >
-                                    <div style="font-size:1.2em; font-weight: bold ; color: rgb(20, 42, 60);; padding: 5px 0; max-width: 150px; margin-left: 20px;">
-                                        <i class="fa-solid fa-house me-2"></i>
-                                    </div>
-
-                                    <div style="font-size:1.2em; font-weight: bold ; color: rgb(20, 42, 60);; padding: 5px 0;">
-                                        /
-                                        {% if modulo %} 
-                                            {{modulo.unidade}}&nbsp
-                                        {% elif unidade %} 
-                                            {{unidade}}&nbsp
-                                        {% endif %}
-                                    </div>
-                                    
-                                    {% if modulo.unidade.modulos.count > 1 %}
-                                        <div style="font-size:1.2em; font-weight: bold ; color: rgb(20, 42, 60);; padding: 5px 0;">
-                                            / 
-                                            Módulo 
-                                            {{modulo.descricao}}
-                                        </div>
-                                    {% endif %}
-
-                                </div>
-
-                            {% endif %}
-                        {% endblock %}
-                    </div>
-                </div>
+              
 
                 <div class="row">
                     <div class="col-12">

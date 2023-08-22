@@ -1,12 +1,12 @@
 <!-- MODULOS -->
-{% if unidade.modulos.count > 1 %}
+
     <div class="d-flex justify-content-center item-submenu {% if request.resolver_match.url_name == 'home-modulos' %} atual {% endif %}">
-        <a href="{% url 'rotina_modulo:home-modulos' unidade.uuid %}" class="">
+        <a href="{% url 'painel_indicadores:home-modulos' unidade.uuid %}" class="">
             <i class="fa-solid fa-house me-1"></i>
             Módulos
         </a>
     </div>
-{% endif %}
+
 
 
 

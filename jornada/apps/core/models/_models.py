@@ -37,24 +37,3 @@ class BaseModel(
     class Meta:
         abstract = True
 
-
-class VinculaPassagemAdolescente(models.Model):   
-    entrada_vinculada = models.ForeignKey(
-        'unidades.EntradaAdolescente', 
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True, 
-        related_name="%(class)ss_vinculados",
-        editable=False
-    )
-    
-    def clean(self) -> None:
-        if self.adding:
-            if hasattr(self, 'adolescente'):
-                entrada_atual = self.adolescente.entrada_em_unidade_atual
-                if entrada_atual is not None:
-                    self.entrada_vinculada = entrada_atual
-        return super().clean()
-
-    class Meta:
-        abstract = True

@@ -3,8 +3,7 @@ from datetime import datetime
 from servidores.models import Servidor
 from custom_auth.models import CustomUser
 from dominios.models import Cargo
-from adolescentes.models import Adolescente
-from dominios.models import Genero, Cor
+
 from unidades.models import Unidade, EntradaAdolescente
 # SCRIPT DE CARGA CSV
 

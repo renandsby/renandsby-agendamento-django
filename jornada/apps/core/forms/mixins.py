@@ -2,9 +2,6 @@ from django import forms
 from django.contrib import messages
 from django.core.exceptions import ImproperlyConfigured
 from django.http import HttpResponseRedirect
-from adolescentes.models import Adolescente
-from processos.models import Processo
-from unidades.models import EntradaAdolescente
 from dominios.models import Cidade, Bairro
 
 
@@ -22,28 +19,6 @@ class UUIDParseFieldsMixin:
                 if hasattr(model_class, 'uuid'):
                     field.to_field_name = 'uuid'
 
-
-class LabelProcessoSemNomeMixin:
-    @staticmethod
-    def processo_label_from_instance(self):
-        return self.str_sem_nome()
-    
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['processo'].label_from_instance = self.processo_label_from_instance
-
-
-class PreencheProcessoPorAdolescenteMixin:
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['processo'].queryset = Processo.objects.none()
-    
-        if hasattr(self.instance, 'adolescente'):
-            if self.instance.adolescente is not None:
-                self.fields['processo'].queryset = self.instance.adolescente.processos.all()
-
-        if 'adolescente' in self.data and self.data.get('adolescente') != "":
-            self.fields['processo'].queryset = Processo.objects.filter(adolescente__id=self.data.get('adolescente'))
 
             
 class UfCidadeBairroMixin:
@@ -79,36 +54,6 @@ class UfCidadeBairroMixin:
                 self.fields['bairro'].queryset = Bairro.objects.filter(cidade__codigo=self.data.get('cidade'))
             
             
-            
-
-class PreencheAdolescentesLotadosEmUnidadesMixin:
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        
-        adol_lotados_ids = EntradaAdolescente.objects.filter(
-                lotado=True
-            ).all().values_list('adolescente__id', flat=True)
-            
-        adol_lotados_ids = list(adol_lotados_ids)
-        if self.instance.pk and self.instance.adolescente is not None and self.instance.adolescente.id not in adol_lotados_ids:
-            adol_lotados_ids.append(self.instance.adolescente.id)
-        self.fields['adolescente'].queryset =  Adolescente.objects.filter(id__in=adol_lotados_ids)
-
-
-class PreencheAdolescentesNaoLotadosEmUnidadesMixin:
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-    
-        adol_lotados_ids = EntradaAdolescente.objects.filter(
-            lotado=True
-        ).all().values_list('adolescente__id', flat=True)
-
-        adol_lotados_ids = list(adol_lotados_ids)
-        if self.instance.pk and self.instance.adolescente is not None and self.instance.adolescente.id in adol_lotados_ids:
-            adol_lotados_ids.remove(self.instance.adolescente.id)
-
-        self.fields['adolescente'].queryset =  Adolescente.objects.all().exclude(id__in=adol_lotados_ids)
-
 
 class InlineFormsetMixin:
     inlineformset_classes = None

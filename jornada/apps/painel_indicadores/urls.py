@@ -4,30 +4,28 @@ from . import (
     views,
 )
 
-app_name = "rotina_modulo"
+app_name ="painel_indicadores"
 
 urlpatterns = [
     # Redireciona para a Unidade do usuário que fez o request
-    path("", views.UnidadeRedirectView.as_view(), name="home"),
+    path("", views.PainelIndicadoresRedirectView.as_view(), name="home"),
     
     # Listagem de Unidades
     path(
-        "unidade/",
-        views.HomeUnidadeView.as_view(),
-        name="home-unidades",
+        "", views.HomePainelIndicadorView.as_view(), name="painel-list",
     ),
-    # MÓDULO
+    
   
     
     # UNIDADE
     path(
-        "unidade/<uuid:unidade_uuid>/",
+        "",
         include(
             [   
 
                 # Listagem de Módulos
                 path(
-                    "painel/",
+                    "",
                     views.HomeModuloView.as_view(),
                     name="home-modulos",
                 ),

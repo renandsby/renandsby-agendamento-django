@@ -46,20 +46,8 @@ class PasswordChangeView(AuthPasswordChangeView):
 class RedirectView(LoginRequiredMixin, View):
     def _handle_user(self, request):
                       
-        if request.user.has_perm('unidades.acessar_todas') or \
-           request.user.has_perm('unidades.acessar_todas_internacoes') or \
-           request.user.has_perm('unidades.acessar_todas_semiliberdades') or \
-           request.user.has_perm('unidades.acessar_todas_geamas'):
-            return redirect('rotina_modulo:home-unidades')
+        return redirect('painel_indicadores:home')
         
-        if (hasattr(request.user, 'servidor') and
-            request.user.servidor is not None and 
-            request.user.servidor.unidade is not None
-        ):
-            return redirect('rotina_modulo:home-modulos', unidade_uuid=request.user.servidor.unidade.uuid)
-
-        # Se não caiu em nenhum caso, Fallback é base.html (tela em branco)
-        return render(request, "base.html")
     
     def get(self, request):
         return self._handle_user(request)
