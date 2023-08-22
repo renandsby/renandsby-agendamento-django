@@ -2,7 +2,7 @@ from django.views.generic import ListView, CreateView, UpdateView
 from core.forms.mixins import InlineFormsetMixin
 from core.views import FilteredViewMixin, UUIDViewMixin
 from unidades.models import Modulo
-from .forms import VisitaForm, PertenceVisitaLivroFormSet
+from .forms import VisitaForm
 from .models import Visita
 from .filters import VisitaFilterset
 
@@ -29,7 +29,7 @@ class VisitaCreateView(
 ):
     model = Visita
     form_class = VisitaForm
-    inlineformset_classes = {"pertences": PertenceVisitaLivroFormSet}
+    inlineformset_classes = {"pertences"}
     
     def get_form_kwargs(self, **kwargs):
         kwargs = super().get_form_kwargs()
@@ -46,7 +46,6 @@ class VisitaUpdateView(
     model = Visita
     form_class = VisitaForm
     uuid_url_kwarg = "visita_uuid"
-    inlineformset_classes = {"pertences": PertenceVisitaLivroFormSet}
 
     def get_form_kwargs(self, **kwargs):
         kwargs = super().get_form_kwargs()

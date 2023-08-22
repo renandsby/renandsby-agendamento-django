@@ -1,5 +1,4 @@
 from unidades.models import EntradaAdolescente
-from solicitacoes.models import Solicitacao
 from django.db.models import Count
 from django.db.models.functions import ExtractYear, ExtractMonth
 from datetime import datetime
@@ -34,15 +33,3 @@ def get_month(month):
             return "Dezembro"
 
 
-@staticmethod
-def get_solicitacoes():
-    try:
-        s = Solicitacao.objects.filter(data_solicitacao__year=datetime.now().year)
-        solicitacoes = list(
-            s.values("data_solicitacao", "acao_solicitada__descricao").annotate(
-                Count("acao_solicitada__descricao"), mes=ExtractMonth("data_solicitacao")
-            )
-        )
-        return solicitacoes
-    except:
-        pass

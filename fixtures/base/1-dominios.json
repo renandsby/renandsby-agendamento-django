@@ -46477,27 +46477,6 @@
         }
     },
     {
-        "model": "dominios.acaosolicitacaomovimentacao",
-        "pk": 1,
-        "fields": {
-            "descricao": "Vinculação"
-        }
-    },
-    {
-        "model": "dominios.acaosolicitacaomovimentacao",
-        "pk": 2,
-        "fields": {
-            "descricao": "Desvinculação"
-        }
-    },
-    {
-        "model": "dominios.acaosolicitacaomovimentacao",
-        "pk": 3,
-        "fields": {
-            "descricao": "Transferência"
-        }
-    },
-    {
         "model": "dominios.tipounidade",
         "pk": 1,
         "fields": {
@@ -46957,41 +46936,6 @@
         "pk": 11,
         "fields": {
             "descricao": "Outro"
-        }
-    },
-    {
-        "model": "dominios.tipoanexosolicitacaomovimentacao",
-        "pk": 1,
-        "fields": {
-            "descricao": "Ofício"
-        }
-    },
-    {
-        "model": "dominios.tipoanexosolicitacaomovimentacao",
-        "pk": 2,
-        "fields": {
-            "descricao": "Memorando"
-        }
-    },
-    {
-        "model": "dominios.tipoanexosolicitacaomovimentacao",
-        "pk": 3,
-        "fields": {
-            "descricao": "Circular"
-        }
-    },
-    {
-        "model": "dominios.tipoanexosolicitacaomovimentacao",
-        "pk": 4,
-        "fields": {
-            "descricao": "Documento Pessoal"
-        }
-    },
-    {
-        "model": "dominios.tipoanexosolicitacaomovimentacao",
-        "pk": 5,
-        "fields": {
-            "descricao": "Outros"
         }
     },
     {

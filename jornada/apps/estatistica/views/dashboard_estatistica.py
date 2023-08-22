@@ -5,12 +5,10 @@ from adolescentes.models import Adolescente, Endereco
 from unidades.models import EntradaAdolescente
 from dominios.models import Bairro
 
-from solicitacoes.models import Solicitacao
 from alteracoes_vinculo.models import Vinculacao
 from unidades.models import Unidade, VagaUnidade
 from estatistica.dash.geral.dashboard_total_situacao_escolar_por_ra import Dashboard
 from estatistica.dash.adolescentes.adolescentes_lotados import dashboard_adolescentes_lotados
-from estatistica.dash.tjdft.solicitacoes import dashboard_solicitacoes
 from estatistica.dash.educacao.situacao_escolar import dashboard_situacao_escolar
 
 
@@ -22,7 +20,6 @@ class DashboardEstatistica(View):
     def get_estatistica_geral(self, *args, **kwargs):
         data = {}
         data = {"data_referencia": datetime.now().strftime("%d/%m/%Y %H:%M")}
-        dashboard_solicitacoes()
         dashboard_situacao_escolar()
 
         # Total de Adolescentes lotados
@@ -66,129 +63,6 @@ class DashboardEstatistica(View):
                 'atendimento_inicial': atendimento_inicial,
             }
         )
-
-        # TJDFT Solicitações
-        try:
-            tjdft_solicitacoes_vinculacao = Solicitacao.objects.filter(
-                acao_solicitada_id=1,
-                data_solicitacao__year=datetime.now().strftime("%Y"),
-                data_solicitacao__month=datetime.now().strftime("%m"),
-            ).count()
-            tjdft_solicitacoes_desvinculacao = Solicitacao.objects.filter(
-                acao_solicitada_id=2,
-                data_solicitacao__year=datetime.now().strftime("%Y"),
-                data_solicitacao__month=datetime.now().strftime("%m"),
-            ).count()
-            tjdft_solicitacoes_transferencia = Solicitacao.objects.filter(
-                acao_solicitada_id=3,
-                data_solicitacao__year=datetime.now().strftime("%Y"),
-                data_solicitacao__month=datetime.now().strftime("%m"),
-            ).count()
-            tjdft_solicitacoes_total = Solicitacao.objects.filter(
-                data_solicitacao__year=datetime.now().strftime("%Y"),
-                data_solicitacao__month=datetime.now().strftime("%m"),
-            ).count()
-            if tjdft_solicitacoes_vinculacao > 0 and tjdft_solicitacoes_total > 0:
-                perc_vinculacao = round(
-                    (tjdft_solicitacoes_vinculacao / tjdft_solicitacoes_total) * 100, 2
-                )
-            else:
-                perc_vinculacao = 0
-            if tjdft_solicitacoes_desvinculacao > 0 and tjdft_solicitacoes_total > 0:
-                perc_desvinculacao = round(
-                    (tjdft_solicitacoes_desvinculacao / tjdft_solicitacoes_total) * 100, 2
-                )
-            else:
-                perc_desvinculacao = 0
-            if tjdft_solicitacoes_transferencia > 0 and tjdft_solicitacoes_total > 0:
-                perc_transferencia = round(
-                    (tjdft_solicitacoes_transferencia / tjdft_solicitacoes_total) * 100, 2
-                )
-            else:
-                perc_transferencia = 0
-
-            data.update(
-                {
-                    'tjdft_solicitacoes_total': tjdft_solicitacoes_total,
-                    'tjdft_solicitacoes_vinculacao': perc_vinculacao,
-                    'tjdft_solicitacoes_desvinculacao': perc_desvinculacao,
-                    'tjdft_solicitacoes_transferencia': perc_transferencia,
-                }
-            )
-
-        except:
-            pass
-
-        # TJDFT Solicitações Status
-        try:
-            tjdft_solicitacoes_aguardando_validacao = Solicitacao.objects.filter(
-                status=1,
-                data_solicitacao__year=datetime.now().strftime("%Y"),
-                data_solicitacao__month=datetime.now().strftime("%m"),
-            ).count()
-            tjdft_solicitacoes_validado = Solicitacao.objects.filter(
-                status=2,
-                data_solicitacao__year=datetime.now().strftime("%Y"),
-                data_solicitacao__month=datetime.now().strftime("%m"),
-            ).count()
-            tjdft_solicitacoes_em_processamento = Solicitacao.objects.filter(
-                status=3,
-                data_solicitacao__year=datetime.now().strftime("%Y"),
-                data_solicitacao__month=datetime.now().strftime("%m"),
-            ).count()
-            tjdft_solicitacoes_realizado = Solicitacao.objects.filter(
-                status=4,
-                data_solicitacao__year=datetime.now().strftime("%Y"),
-                data_solicitacao__month=datetime.now().strftime("%m"),
-            ).count()
-            tjdft_solicitacoes_negado = Solicitacao.objects.filter(
-                status=5,
-                data_solicitacao__year=datetime.now().strftime("%Y"),
-                data_solicitacao__month=datetime.now().strftime("%m"),
-            ).count()
-            tjdft_solicitacoes_total = Solicitacao.objects.filter(
-                data_solicitacao__year=datetime.now().strftime("%Y"),
-                data_solicitacao__month=datetime.now().strftime("%m"),
-            ).count()
-            if tjdft_solicitacoes_aguardando_validacao > 0 and tjdft_solicitacoes_total > 0:
-                perc_aguardando_validacao = round(
-                    (tjdft_solicitacoes_aguardando_validacao / tjdft_solicitacoes_total) * 100, 2
-                )
-            else:
-                perc_aguardando_validacao = 0
-            if tjdft_solicitacoes_validado > 0 and tjdft_solicitacoes_total > 0:
-                perc_validado = round(
-                    (tjdft_solicitacoes_validado / tjdft_solicitacoes_total) * 100, 2
-                )
-            else:
-                perc_validado = 0
-            if tjdft_solicitacoes_em_processamento > 0 and tjdft_solicitacoes_total > 0:
-                perc_em_processamento = round(
-                    (tjdft_solicitacoes_em_processamento / tjdft_solicitacoes_total) * 100, 2
-                )
-            else:
-                perc_em_processamento = 0
-            if tjdft_solicitacoes_realizado > 0 and tjdft_solicitacoes_total > 0:
-                perc_realizado = round(
-                    (tjdft_solicitacoes_realizado / tjdft_solicitacoes_total) * 100, 2
-                )
-            else:
-                perc_realizado = 0
-            if tjdft_solicitacoes_negado > 0 and tjdft_solicitacoes_total > 0:
-                perc_negado = round((tjdft_solicitacoes_negado / tjdft_solicitacoes_total) * 100, 2)
-            else:
-                perc_negado = 0
-            data.update(
-                {
-                    'tjdft_solicitacoes_aguardando_validacao': perc_aguardando_validacao,
-                    'tjdft_solicitacoes_validado': perc_validado,
-                    'tjdft_solicitacoes_em_processamento': perc_em_processamento,
-                    'tjdft_solicitacoes_realizado': perc_realizado,
-                    'tjdft_solicitacoes_negado': perc_negado,
-                }
-            )
-        except:
-            pass
 
         # Adolescentes por RA
         adolescentes = list(Adolescente.objects.all())

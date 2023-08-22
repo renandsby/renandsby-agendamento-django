@@ -1,7 +1,7 @@
 from unidades.models import Unidade, Modulo, EntradaAdolescente
 from atividades.models import Atividade, HistoricoAtividade
 from adolescentes.models import Adolescente
-from rede_de_apoio.models import UnidadeDeApoio
+
 
 def url_kwargs_object_injection(request):
     context = {}

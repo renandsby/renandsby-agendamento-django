@@ -63,12 +63,3 @@ class PertenceVisitaForm(forms.ModelForm):
         widgets = {
             'observacoes' : forms.widgets.Textarea( attrs={'rows':1})
         }
-
-PertenceVisitaLivroFormSet = forms.inlineformset_factory(
-    Visita,
-    PertenceVisita,
-    form = PertenceVisitaForm,
-    fk_name="visita",
-    extra=1,
-    can_delete=True,
-)

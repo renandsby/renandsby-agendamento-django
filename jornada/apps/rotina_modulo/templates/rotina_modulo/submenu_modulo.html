@@ -66,15 +66,6 @@
     {% endif %}
 {% endif %}
 
-<!-- LIVRO -->
-
-<div class="d-flex justify-content-center item-submenu {% if 'livro' in request.resolver_match.url_name %} atual {% endif %}">
-    <a href="{% url 'rotina_modulo:livro-redirect' modulo.uuid %}" class="">
-        <i class="fa-solid fa-book me-1"></i>
-        Livro
-    </a>
-</div>
-
 
 <!-- AGENDA -->
 <div class="d-flex justify-content-center item-submenu {% if 'agenda' in request.resolver_match.url_name %} atual {% endif %}">

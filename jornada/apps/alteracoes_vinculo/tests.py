@@ -1,5 +1,4 @@
 from django.test import TestCase
-from solicitacoes.models import Solicitacao
 from dominios.models import TipoVagaUnidade, TipoEntradaUnidade, TipoSaidaUnidade
 from alteracoes_vinculo.models import Vinculacao, Transferencia, Desvinculacao
 from adolescentes.models import Adolescente

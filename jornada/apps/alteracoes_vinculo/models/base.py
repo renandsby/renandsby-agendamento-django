@@ -219,7 +219,6 @@ class BaseDesvinculacao(BaseAlteracoesVinculo):
     
     def realizar_desvinculacao(self):
         from unidades.models import EntradaAdolescente
-        from solicitacoes.models import Solicitacao
         
 
         if self.entrada_antiga is not None:

@@ -26,49 +26,7 @@ from alteracoes_vinculo.views import (
     DesvinculacaoCancelarView,
     DesvinculacaoDesfazerView,
     DesvincularView,
-)
-
-from solicitacoes.forms import SolicitacaoCentralForm
-from solicitacoes.views import (
-    SolicitacaoListView,
-    SolicitacaoUpdateView,
-    SolicitacaoDeleteView
-)
-
-
-### SOLICITAÇÃO
-class SolicitacaoCentralListView(
-    CustomPermissionMixin,
-    LoginRequiredMixin,  
-    SolicitacaoListView
-):
-    permission_required = ['solicitacoes.ver']
-    template_name = "central/solicitacoes/solicitacao_list.html"
-
-class SolicitacaoCentralUpdateView(
-    CustomPermissionMixin,
-    LoginRequiredMixin,
-    SolicitacaoUpdateView
-):
-    permission_required = ['solicitacoes.editar']
-    check_permission_only_in_post = True
-    template_name = "central/solicitacoes/solicitacao_form.html"
-    form_class = SolicitacaoCentralForm
-
-    def get_success_url(self):
-        return reverse('central:solicitacao-list')
-    
-
-class SolicitacaoCentralDeleteView(
-    CustomPermissionMixin,
-    LoginRequiredMixin,
-    SolicitacaoDeleteView
-):
-    permission_required = ['solicitacoes.excluir']
-    def get_success_url(self):
-        return reverse('central:solicitacao-list')
-
-
+);
 
 
 ### VINCULAÇÃO

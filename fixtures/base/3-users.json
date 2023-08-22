@@ -36,25 +36,6 @@
     {
         "model": "custom_auth.customuser",
         "fields": {
-            "password": "pbkdf2_sha256$390000$T6Px5PyzQqdS5vOyjHKiva$VTXNZC1kszhlkwkbAsPJiB7Z93QbqEYrsPe5fxo2C2A=",
-            "last_login": "2023-03-29T15:00:11.034",
-            "is_superuser": false,
-            "username": "tjdft",
-            "email": null,
-            "is_active": true,
-            "is_staff": false,
-            "date_joined": "2022-06-01T14:46:03",
-            "groups": [
-                [
-                    "TJDFT"
-                ]
-            ],
-            "user_permissions": []
-        }
-    },
-    {
-        "model": "custom_auth.customuser",
-        "fields": {
             "password": "pbkdf2_sha256$390000$IeuBWI1xQXJ6Rg8YtYcP8X$yJINWxhdEV/+7QWrPM1UxOb11zts4cZ4cYvJpAK4dHc=",
             "last_login": null,
             "is_superuser": false,

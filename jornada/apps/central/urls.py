@@ -12,12 +12,6 @@ urlpatterns = [
         path('unidade/<uuid:unidade_uuid>/adolescentes/', painel_vagas_views.UnidadeAdolescentesView.as_view(), name="unidade-adolescentes"),
         
 
-        # SOLICITAÇÃO
-        path('solicitacao/', views.SolicitacaoCentralListView.as_view(), name='solicitacao-list'),
-        path('solicitacao/<uuid:solicitacao_uuid>/update/', views.SolicitacaoCentralUpdateView.as_view(), name="solicitacao-update"),
-        path('solicitacao/<uuid:solicitacao_uuid>/delete/', views.SolicitacaoCentralDeleteView.as_view(), name="solicitacao-delete"),
-
-
         # VINCULAÇÃO
         path('vinculacao/', views.VinculacaoCentralListView.as_view(), name='vinculacao-list'),
         path('vinculacao/create/', views.VinculacaoCentralCreateView.as_view(), name='vinculacao-create'),

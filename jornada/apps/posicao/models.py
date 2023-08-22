@@ -3,7 +3,7 @@ from core.models import BaseModel
 from geoposition.fields import GeopositionField
 
 class RedeDeLocalizacao(BaseModel):
-    descricao = models.CharField("Descrição curta", max_length=20)
+    descricao = models.CharField("Descrição curta", max_length=50)
     observacoes = models.TextField("Observações", null=True, blank=True, max_length=255)
     tipo_rede_localizacao = models.ForeignKey("dominios.TipoRedeApoio", on_delete=models.SET_NULL, null=True, verbose_name="Tipo Rede de Localização" )
     cep = models.CharField("CEP", max_length=8, blank=True, null=True)

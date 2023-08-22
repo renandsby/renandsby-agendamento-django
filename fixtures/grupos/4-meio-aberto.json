@@ -30,24 +30,9 @@
                     "entradaadolescente"
                 ],
                 [
-                    "ver_livro_c2",
-                    "livro",
-                    "livro"
-                ],
-                [
-                    "incluir_livro_modulos",
-                    "livro",
-                    "livro"
-                ],
-                [
                     "editar",
                     "atividades",
                     "atividade"
-                ],
-                [
-                    "ver",
-                    "solicitacoes",
-                    "solicitacao"
                 ]
             ]
         }
@@ -61,11 +46,6 @@
                     "editar_da_unidade",
                     "adolescentes",
                     "adolescente"
-                ],
-                [
-                    "incluir_livro_modulos",
-                    "livro",
-                    "livro"
                 ],
                 [
                     "ver_da_unidade",
@@ -84,11 +64,6 @@
                     "editar_da_unidade",
                     "adolescentes",
                     "adolescente"
-                ],
-                [
-                    "incluir_livro_modulos",
-                    "livro",
-                    "livro"
                 ],
                 [
                     "ver_da_unidade",

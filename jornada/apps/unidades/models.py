@@ -55,10 +55,6 @@ class Unidade(BaseModel):
     )
 
     @property
-    def ultimo_livro(self):
-        return self.livros.filter(modulo__isnull=True).order_by('data_abertura').last()
-
-    @property
     def agentes(self):
         return self.servidores.filter(
             cargo__descricao__in=["TSOCIO - AGENTE SOCIAL", "AGENTE SOCIOEDUCATIVO"]
@@ -226,10 +222,6 @@ class Modulo(BaseModel):
 
 
     @property
-    def ultimo_livro(self):
-        return self.livros.order_by('data_abertura').last()
-
-    @property
     def _ids_entradas_adol_em_atividade_externa(self):
         return [entrada.id for entrada in self.entradas_atuais if entrada.em_atividade_externa]
 
@@ -265,9 +257,6 @@ class Modulo(BaseModel):
             modulo = self,
         )
         qs = qs.filter(models.Q(realizada=True) | models.Q(em_atividade=True))
-        
-        if self.ultimo_livro:
-            qs = qs.filter(data_ida__gte = self.ultimo_livro.data_abertura)
         
         return qs
         

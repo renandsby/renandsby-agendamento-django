@@ -30,19 +30,9 @@
                     "entradaadolescente"
                 ],
                 [
-                    "incluir_livro_modulos",
-                    "livro",
-                    "livro"
-                ],
-                [
                     "editar",
                     "atividades",
                     "atividade"
-                ],
-                [
-                    "ver",
-                    "solicitacoes",
-                    "solicitacao"
                 ]
             ]
         }
@@ -71,11 +61,6 @@
                     "ver_saidas",
                     "unidades",
                     "entradaadolescente"
-                ],
-                [
-                    "incluir_livro_modulos",
-                    "livro",
-                    "livro"
                 ],
                 [
                     "editar_entradas",

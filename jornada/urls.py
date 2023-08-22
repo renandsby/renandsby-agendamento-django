@@ -19,14 +19,10 @@ urlpatterns = [
     path("", include("rotina_modulo.urls", namespace="rotina_modulo")),
     
     path("prontuario/", include("prontuario.urls", namespace="prontuario")),
-    path("rede_de_apoio/", include("rede_de_apoio.urls", namespace="rede_de_apoio")),
-    path("tjdft/", include("tjdft.urls", namespace="tjdft")),
     path("central/", include("central.urls", namespace="central")),
     path("nai/", include("nai.urls", namespace="nai")),
-    path("livro/", include("livro.urls", namespace="livro")),
     path("uama/", include("uama.urls", namespace="uama")),
     
-    path("tutorial/", include("tutorial.urls", namespace="tutorial")),
     path("posicao/", include("posicao.urls", namespace="posicao")),
     
     path("admin/", admin.site.urls),

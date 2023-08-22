@@ -38,27 +38,7 @@
     </div>
 {% endif %}
 
-<!-- LIVRO C2 -->
-{% if 'livro.ver_livro_c2' in perms %}
-    {% if unidade.modulos.count > 1 %}
-    <div class="d-flex justify-content-center item-submenu {% if 'livro' in request.resolver_match.url_name %} atual {% endif %}">
-        <a href="{% url 'rotina_modulo:livro-c2-redirect' unidade.uuid %}" class="">
-            <i class="fa-solid fa-book me-1"></i>
-            Livro C2
-        </a>
-    </div>
-    {% endif %}
-{% endif %}
 
-<!-- SOLICITACOES CENTRAL -->
-{% if 'solicitacoes.ver_da_unidade' in perms %}
-    <div class="d-flex justify-content-center item-submenu {% if 'solicitacao' in request.resolver_match.url_name %} atual {% endif %}">
-        <a href="{% url 'rotina_modulo:solicitacao-list' unidade.uuid %}" class="">
-            <i class="fa-solid fa-ticket me-1"></i>
-            Solicitações Central
-        </a>
-    </div>
-{% endif %}
 
 <div class="d-flex justify-content-center item-submenu {% if 'historico-unidade' in request.resolver_match.url_name %} atual {% endif %}">
     <a href="{% url 'rotina_modulo:historico-unidade' unidade.uuid %}" class="">

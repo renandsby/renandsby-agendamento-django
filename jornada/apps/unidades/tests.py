@@ -1,8 +1,7 @@
 from datetime import datetime
 from django.test import TestCase
 from django.core.management import call_command
-from solicitacoes.models import Solicitacao
-from dominios.models import AcaoSolicitacaoMovimentacao, TipoUnidade
+from dominios.models import TipoUnidade
 from adolescentes.models import Adolescente
 from processos.models import Processo
 from unidades.models import Unidade, EntradaAdolescente, Quarto, Modulo

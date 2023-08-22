@@ -4,13 +4,9 @@ from . import (
     views,
     agendamentos,
     atividades,
-    livro,
     ocorrencias,
     visitas,
-    ligacoes,
-    livro_c2, 
     chegadas_saidas, 
-    solicitacoes_central,
     historico_unidade,
     lista_geral
 )
@@ -184,55 +180,7 @@ urlpatterns = [
                     visitas.views.ModuloVisitaUpdateView.as_view(),
                     name="modulo-visita-update",
                 ),
-                      
-                ### Ligações
-                # Listar Ligações
-                path(
-                    "ligacao/",
-                    ligacoes.views.ModuloLigacaoListView.as_view(),
-                    name="modulo-ligacao-list",
-                ),
-                # Criar Ligações
-                path(
-                    "ligacao/create/",
-                    ligacoes.views.ModuloLigacaoCreateView.as_view(),
-                    name="modulo-ligacao-create",
-                ),
-                # Editar Ligações
-                path(
-                    "ligacao/<uuid:ligacao_uuid>/update/",
-                    ligacoes.views.ModuloLigacaoUpdateView.as_view(),
-                    name="modulo-ligacao-update",
-                ),
-                # Deletar Ligação
-                path(
-                    "ligacao/<uuid:ligacao_uuid>/deete/",
-                    ligacoes.views.ModuloLigacaoDeleteView.as_view(),
-                    name="modulo-ligacao-delete",
-                ),
       
-                ### LIVRO
-                path(
-                    "livro/redirect/",
-                    livro.views.ModuloLivroRedirectView.as_view(),
-                    name="livro-redirect",
-                ),
-                path(
-                    "livro/novo_plantao/",
-                    livro.views.ModuloNovoPlantaoView.as_view(),
-                    name="livro-create",
-                ),
-                path(
-                    "livro/<uuid:livro_uuid>/update/",
-                    livro.views.ModuloLivroUpdateView.as_view(),
-                    name="livro-update",
-                ),
-                path(
-                    "livro/imprimir-por-data/",
-                    livro.views.ModuloLivroImprimeDataView.as_view(),
-                    name="livro-imprime-data",
-                ),
-                
             ]
         ),
     ),
@@ -260,27 +208,6 @@ urlpatterns = [
                     "modulos/",
                     views.HomeModuloView.as_view(),
                     name="home-modulos",
-                ),
-                ### LIVRO C2
-                path(
-                    "livro/redirect/",
-                    livro_c2.views.UnidadeLivroRedirectView.as_view(),
-                    name="livro-c2-redirect",
-                ),
-                path(
-                    "livro/novo_plantao/",
-                    livro_c2.views.UnidadeNovoPlantaoView.as_view(),
-                    name="livro-c2-create",
-                ),
-                path(
-                    "livro/<uuid:livro_uuid>/update/",
-                    livro_c2.views.UnidadeLivroUpdateView.as_view(),
-                    name="livro-c2-update",
-                ),
-                path(
-                    "livro/imprimir-por-data/",
-                    livro_c2.views.UnidadeLivroImprimeDataView.as_view(),
-                    name="livro-c2-imprime-data",
                 ),
                 ### CHEGADAS PREVISAS
                 path(
@@ -323,23 +250,7 @@ urlpatterns = [
                     name="atividade-update",
                 ),
                 
-                ### SOLICITAÇÕES CENTRAL
-                path(
-                    "solicitacao/",
-                    solicitacoes_central.views.AdministradorSolicitacaoListView.as_view(),
-                    name="solicitacao-list",
-                ),
-                path(
-                    "solicitacao/create/",
-                    solicitacoes_central.views.AdministradorSolicitacaoCreateView.as_view(),
-                    name="solicitacao-create",
-                ),
-                path(
-                    "solicitacao/<uuid:solicitacao_uuid>/update/",
-                    solicitacoes_central.views.AdministradorSolicitacaoUpdateView.as_view(),
-                    name="solicitacao-update",
-                ),
-                
+              
                 ### EFETIVO GERAL
                 path(
                     "efetivo_geral/",

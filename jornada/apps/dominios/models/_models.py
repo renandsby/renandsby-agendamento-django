@@ -210,22 +210,6 @@ class OrigemEntradaUnidade(models.Model):
         verbose_name = "Origem de Entrada em Unidade"
         verbose_name_plural = "Origens de Entrada em Unidade"
 
-
-class AcaoSolicitacaoMovimentacao(models.Model):
-    descricao = models.CharField(max_length=100, unique=True)
-
-    def __str__(self):
-        return f"{self.descricao}"
-
-    def __hash__(self):
-        return hash(self.descricao)
-
-    class Meta:
-        app_label = "dominios"
-        verbose_name = "Ação em Solicitação de Movimentação"
-        verbose_name_plural = "Ações em Solicitações de Movimentação"
-
-
 class TipoUnidade(models.Model):
     descricao = models.CharField(max_length=100, unique=True)
 
@@ -285,18 +269,6 @@ class TipoRisco(models.Model):
         app_label = "dominios"
         verbose_name = "Tipo de Risco"
         verbose_name_plural = "Tipos de Risco"
-
-
-class TipoAnexoSolicitacaoMovimentacao(models.Model):
-    descricao = models.CharField(max_length=100)
-
-    def __str__(self):
-        return f"{self.descricao}"
-
-    class Meta:
-        app_label = "dominios"
-        verbose_name = "Tipo de Anexo em Solicitação de Movimentação"
-        verbose_name_plural = "Tipos de Anexos em Solicitações de Movimentação"
 
 
 class GravidadeInfracaoOcorrencia(models.Model):
