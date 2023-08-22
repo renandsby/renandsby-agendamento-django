@@ -140,10 +140,6 @@ class Adolescente(BaseModel):
         return self.fotos.last()
 
     @property
-    def telefones_autorizados(self):
-        return self.telefones.filter(autorizado=True).all()
-
-    @property
     def todas_fotos(self):
         return self.fotos.all()
 
@@ -207,9 +203,6 @@ class Adolescente(BaseModel):
         return self.riscos.filter(ativo=True)
     
 
-    @property
-    def familiares_autorizados_visita(self):
-        return self.familiares.filter(visitante_autorizado=True)
     
     @classmethod
     def vinculados_em_unidade(cls):
@@ -234,68 +227,6 @@ class DocumentoAnexo(BaseModel):
 
     def __str__(self):
         return f"{self.descricao}"
-
-
-class Familiar(BaseModel):
-    caracter_especial_validator = CaracteresEspeciaisValidator()
-    somente_numeros_validator = SomenteNumeros()
-
-    adolescente = models.ForeignKey(
-        Adolescente, on_delete=models.CASCADE, related_name="familiares"
-    )
-    nome = models.CharField(
-        "Nome do Familiar", max_length=100, validators=[caracter_especial_validator]
-    )
-    observacoes = models.TextField(
-        "Observações", max_length=1000, blank=True, null=True
-    )
-    vinculo = models.ForeignKey(
-        "dominios.VinculoFamiliar",
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        verbose_name="Vínculo Familiar",
-    )
-    cpf = models.CharField(
-        "CPF",
-        max_length=11,
-        blank=True,
-        null=True,
-        validators=[somente_numeros_validator],
-    )
-    rg = models.CharField(
-        "RG",
-        max_length=11,
-        blank=True,
-        null=True,
-        validators=[somente_numeros_validator],
-    )
-    orgao_emissor = models.CharField(
-        "Órgão Emissor",
-        max_length=50,
-        blank=True,
-        null=True
-    )
-    trabalho = models.CharField(
-        "Trabalho",
-        max_length=50,
-        blank=True,
-        null=True,
-        validators=[caracter_especial_validator],
-    )
-    renda = models.CharField(
-        "Renda",
-        max_length=50,
-        blank=True,
-        null=True
-    )
-    
-    responsavel = models.BooleanField("É Responsável", default=False)
-
-    visitante_autorizado = models.BooleanField("Visitante autorizado", default=False)
-
-    def __str__(self):
-        return f"{self.nome} ({self.vinculo})"
 
 
 class Foto(BaseModel):
@@ -334,28 +265,6 @@ class Observacao(BaseModel):
 
     def clean(self, *args, **kwargs):
         logica_principal(self)
-        super().clean(*args, **kwargs)
-
-
-class Telefone(BaseModel):
-    """
-    Modelo com os telefones dos adolescentes.
-    Permite inserir descrição e indicar se é o telefone principal.
-    O validador garante_unico_principal assegura que se o adolescentes
-    já tinha um telefone principal, o principal anterior terá essa opção desmarcada.
-    """
-
-    adolescente = models.ForeignKey(
-        Adolescente, on_delete=models.CASCADE, related_name="telefones"
-    )
-    telefone = models.CharField("Número de Telefone", max_length=20)
-    descricao = models.CharField("Descrição", max_length=100, blank=True, null=True)
-    autorizado = models.BooleanField("Telefone Autorizado", default=False)
-
-    def __str__(self):
-        return f"{self.telefone} - {self.descricao}"
-
-    def clean(self, *args, **kwargs):
         super().clean(*args, **kwargs)
 
 
@@ -418,19 +327,6 @@ class Endereco(BaseModel):
 
         super().clean(*args, **kwargs)
 
-class AnexoFamiliar(BaseModel):
-    familiar = models.ForeignKey(
-        Familiar,
-        models.CASCADE,
-        related_name="anexos",
-    )
-    anexo = models.FileField(max_length=500, upload_to=generate_uuid4_filename, validators=[validate_file_size])
-    descricao = models.CharField(
-        max_length=100,
-        blank=True,
-        null=True,
-        verbose_name="Descrição",
-    )
 
 class AnexoEndereco(BaseModel):
     endereco = models.ForeignKey(
@@ -446,18 +342,5 @@ class AnexoEndereco(BaseModel):
         verbose_name="Descrição",
     )
 
-class AnexoTelefone(BaseModel):
-    telefone = models.ForeignKey(
-        Telefone,
-        models.CASCADE,
-        related_name="anexos",
-    )
-    anexo = models.FileField(max_length=500, upload_to=generate_uuid4_filename, validators=[validate_file_size])
-    descricao = models.CharField(
-        max_length=100,
-        blank=True,
-        null=True,
-        verbose_name="Descrição",
-    )
 
 

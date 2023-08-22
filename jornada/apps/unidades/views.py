@@ -20,7 +20,6 @@ from .forms import (
     EditaQuartoForm, 
     EntradaCheckinForm,
     EntradaCheckoutForm,
-    EntradaCheckinNAIForm,
     AnexoEntradaFormset,
     MedidaAdaptacaoFormset,
     MedidaDisciplinarFormset
@@ -204,7 +203,6 @@ class EditaQuartoView(
 
 class IncluirAdolescenteEntradaView(CustomPermissionMixin, CreateView):
     model = EntradaAdolescente
-    form_class = EntradaCheckinNAIForm
     template_name = ""
     permission_required = ['unidades.incluir_entradas_na_unidade']
     no_permission_redirect_url = "/"

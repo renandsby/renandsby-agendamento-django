@@ -8,7 +8,6 @@ from . import (
     visitas,
     chegadas_saidas, 
     historico_unidade,
-    lista_geral
 )
 
 app_name = "rotina_modulo"
@@ -196,12 +195,6 @@ urlpatterns = [
                     "historico/",
                     historico_unidade.views.HistoricoUnidadeListView.as_view(),
                     name="historico-unidade",
-                ),
-                # Listagem de Módulos
-                path(
-                    "lista-geral/",
-                    lista_geral.views.ListaGeralListView.as_view(),
-                    name="lista-geral",
                 ),
                 # Listagem de Módulos
                 path(

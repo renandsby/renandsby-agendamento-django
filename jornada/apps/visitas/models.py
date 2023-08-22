@@ -5,7 +5,6 @@ from .logic import logica_visita
 class Visita(BaseModel):
     modulo = models.ForeignKey("unidades.Modulo", null=False, blank=False, on_delete=models.CASCADE)
     adolescente = models.ForeignKey("adolescentes.Adolescente", null=True, blank=False, on_delete=models.SET_NULL)
-    visitante = models.ForeignKey("adolescentes.Familiar", null=True, blank=False, on_delete=models.SET_NULL)
     data_entrada = models.DateTimeField("Data Entrada", null=True, blank=False)
     data_saida = models.DateTimeField("Data de Saída", null=True, blank=True)
     observacoes = models.TextField(blank=True, null=True, verbose_name="Observações")

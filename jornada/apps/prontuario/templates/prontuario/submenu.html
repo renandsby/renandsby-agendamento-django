@@ -27,16 +27,6 @@
                 class="fa-solid fa-location-dot me-2"></i>Endereços</a>
           </div>
 
-          <div class="d-flex justify-content-center item-submenu {% if 'telefone' in request.resolver_match.url_name %} atual {% endif %}">
-            <a href="{% url 'prontuario:telefone-list' adolescente.uuid %}" class=""><i
-                class="fa-solid fa-mobile-retro me-2"></i>Telefones</a>
-          </div>
-          
-
-          <div class="d-flex justify-content-center item-submenu {% if 'familiar' in request.resolver_match.url_name %} atual {% endif %}">
-            <a href="{% url 'prontuario:familiar-list' adolescente.uuid %}" class=""><i
-                class="fa-solid fa-restroom me-2"></i>Familiares</a>
-          </div>
 
           <div class="d-flex justify-content-center item-submenu {% if 'historico' in request.resolver_match.url_name %} atual {% endif %}">
               <a href="{% url 'prontuario:historico-list' adolescente.uuid %}"><i
@@ -76,10 +66,7 @@
             </div>
           {% endif %}
 
-          <div class="d-flex justify-content-center item-submenu {% if 'pia' in request.resolver_match.url_name %} atual {% endif %}">
-            <a href="{% url 'prontuario:pia-list' adolescente.uuid %}" class=""><i
-                class="fa-solid fa-newspaper me-2"></i>PIA</a>
-          </div>
+
         
         </div>
   </div>

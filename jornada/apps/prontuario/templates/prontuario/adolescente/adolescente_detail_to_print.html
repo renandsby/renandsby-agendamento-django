@@ -92,22 +92,6 @@
 			</div>
 			<div class="contato">
 			<div class="row">
-			<div class="col-12"><strong>Contato</strong></div>
-			{% if adolescente.telefones.all %}
-				{% for telefone in adolescente.telefones.all %}
-					<div class="col-3">Numero de Telefone: </div>
-					<div class="col-9">
-						{{telefone.telefone}}
-					</div>
-					<div class="col-3">Descrição: </div>
-					<div class="col-9">
-						{{telefone.descricao}}
-					</div>
-				{% endfor %}
-			{% else %}
-			<div class="col-3">Telefone: </div>
-			<div class="col-9">Não informado</div>
-			{%endif%}
 			</div>
 			</div>
 			<div class="endereco">
@@ -213,32 +197,7 @@
 			</div>
 			</div>
 			</div>
-			<div class="familiares">
-				<div class="row">
-					<div class="col-12"><strong>Familiares</strong></div>
-			{% if adolescente.familiares.all %}
-				{% for familiar in adolescente.familiares.all %}
-				<div class="col-3">Nome do Familiar: </div>
-				<div class="col-9">
-					{{familiar.nome}}
-				</div>
-				<div class="col-3">Vinculo Familiar: </div>
-				<div class="col-9">
-					{{familiar.vinculo}}
-				</div>
-				<div class="col-3">CPF: </div>
-				<div class="col-9">
-					{{familiar.cpf | default_if_none:"Não informado" }}
-				</div>
-				<div class="col-3">RG: </div>
-				<div class="col-lg-9">
-					{{familiar.rg | default_if_none:"Não informado" }}
-				</div>
-				{% endfor %}
-			{% else %}
-			<div class="col-3">Parentes: </div>
-			<div class="col-9">Não informado</div>
-			{% endif %}
+			
 	</div>
 	</div>
 </div>

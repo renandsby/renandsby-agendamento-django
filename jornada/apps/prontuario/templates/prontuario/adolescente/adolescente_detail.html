@@ -101,95 +101,9 @@
 
 
         <section class="border rounded mx-2 p-3 bg-light my-4 row justify-content" >
-       
-
-   
-{% Fieldset legenda="Familiares" class="col-lg-6 border rounded my-2 p-3 bg-light  "%}
-  
-
-  
-<!-- Familiares -->
-
-{% comment %} <div class=" col-lg-6 border rounded m-2 p-3 bg-light mb-3">  {% endcomment %}
-  {% for familiar in familiares %}
-
-
-    <div class="row  px-2 mb-5 ">
-
-      
-      <div class="col-lg-6 px-1 mt-auto mb-2">
-        <b> Nome do Familiar:</b> {{ familiar.nome.value  | default_if_none:"Não informado" }}
-      </div>
-      <div class="form-check form-switch col-lg-4">
-        <b> É Responsavel:</b>
-       <input class="form-check-input" type="checkbox" disabled="" role="switch" id="flexSwitchCheckChecked" {% if familiar.responsavel.value  %} checked="" entrei {% else %}  "" {% endif %}>
-      </div>
-      <div class="row  px-2 mb-5 mt-2">
-        <div class="col-lg-5 px-1 mt-auto mb-2">
-          <b> Vinculo Familiar:</b>  {{familiar.vinculo.value  | default_if_none:"Não informado" }}
-        </div>
-  
-        <div class="col-lg-4 px-1 mt-auto mb-2">
-          <b> CPF:</b>  {{familiar.cpf.value  | default_if_none:"Não informado" }}
-        </div>
-
-        <div class="col-lg-3 px-1 mt-auto mb-2">
-          <b> RG</b>  {{familiar.rg.value  | default_if_none:"Não informado" }}
-        </div>
-        <div class="form-check form-switch col-lg-4">
-          <b> Visitante autorizado </b>
-          <input class="form-check-input" type="checkbox" disabled="" role="switch" id="flexSwitchCheckChecked" {% if familiar.visitante_autorizado.value  %} checked="" entrei {% else %}  "" {% endif %}>
-        </div>
-        <div class="col-lg-6 px-1 mt-auto mb-2">
-          <b> Trabalho do responsável:</b> {{ familiar.trabalho.value  | default_if_none:"Não informado" }}
-        </div>
-        <div class="col-lg-6 px-1 mt-auto mb-2">
-          <b> Renda:</b> {{ familiar.renda.value  | default_if_none:"Não informado" }}
-        </div>
-      </div>
-    </div>
-
-
-    {% endfor %}
- 
- 
-
-  {% /Fieldset %}
 
 
 
-<!-- telefone.id -->
-{% Fieldset legenda="Telefones" class="col-lg-6 border rounded my-2 p-3 bg-light "%}
-
-
-  {% for telefone in telefones %}
-
-  <div class="row px-2 mb-5 mt-2 ">
-    <div class="row col-12">
-      <div class="col-lg-8 px-1 mt-auto mb-2">
-       <b>Numero de Telefone:</b> {{telefone.telefone.value  | default_if_none:"Não informado" }}
-      </div>
-  <div class="col-lg-4 px-1 mt-auto mb-2">
-  
-    <div class="form-check form-switch">
-        <b>É o principal</b> 
-        <input class="form-check-input" type="checkbox" disabled="" role="switch" id="flexSwitchCheckChecked" {% if telefone.principal.value %} checked='' {% else %}{% endif %}>
-      </div>
-    </div>
-
-    </div>
-    <div class="row">
-      <span class="col-lg-12 px-1 mt-auto mb-2">
-        <b>Descrição:</b> {{telefone.descricao.value  | default_if_none:"Não informado" }}
-       </span>
-    </div>
-    <div class="form-check form-switch">
-      <b>Telefone Autorizado</b> 
-      <input class="form-check-input" type="checkbox" disabled="" role="switch" id="flexSwitchCheckChecked" {% if telefone.telefone_autorizado.value %} checked='' {% else %}{% endif %}>
-    </div>
-  </div>
-  {% endfor %}
-  {% /Fieldset %}
 
 
 </div>

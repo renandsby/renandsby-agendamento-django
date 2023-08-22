@@ -170,35 +170,6 @@ def adolescente_label_from_instance(adol):
             label += f" [{str(adol.entrada_em_unidade_atual.processo.str_sem_nome())}]"
     return label
 
-class EntradaCheckinNAIForm(
-    PreencheProcessoPorAdolescenteMixin,
-    LabelProcessoSemNomeMixin,
-    EntradaCheckinForm
-):  
-    data_entrada = forms.DateTimeField(required=True, initial=timezone.now)
-    def __init__(self, *args, **kwargs):
-        self.modulo = kwargs.pop('modulo', None)
-        super().__init__(*args, **kwargs)
-        
-        # self.fields['adolescente'].label_from_instance = adolescente_label_from_instance    
-        self.fields['adolescente'].queryset = Adolescente.nao_vinculados_em_unidade()
-        
-        self.fields["unidade"].widget = forms.HiddenInput()
-        self.initial["unidade"] = self.modulo.unidade
-        self.fields["unidade"].queryset = Unidade.objects.filter(id=self.modulo.unidade.id)
-        
-        self.fields["modulo"].widget = forms.HiddenInput()
-        self.initial["modulo"] = self.modulo
-        self.fields["modulo"].queryset = Modulo.objects.filter(id=self.modulo.id)
-        
-        self.fields['quarto'].required = True
-        self.fields['quarto'].queryset = self.modulo.quartos.all()
-
-    class Meta:
-        model = EntradaAdolescente
-        fields = ('adolescente', 'processo', 'unidade', 'modulo', 'quarto','protetiva', 'agente_referencia', 'especialista_referencia','tipo_entrada', 'tipo_vaga')
-
-
 
 AnexoEntradaFormset = forms.inlineformset_factory(
     EntradaAdolescente,

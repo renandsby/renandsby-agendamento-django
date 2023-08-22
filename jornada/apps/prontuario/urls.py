@@ -60,53 +60,8 @@ urlpatterns = [
             ]
         ),
     ),
-    # FAMILIARES
-    path(
-        "adolescente/<uuid:adolescente_uuid>/familiar/",
-        include(
-            [
-                path(
-                    "", views.FamiliarProntuarioListView.as_view(), name="familiar-list"
-                ),
-                path(
-                    "create/",
-                    views.FamiliarProntuarioCreateView.as_view(),
-                    name="familiar-create",
-                ),
-                path(
-                    "<uuid:familiar_uuid>/update",
-                    views.FamiliarProntuarioUpdateView.as_view(),
-                    name="familiar-update",
-                ),
-            ]
-        ),
-    ),
-    # TELEFONES
-    path(
-        "adolescente/<uuid:adolescente_uuid>/telefone/",
-        include(
-            [
-                path(
-                    "", views.TelefoneProntuarioListView.as_view(), name="telefone-list"
-                ),
-                path(
-                    "create/",
-                    views.TelefoneProntuarioCreateView.as_view(),
-                    name="telefone-create",
-                ),
-                path(
-                    "autorizados/",
-                    views.TelefoneReportView.as_view(),
-                    name="telefone-report",
-                ),
-                path(
-                    "<uuid:telefone_uuid>/update",
-                    views.TelefoneProntuarioUpdateView.as_view(),
-                    name="telefone-update",
-                ),
-            ]
-        ),
-    ),
+
+
     # ATENDIMENTO PSICOSSOCIAL
     path(
         "adolescente/<uuid:adolescente_uuid>/atendimento-psicossocial/",
@@ -241,20 +196,5 @@ urlpatterns = [
                 ),
             ]
         ),
-    ),
-    # PIA
-    path(
-        "adolescente/<uuid:adolescente_uuid>/pia/",
-        include(
-            [
-                path("", views.pia.PiaListView.as_view(), name="pia-list"),
-                path("create/", views.pia.PiaCreateView.as_view(), name="pia-create"),
-                path(
-                    "<uuid:pia_uuid>/update",
-                    views.pia.PiaUpdateView.as_view(),
-                    name="pia-update",
-                ),
-            ]
-        ),
-    ),
+    )
 ]

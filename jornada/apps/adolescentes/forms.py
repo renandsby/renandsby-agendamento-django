@@ -7,14 +7,10 @@ from .models import (
     Adolescente, 
     Foto, 
     Observacao, 
-    Telefone,
     Relatorio, 
     Endereco, 
-    Familiar, 
     DocumentoAnexo, 
-    AnexoFamiliar, 
     AnexoEndereco,
-    AnexoTelefone
 )
 
 
@@ -61,19 +57,6 @@ class EnderecoForm(UfCidadeBairroMixin, forms.ModelForm):
             ),
         }
 
-class FamiliarForm(forms.ModelForm):
-    class Meta:
-        model = Familiar
-        exclude = ("adolescente",)
-        widgets = {
-            'observacoes' : forms.widgets.Textarea(attrs={'rows':3})
-        }
-
-
-class TelefoneForm(forms.ModelForm):
-    class Meta:
-        model = Telefone
-        exclude = ("adolescente",)
 
 
 class RelatorioForm(forms.ModelForm):
@@ -112,15 +95,6 @@ DocumentoAnexoFormSet = forms.inlineformset_factory(
 )
 
 
-FamiliarAdolescenteFormSet = forms.inlineformset_factory(
-    Adolescente,
-    Familiar, 
-    fk_name="adolescente", 
-    fields="__all__", 
-    extra=1, 
-    max_num=1,
-    can_delete=True, 
-)
 
 ObservacoesFormSet = forms.inlineformset_factory(
     Adolescente, 
@@ -135,18 +109,6 @@ ObservacoesFormSet = forms.inlineformset_factory(
     }  
 )
 
-TelefoneAdolescenteFormSet = forms.inlineformset_factory(
-    Adolescente, 
-    Telefone, 
-    fk_name="adolescente", 
-    fields="__all__", 
-    extra=1, 
-    max_num=1,
-    can_delete=True,
-    widgets = {
-        'descricao': forms.TextInput(attrs={'placeholder': 'Ex: Telefone Da Mãe'}),
-    }  
-)
 
 ObservacaoAdolescenteFormSet = forms.inlineformset_factory(
     Adolescente, 
@@ -161,17 +123,6 @@ ObservacaoAdolescenteFormSet = forms.inlineformset_factory(
     }  
 )
 
-AnexoFamiliarFormSet = forms.inlineformset_factory(
-    Familiar,
-    AnexoFamiliar,
-    fk_name="familiar",
-    fields="__all__",
-    extra=1,
-    can_delete=True,
-    widgets = {
-        'anexo': CustomAttachmentInput(),
-    }
-)
 AnexoEnderecoFormSet = forms.inlineformset_factory(
     Endereco,
     AnexoEndereco,
@@ -183,14 +134,4 @@ AnexoEnderecoFormSet = forms.inlineformset_factory(
         'anexo': CustomAttachmentInput(),
     }
 )
-AnexoTelefoneFormSet = forms.inlineformset_factory(
-    Telefone,
-    AnexoTelefone,
-    fk_name="telefone",
-    fields="__all__",
-    extra=1,
-    can_delete=True,
-    widgets = {
-        'anexo': CustomAttachmentInput(),
-    }
-)
+

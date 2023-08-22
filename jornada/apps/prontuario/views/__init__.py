@@ -1,4 +1,4 @@
-from . import pia
+
 
 from .adolescente import (
     AdolescenteProntuarioCreateView,
@@ -26,11 +26,6 @@ from .endereco import (
     EnderecoProntuarioUpdateView
 )
 
-from .familiar import (
-    FamiliarProntuarioCreateView,
-    FamiliarProntuarioListView,
-    FamiliarProntuarioUpdateView
-)
 
 from .historico import HistoricoListView
 
@@ -45,13 +40,6 @@ from .risco import (
     RiscoProntuarioCreateView, 
     RiscoProntuarioListView,
     RiscoProntuarioUpdateView
-)
-
-from .telefone import (
-    TelefoneProntuarioCreateView,
-    TelefoneProntuarioListView,
-    TelefoneProntuarioUpdateView, 
-    TelefoneReportView
 )
 
 from .relatorio import (
@@ -91,17 +79,10 @@ __all__ = [
     "RiscoProntuarioUpdateView",
     "HistoricoListView",
     "TutorialListView",
-    "TelefoneProntuarioCreateView",
-    "TelefoneProntuarioListView",
-    "TelefoneProntuarioUpdateView", 
-    "TelefoneReportView",
     "RelatorioProntuarioListView",
     "RelatorioProntuarioCreateView",
     "RelatorioProntuarioUpdateView", 
     "RelatorioProntuarioDeleteView",
-    "FamiliarProntuarioCreateView",
-    "FamiliarProntuarioListView",
-    "FamiliarProntuarioUpdateView",
     "OcorrenciaProntuarioListView",
     "OcorrenciaProntuarioDetailView"
 ]

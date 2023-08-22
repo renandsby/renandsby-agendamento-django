@@ -9,21 +9,13 @@ from .filters import AdolescenteFilterSet
 from .forms import (
     AdolescenteCreateForm,
     EnderecoForm,
-    FamiliarForm,
-    TelefoneForm,
     RelatorioForm,
     FotoAdolescenteFormSet,
-    TelefoneAdolescenteFormSet,
-    FamiliarAdolescenteFormSet,
-    AnexoFamiliarFormSet,
-    AnexoTelefoneFormSet,
     DocumentoAnexoFormSet,
     AnexoEnderecoFormSet,
     ObservacoesFormSet,
     DocumentoAnexo,
-    Telefone,
     Relatorio,
-    Familiar,
     Endereco,
     Foto,
 )
@@ -82,8 +74,6 @@ class AdolescenteDetailView(
     fields = "__all__"
     template_name = ""
     inlineformset_classes = {
-        "telefones": TelefoneAdolescenteFormSet,
-        "familiares": FamiliarAdolescenteFormSet,
         "fotos": FotoAdolescenteFormSet,
         "documentos_anexados": DocumentoAnexoFormSet,
     }
@@ -122,63 +112,6 @@ class EnderecoUpdateView(
     template_name = ""
     uuid_url_kwarg = "endereco_uuid"
     
-
-class FamiliarListView(ListView):
-    template_name = ""
-    model = Familiar
-
-class FamiliarCreateView(
-    InlineFormsetMixin,
-    CreateView
-):
-    model = Familiar
-    form_class = FamiliarForm
-    inlineformset_classes = {
-        "anexos": AnexoFamiliarFormSet,
-    }
-    template_name = ""
-
-class FamiliarUpdateView(
-    UUIDViewMixin, 
-    InlineFormsetMixin,
-    UpdateView
-):
-    model = Familiar
-    form_class = FamiliarForm
-    inlineformset_classes = {
-        "anexos": AnexoFamiliarFormSet,
-    }
-    uuid_url_kwarg = "familiar_uuid"
-    template_name = ""
-    
-
-class TelefoneListView(ListView):
-    template_name = ""
-    model = Telefone
-
-class TelefoneCreateView(
-    InlineFormsetMixin,
-    CreateView
-):
-    model = Telefone
-    form_class = TelefoneForm
-    template_name = ""
-    inlineformset_classes = {
-        "anexos": AnexoTelefoneFormSet,
-    }
-
-class TelefoneUpdateView(
-    UUIDViewMixin, 
-    InlineFormsetMixin,
-    UpdateView
-):
-    model = Telefone
-    form_class = TelefoneForm
-    template_name = ""
-    uuid_url_kwarg = "telefone_uuid"
-    inlineformset_classes = {
-        "anexos": AnexoTelefoneFormSet,
-    }
 
 class RelatorioListView(ListView):
     template_name = ""

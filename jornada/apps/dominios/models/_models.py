@@ -336,17 +336,6 @@ class TurnoEscolar(models.Model):
         verbose_name_plural = "Turnos Escolares"
 
 
-class VinculoFamiliar(models.Model):
-    descricao = models.CharField(max_length=100)
-
-    def __str__(self):
-        return f"{self.descricao}"
-
-    class Meta:
-        app_label = "dominios"
-        verbose_name = "Vínculo Familiar"
-        verbose_name_plural = "Vínculos Familiares"
-
 
 class OpcaoSabeLer(models.Model):
     descricao = models.CharField(max_length=100)

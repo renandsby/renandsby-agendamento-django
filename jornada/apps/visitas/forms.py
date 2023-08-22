@@ -6,7 +6,7 @@ from django.forms.utils import ErrorList
 from django.utils import timezone
 from core.forms.widgets import CustomSplitDateTimeWidget
 from unidades.models import Modulo
-from adolescentes.models import Adolescente, Familiar
+from adolescentes.models import Adolescente
 from .models import Visita, PertenceVisita
 
 
@@ -20,22 +20,17 @@ class VisitaForm(forms.ModelForm):
         self.fields["modulo"].widget = forms.HiddenInput()
         self.fields["modulo"].queryset = Modulo.objects.none()
         self.fields["adolescente"].queryset = Adolescente.objects.none()
-        self.fields["visitante"].queryset = Familiar.objects.none()
+
         
         if self.modulo is not None:
             self.fields["modulo"].queryset = Modulo.objects.filter(id=self.modulo.id)
             self.initial["modulo"] = self.modulo
             self.fields["adolescente"].queryset = self.modulo.adolescentes
 
-        if hasattr(self.instance, 'adolescente'):
-            if self.instance.adolescente is not None:
-                self.fields['visitante'].queryset = self.instance.adolescente.familiares_autorizados_visita
 
         if self.instance.pk and self.instance.data_entrada is not None:
             self.initial['data_saida'] = timezone.now
         
-        if 'adolescente' in self.data and self.data.get('adolescente') != "":
-            self.fields['visitante'].queryset = Familiar.objects.filter(adolescente__id=self.data.get('adolescente'))
     
     class Meta:
         model = Visita

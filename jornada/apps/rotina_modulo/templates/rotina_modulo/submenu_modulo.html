@@ -19,12 +19,7 @@
 {% endif %}
 <!-- EFETIVO -->
 {% if modulo.unidade.tipo_unidade.descricao == "Atendimento Inicial" %}
-    <div class="d-flex justify-content-center item-submenu {% if 'efetivo-nai' in request.resolver_match.url_name %} atual {% endif %}">
-        <a href="{% url 'nai:efetivo-nai' modulo.uuid %}" class="">
-            <i class="fa-solid fa-person me-1"></i>
-            Adolescentes
-        </a>
-    </div>
+    
 
 {% elif modulo.unidade.tipo_unidade.descricao == "Meio Aberto" %}
 
@@ -75,21 +70,5 @@
     </a>
 </div>
 
-<!-- VISITA -->
-{% if modulo.unidade.tipo_unidade.descricao == "Internação" %}
-    <div class="d-flex justify-content-center item-submenu {% if 'visita' in request.resolver_match.url_name %} atual {% endif %}">
-        <a href="{% url 'rotina_modulo:modulo-visita-list' modulo.uuid %}?periodo=today" class="">
-            <i class="fa-solid fa-people-arrows fs-5 me-1"></i>
-            Visita
-        </a>
-    </div>
-{% endif %}
 
-<!-- Ligacao -->
 
-    <div class="d-flex justify-content-center item-submenu {% if 'ligacao' in request.resolver_match.url_name %} atual {% endif %}">
-        <a href="{% url 'rotina_modulo:modulo-ligacao-list' modulo.uuid %}?periodo=today" class="">
-            <i class="fa-solid fa-phone fs-5 me-1"></i>
-            Ligações
-        </a>
-    </div>

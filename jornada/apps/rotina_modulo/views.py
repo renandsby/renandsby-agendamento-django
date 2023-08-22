@@ -80,9 +80,6 @@ class HomeModuloView(
         if modulos.count() == 1:
             #Tem quartos
             if modulos.first().quartos.exists():
-                # Caso NAI
-                if modulos.first().unidade.tipo_unidade.descricao == "Atendimento Inicial":
-                    return redirect('nai:efetivo-nai', modulo_uuid=modulos.first().uuid)
 
                 # Caso 1 Módulo com quartos exceto NAI (Semis por exemplo)
                 return redirect('rotina_modulo:quartos-modulo', modulo_uuid=modulos.first().uuid)

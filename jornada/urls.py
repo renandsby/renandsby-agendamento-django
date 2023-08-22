@@ -19,8 +19,6 @@ urlpatterns = [
     path("", include("rotina_modulo.urls", namespace="rotina_modulo")),
     
     path("prontuario/", include("prontuario.urls", namespace="prontuario")),
-    path("central/", include("central.urls", namespace="central")),
-    path("nai/", include("nai.urls", namespace="nai")),
     path("uama/", include("uama.urls", namespace="uama")),
     
     path("posicao/", include("posicao.urls", namespace="posicao")),

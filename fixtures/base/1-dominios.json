@@ -48081,55 +48081,7 @@
             "momento": "APÓS"
         }
     },
-    {
-        "model": "dominios.vinculofamiliar",
-        "pk": 1,
-        "fields": {
-            "descricao": "Mãe"
-        }
-    },
-    {
-        "model": "dominios.vinculofamiliar",
-        "pk": 2,
-        "fields": {
-            "descricao": "Pai"
-        }
-    },
-    {
-        "model": "dominios.vinculofamiliar",
-        "pk": 3,
-        "fields": {
-            "descricao": "Tio(a)"
-        }
-    },
-    {
-        "model": "dominios.vinculofamiliar",
-        "pk": 5,
-        "fields": {
-            "descricao": "Avô(ó)"
-        }
-    },
-    {
-        "model": "dominios.vinculofamiliar",
-        "pk": 7,
-        "fields": {
-            "descricao": "Primo(a)"
-        }
-    },
-    {
-        "model": "dominios.vinculofamiliar",
-        "pk": 8,
-        "fields": {
-            "descricao": "Companheiro(a)"
-        }
-    },
-    {
-        "model": "dominios.vinculofamiliar",
-        "pk": 9,
-        "fields": {
-            "descricao": "Outros"
-        }
-    },
+   
     {
         "model": "dominios.opcaosabeler",
         "pk": 1,
