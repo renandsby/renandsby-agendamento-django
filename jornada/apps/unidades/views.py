@@ -12,7 +12,6 @@ from django.db.models.functions import Cast
 from django.db.models import IntegerField, CharField
 from .models import Modulo, Quarto, Unidade, EntradaAdolescente
 
-from atividades.forms import AdolescenteAtividadeFormset
 
 from .forms import (
     EntradaForm,
@@ -164,7 +163,7 @@ class EntradaUpdateView(
         "anexos": AnexoEntradaFormset,
         "medidas_adaptacao": MedidaAdaptacaoFormset,
         "medidas_disciplinares": MedidaDisciplinarFormset,
-        # "atividades_inscrito": AdolescenteAtividadeFormset
+
     }
     
     def get_form_kwargs(self):
@@ -172,14 +171,7 @@ class EntradaUpdateView(
         kwargs.update({'unidade': self.object.unidade})
         return kwargs
     
-    def get_formset_kwargs(self):
-        return {
-            'atividades_inscrito' : {
-                'form_kwargs' : {
-                    'unidade': self.object.unidade
-                }
-            }
-        }
+
 
 
 class EditaQuartoView(

@@ -153,19 +153,12 @@ class Unidade(BaseModel):
     def quantidade_total_adolescentes(self):
         return self.entradas_de_adolescentes.filter(lotado=True).count()
     
-    @property
-    def quantidade_adolescentes_presentes(self):
-        return int(self.quantidade_total_adolescentes - self.quantidade_adolescentes_evadidos - self.quantidade_adolescentes_em_atividade_externa)
-    
+
     @property
     def quantidade_adolescentes_evadidos(self):
         return self.entradas_de_adolescentes.filter(lotado=True, evadido=True).count()
     
-    @property
-    def quantidade_adolescentes_em_atividade_externa(self):
-        return len([entrada.id for entrada in self.entradas_de_adolescentes.filter(lotado=True) if entrada.em_atividade_externa])
-    
-    
+ 
     def __str__(self):
         return f"{self.sigla}"
 
@@ -221,17 +214,9 @@ class Modulo(BaseModel):
         return f"{self.unidade} - Módulo {self.descricao}"
 
 
-    @property
-    def _ids_entradas_adol_em_atividade_externa(self):
-        return [entrada.id for entrada in self.entradas_atuais if entrada.em_atividade_externa]
 
-    @property
-    def entradas_adol_em_atividade_externa(self):    
-        return self.entradas_atuais.filter(id__in = self._ids_entradas_adol_em_atividade_externa)
     
-    @property
-    def entradas_adol_no_modulo(self):
-        return self.entradas_atuais.exclude(id__in = self._ids_entradas_adol_em_atividade_externa)
+
 
     @property
     def entradas_atuais(self):
@@ -249,16 +234,7 @@ class Modulo(BaseModel):
     def adolescentes(self):
         return Adolescente.objects.filter(id__in=self.ids_adolescentes_lotados)
 
-    @property
-    def historico_atividades_plantao_atual(self):
-        from atividades.models import HistoricoAtividade
-        qs =  HistoricoAtividade.objects.filter(
-            atividade__unidade=self.unidade,
-            modulo = self,
-        )
-        qs = qs.filter(models.Q(realizada=True) | models.Q(em_atividade=True))
-        
-        return qs
+
         
     class Meta:
         ordering = ["descricao"]
@@ -290,17 +266,7 @@ class Quarto(BaseModel):
             return f"{self.modulo.unidade.sigla} Quarto {self.numero}{self.nome}"
         return f"{self.modulo.unidade.sigla} Modulo {self.modulo.descricao} Quarto {self.numero}{self.nome}"
 
-    @property
-    def _ids_entradas_adol_em_atividade_externa(self):
-        return [entrada.id for entrada in self.entradas_atuais if entrada.em_atividade_externa]
 
-    @property
-    def entradas_adol_em_atividade_externa(self):    
-        return self.entradas_atuais.filter(id__in = self._ids_entradas_adol_em_atividade_externa)
-    
-    @property
-    def entradas_adol_no_quarto(self):
-        return self.entradas_atuais.exclude(id__in = self._ids_entradas_adol_em_atividade_externa)
     
     @property
     def entradas_atuais(self):
@@ -530,30 +496,6 @@ class EntradaAdolescente(BaseModel):
         )
 
     @property
-    def em_atividade_externa(self):
-        if self.em_atividade:
-            if self.atividade_atual.atividade.externa:
-                return True
-        return False
-
-    
-    @property
-    def em_atividade(self):
-        return self.adolescente.historico_atividades.filter(
-            atividade__unidade=self.unidade, 
-            em_atividade=True,
-            data_ida__gte = self.data_entrada if self.data_entrada is not None else datetime.datetime(year=2023,month=1,day=1),
-        ).exists()
-
-    @property
-    def atividade_atual(self):
-        return self.adolescente.historico_atividades.filter(
-            atividade__unidade=self.unidade, 
-            em_atividade=True,
-            data_ida__gte = self.data_entrada if self.data_entrada is not None else datetime.datetime(year=2023,month=1,day=1),
-        ).first()
-
-    @property
     def medidas_adaptacao_ativas(self):
         return self.medidas_adaptacao.filter(data_fim__gte=timezone.now())
 
@@ -690,13 +632,7 @@ class MedidaDisciplinar(Medida):
         related_name="medidas_disciplinares",
         on_delete=models.CASCADE,
     )
-    ocorrencia = models.ForeignKey(
-        "ocorrencias.Ocorrencia",
-        related_name="medidas_geradas",
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True,
-    )
+
 
     def __str__(self):
         return f"{self.entrada.adolescente.nome}: {self._medida_to_str()}"

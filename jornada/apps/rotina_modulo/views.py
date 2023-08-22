@@ -3,7 +3,6 @@ from django.shortcuts import redirect, render
 from django.urls.base import reverse
 from django.views.generic import View, ListView
 from unidades.models import Modulo
-from atividades.models import Atividade
 from django.contrib.auth.mixins import LoginRequiredMixin
 from unidades.models import Unidade, EntradaAdolescente, VagaUnidade
 from central.painel_vagas import adiciona_vagas, somatorio, somatorio_internacao
@@ -116,18 +115,4 @@ class ModuloAdolescenteListView(
         return qs.order_by('modulo', 'quarto', 'adolescente__nome')
     
 
-class ModuloAtividadeListView(
-    LoginRequiredMixin, 
-    ListView
-):
-    template_name = 'rotina_modulo/atividade_list.html'
-    model = Atividade
-    
-    def get_queryset(self):
-        qs = super().get_queryset()
-        modulo = Modulo.objects.get(uuid=self.kwargs.get('modulo_uuid'))
-        qs = qs.filter(unidade__uuid=modulo.unidade.uuid)   
-        return qs
-    
 
-    

@@ -222,17 +222,6 @@ class TipoUnidade(models.Model):
         verbose_name_plural = "Tipos de Unidade"
 
 
-class TipoAtividade(models.Model):
-    descricao = models.CharField(max_length=100, unique=True)
-
-    def __str__(self):
-        return f"{self.descricao}"
-
-    class Meta:
-        ordering = ('descricao',)
-        app_label = "dominios"
-        verbose_name = "Tipo de Atividade"
-        verbose_name_plural = "Tipos de Atividade"
 
 
 class SituacaoEscolar(models.Model):
@@ -259,16 +248,6 @@ class Escolaridade(models.Model):
         verbose_name_plural = "Escolaridades"
 
 
-class TipoRisco(models.Model):
-    descricao = models.CharField(max_length=100)
-
-    def __str__(self):
-        return f"{self.descricao}"
-
-    class Meta:
-        app_label = "dominios"
-        verbose_name = "Tipo de Risco"
-        verbose_name_plural = "Tipos de Risco"
 
 
 class GravidadeInfracaoOcorrencia(models.Model):

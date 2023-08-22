@@ -62,9 +62,7 @@
                                 <i class="text-info fs-8 fa-solid fa-clipboard"></i>
                                 </a> -->
                               
-                                {% if entrada.em_atividade_externa %}
-                                &nbsp; <span class="badge bg-secondary">{{entrada.atividade_atual.atividade.nome_curto|truncatechars:20}}</span>
-                                {% endif %}
+                              
 
                             </td>
                             <td class="col-1 text-center">
@@ -121,29 +119,7 @@
                                         {% endif %}
                                 </small>
                             </td>
-                            <td class="text-end">
-                                {% if entrada.adolescente.tem_risco_ativo %}
-                                    <a class="mr-2"
-                                        href="{% url 'prontuario:risco-list' entrada.adolescente.uuid %}"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="
-                                        Riscos:
-                                        {% for risco in entrada.adolescente.riscos_ativos.all %} 
-                                            {% if not forloop.first %},{% endif %}
-                                            {% for tipo in risco.tipo_risco.all %} 
-                                                {{tipo}}{% if not forloop.last %},{% endif %}
-                                            {% endfor %}
-                                        {% endfor %}
-                                        ">
-                                        <i class="text-danger fs-4 fa-solid fa-triangle-exclamation"></i>
-                                    </a>
-                                {% endif %}
-
-                                <a class="mx-2"
-                                    href="{% url 'rotina_modulo:modulo-entradas-edita-quarto' modulo.uuid entrada.uuid %}"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Trocar Quarto">
-                                    <i class="text-primary fs-5 fa-solid fa-bed"></i>
-                                </a>
-                            </td>
+                 
                         </tr>
                     {% endfor %}
 

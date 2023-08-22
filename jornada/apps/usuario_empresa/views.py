@@ -12,7 +12,7 @@ from django.db.models.functions import Cast
 from django.db.models import IntegerField, CharField
 from .models import UsuarioEmpresa
 
-from atividades.forms import AdolescenteAtividadeFormset
+
 
 from .forms import (
     UsuarioEmpresaForm

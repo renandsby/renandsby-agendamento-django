@@ -85,27 +85,7 @@ urlpatterns = [
             ]
         ),
     ),
-    # EDUCACAO
-    path(
-        "adolescente/<uuid:adolescente_uuid>/educacao/",
-        include(
-            [
-                path(
-                    "", views.EducacaoProntuarioListView.as_view(), name="educacao-list"
-                ),
-                path(
-                    "create/",
-                    views.EducacaoProntuarioCreateView.as_view(),
-                    name="educacao-create",
-                ),
-                path(
-                    "<uuid:edu_uuid>/update",
-                    views.EducacaoProntuarioUpdateView.as_view(),
-                    name="educacao-update",
-                ),
-            ]
-        ),
-    ),
+   
     # HISTÓRICO ENTRADA EM UNIDADES
     path(
         "adolescente/<uuid:adolescente_uuid>/historico/",
@@ -116,17 +96,6 @@ urlpatterns = [
         ),
     ),
     
-     # HISTÓRICO Ocorrencias
-    path(
-        "adolescente/<uuid:adolescente_uuid>/ocorrencia/",
-        include(
-            [
-                path("", views.OcorrenciaProntuarioListView.as_view(), name="ocorrencia-list"),
-                # ver ocorrencia
-                path("<uuid:ocorrencia_uuid>/detail/", views.OcorrenciaProntuarioDetailView.as_view(), name="ocorrencia-detail"),
-            ]
-        ),
-    ),
 
     # PROCESSOS
     path(
@@ -154,25 +123,7 @@ urlpatterns = [
             ]
         ),
     ),
-    # RISCO
-    path(
-        "adolescente/<uuid:adolescente_uuid>/risco/",
-        include(
-            [
-                path("", views.RiscoProntuarioListView.as_view(), name="risco-list"),
-                path(
-                    "create/",
-                    views.RiscoProntuarioCreateView.as_view(),
-                    name="risco-create",
-                ),
-                path(
-                    "<uuid:risco_uuid>/update",
-                    views.RiscoProntuarioUpdateView.as_view(),
-                    name="risco-update",
-                ),
-            ]
-        ),
-    ),
+   
     ## RELATÓRIOS
     path(
         "adolescente/<uuid:adolescente_uuid>/relatorio/",

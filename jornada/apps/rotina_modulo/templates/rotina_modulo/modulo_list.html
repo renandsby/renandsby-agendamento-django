@@ -17,19 +17,6 @@
         Total: {{unidade.quantidade_total_adolescentes}}, 
       </small>
 
-      {% if unidade.quantidade_adolescentes_evadidos > 0 %}
-        <small>
-          Evadido(s): {{unidade.quantidade_adolescentes_evadidos}}{% if unidade.quantidade_adolescentes_em_atividade_externa > 0 %},{% endif %} 
-        </small>
-        {% endif %} 
-        {% if unidade.quantidade_adolescentes_em_atividade_externa > 0 %}
-        <small>
-          Em Atividade Externa: {{unidade.quantidade_adolescentes_em_atividade_externa}} 
-        </small>
-        {% endif %}
-    
-      </p>
-      {% endif %}
 
   </div>
 
@@ -58,7 +45,7 @@
       </div>
     </div>
 
-
+    {% endif %}
 
 
   </fieldset>

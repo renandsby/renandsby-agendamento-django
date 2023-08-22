@@ -49,7 +49,6 @@
 
   {% arg empty_form %}
       {{ anexos.empty_form.id }}
-      {{ anexos.empty_form.atendimento_educacao }}
       <div class="row justify-content-center">
           <div class="col-md-6 mt-auto mb-2">
             {% LabeledInput field=anexos.empty_form.anexo %}{% /LabeledInput %}
@@ -62,7 +61,6 @@
   {% for anexo in anexos %}
     {% FormErrors form=anexo%}{%/FormErrors%}
     {{ anexo.id }}
-    {{anexo.atendimento_educacao }}
   
     <div class="row justify-content-center">
       <div class="col-md-6 mt-auto mb-2">

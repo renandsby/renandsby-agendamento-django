@@ -186,21 +186,12 @@ class Adolescente(BaseModel):
     def unidade_saida_pendente(self):
         return self.entradas_em_unidades.filter(status=3).first().unidade
 
-    @property
-    def atendimento_educacao_atual(self):
-        return self.atendimento_educacao.last()
 
     @property
     def endereco_atual(self):
         return self.enderecos.filter(reside=True).first()
 
-    @property
-    def tem_risco_ativo(self):
-        return self.riscos.filter(ativo=True).exists()
-    
-    @property
-    def riscos_ativos(self):
-        return self.riscos.filter(ativo=True)
+  
     
 
     

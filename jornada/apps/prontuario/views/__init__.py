@@ -14,11 +14,6 @@ from .atendimento_psicossocial import (
     AtendimentoPsicossocialProntuarioUpdateView
 )
 
-from .educacao import (
-    EducacaoProntuarioCreateView,
-    EducacaoProntuarioListView,
-    EducacaoProntuarioUpdateView
-)
 
 from .endereco import (
     EnderecoProntuarioCreateView,
@@ -36,11 +31,6 @@ from .processo import (
     ProcessoProntuarioDeleteView,
 )
 
-from .risco import (
-    RiscoProntuarioCreateView, 
-    RiscoProntuarioListView,
-    RiscoProntuarioUpdateView
-)
 
 from .relatorio import (
     RelatorioProntuarioCreateView,
@@ -49,10 +39,7 @@ from .relatorio import (
     RelatorioProntuarioDeleteView
 )
 
-from .ocorrencias import (
-    OcorrenciaProntuarioListView,
-    OcorrenciaProntuarioDetailView
-)
+
 
 __all__ = [
     "AdolescenteProntuarioListView",
@@ -67,16 +54,10 @@ __all__ = [
     "AtendimentoPsicossocialProntuarioListView",
     "AtendimentoPsicossocialProntuarioCreateView",
     "AtendimentoPsicossocialProntuarioUpdateView",
-    "EducacaoProntuarioListView",
-    "EducacaoProntuarioCreateView",
-    "EducacaoProntuarioUpdateView",
     "ProcessoProntuarioListView",
     "ProcessoProntuarioCreateView",
     "ProcessoProntuarioUpdateView",
     "ProcessoProntuarioDeleteView",
-    "RiscoProntuarioListView",
-    "RiscoProntuarioCreateView",
-    "RiscoProntuarioUpdateView",
     "HistoricoListView",
     "TutorialListView",
     "RelatorioProntuarioListView",

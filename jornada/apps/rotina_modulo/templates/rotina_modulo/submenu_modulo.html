@@ -41,34 +41,11 @@
 
 {% endif %}
 
-<!-- ATIVIDADES -->
-<div class="d-flex justify-content-center item-submenu {% if 'modulo-atividade' in request.resolver_match.url_name %} atual {% endif %}">
-    <a href="{% url 'rotina_modulo:modulo-atividades' modulo.uuid %}" class="">
-        <i class="fa-solid fa-network-wired me-1"></i>
-        Atividades
-    </a>
-</div>
-
-<!-- OCORRÊNCIAS -->
-{% if 'ocorrencias.ver' in perms %}
-    {% if not modulo.unidade.tipo_unidade.descricao == "Meio Aberto" %}
-        <div class="d-flex justify-content-center item-submenu {% if 'ocorrencia' in request.resolver_match.url_name %} atual {% endif %}">
-            <a href="{% url 'rotina_modulo:modulo-ocorrencia-list' modulo.uuid %}" class="">
-                <i class="fa-solid fa-comments me-1"></i>
-                Ocorrências
-            </a>
-        </div>
-    {% endif %}
-{% endif %}
 
 
-<!-- AGENDA -->
-<div class="d-flex justify-content-center item-submenu {% if 'agenda' in request.resolver_match.url_name %} atual {% endif %}">
-    <a href="{% url 'rotina_modulo:modulo-listar-agendamentos' modulo.uuid %}?periodo=today" class="">
-        <i class="fa-regular fa-calendar me-1"></i>
-        Agenda
-    </a>
-</div>
+
+
+
 
 
 
