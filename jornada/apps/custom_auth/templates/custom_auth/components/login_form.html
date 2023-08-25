@@ -24,6 +24,11 @@
   </div> {% endcomment %}
 
   <div class="text-center mt-4 mb-4">
-    <button type="submit" class="btn btn-primary w-75" style="height:45px;">Entrar</button>
+    <button type="submit" class="btn btn-primary w-75" style="height:45px;">Entrar</button></br></br>
+    <a href="{% url 'usuario_empresa:usuario-create' %}">  
+      <i class="fa-solid fa-user-plus"></i>
+      <span class="fw-bold">Novo Usuário</span>
+  </a>
+
   </div>
 </form>

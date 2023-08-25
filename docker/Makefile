@@ -69,8 +69,6 @@ network:
 remove_migrations:
 	docker-compose exec -T django django-admin shell < ../scripts/remove_migrations.py
 
-testa_aplicacao:
-	docker-compose exec django django-admin test unidades alteracoes_vinculo --keepdb
 
 vincula_randomicos:
 	docker-compose exec django django-admin vincula_randomicos --qtd 1 --lotado True \

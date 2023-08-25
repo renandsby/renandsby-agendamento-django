@@ -10,7 +10,7 @@
     <div class="col-xl-7">
         <fieldset class="border rounded position-relative bg-white pt-4 pb-9 px-4 mb-3 mt-4">
             <legend class=" fw-bold legenda-flutuante w-auto fw-bold "> 
-            Unidades de Internação
+            Unidades de Intssssssernação
             </legend>
         
     
@@ -36,23 +36,7 @@
                             </a>
                         </td>
                         {% endwith %}
-                        
-                        {% for tipo_vaga, vagas in unidade.vagas.items %}
-                        <tr {% if forloop.last %} class='fw-bold fs-6'{% else %} class = "table-light"{% endif %}>      
-                            <td>{{tipo_vaga}}</td>
-                            <td>
-                                <strong>{{vagas.ocupadas}}/{{vagas.total}}</strong>
-                            </td>
-                            <td>
-                                <div class="progress" style="height: 35px;">
-                                <div class="progress-bar progress-bar {{vagas.progress_bg_class}}" role="progressbar" style="width: {{vagas.porcentagem|replace:',|.'}}%;" aria-valuenow="{{vagas.ocupadas}}" aria-valuemin="0" aria-valuemax="{{vagas.total}}">
-                                  </div>
-                                </div>
-                            </td>
-                                
-                            </td>
-                        </tr>
-                        {% endfor %}
+                
                         
                     </tr>
                 

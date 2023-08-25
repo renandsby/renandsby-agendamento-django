@@ -5,9 +5,7 @@
             "name": "Gestor Geral",
             "permissions": [
                 [
-                    "ver_todos",
-                    "adolescentes",
-                    "adolescente"
+                    "ver_todos"
                 ]
             ]
         }

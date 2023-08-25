@@ -11,8 +11,8 @@ from django.db.models import F, Func, Value, Q, When, Case
 from django.db.models.functions import Cast
 from django.db.models import IntegerField, CharField
 from .models import UsuarioEmpresa
+from django.urls.base import reverse
 
-from atividades.forms import AdolescenteAtividadeFormset
 
 from .forms import (
     UsuarioEmpresaForm
@@ -24,14 +24,16 @@ from core.permission_mixins import CustomPermissionMixin
 
 class UsuarioEmpresaListView(CustomPermissionMixin, ListView):
     model = UsuarioEmpresa
-    template_name = ""
+    template_name = "usuario_empresa/usuario_list.html"
     # permission_required = ["unidades.acessar_todas"]
     # no_permission_redirect_url = "/"
 
-class UsuarioEmpresaCreateView(CustomPermissionMixin, CreateView):
+class UsuarioEmpresaCreateView(CreateView):
     model = UsuarioEmpresa
     form_class = UsuarioEmpresaForm
-    template_name = ""
+    template_name ="usuario_empresa/usuario_form.html"
+    def get_success_url(self):
+        return reverse('usuario_empresa:usuario-create')
     # permission_required = ["unidades.incluir_unidades"]
     # no_permission_redirect_url = "/"
 
@@ -44,7 +46,7 @@ class UsuarioEmpresaUpdateView(
     model = UsuarioEmpresa
     form_class = UsuarioEmpresaForm
     uuid_url_kwarg = "usuario_empresa_uuid"
-    template_name = ""
+    template_name = "usuario_empresa/usuario_form.html"
     # permission_required = ["usuario_empresa_uuid.editar_unidades"]
     # no_permission_redirect_url = "/"
 

@@ -8,27 +8,16 @@ urlpatterns = [
         "api/",
         include(
             [   
-                path("adolescentes/", include("adolescentes.urls")),
-                path("processos/", include("processos.urls")),
                 path("unidades/", include("unidades.urls")),
                 path("dominios/", include("dominios.urls")),
             ]
         ),
     ),
     path("", include("custom_auth.urls")),
-    path("", include("rotina_modulo.urls", namespace="rotina_modulo")),
-    
-    path("prontuario/", include("prontuario.urls", namespace="prontuario")),
-    path("rede_de_apoio/", include("rede_de_apoio.urls", namespace="rede_de_apoio")),
-    path("tjdft/", include("tjdft.urls", namespace="tjdft")),
-    path("central/", include("central.urls", namespace="central")),
-    path("nai/", include("nai.urls", namespace="nai")),
-    path("livro/", include("livro.urls", namespace="livro")),
-    path("uama/", include("uama.urls", namespace="uama")),
-    
-    path("tutorial/", include("tutorial.urls", namespace="tutorial")),
+    path("painel/", include("painel_indicadores.urls", namespace="painel_indicadores")),
+
     path("posicao/", include("posicao.urls", namespace="posicao")),
-    
+    path("usuario_empresa/", include("usuario_empresa.urls", namespace="usuario_empresa")),
     path("admin/", admin.site.urls),
     path(settings.MEDIA_URL[1:]+'<path:file>', serve_protected_document, name='media_serve'),
 

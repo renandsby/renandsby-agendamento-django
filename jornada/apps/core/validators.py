@@ -50,15 +50,6 @@ def block_changes(obj, *fields, error_message = 'Esse campo não pode ser altera
         if field in obj.changes or field+"_id" in obj.changes:
             raise_validation_error(field, error_message)
 
-def processo_do_adolescente(obj):
-    '''
-        Se o objeto tiver processo e adolescente, checa se o processo é do adolescente
-    '''
-    if hasattr(obj, 'processo') and hasattr(obj, 'adolescente'):
-        if obj.processo is not None and obj.adolescente is not None:
-            if obj.processo.adolescente != obj.adolescente:
-                raise_validation_error('processo', f'O Processo selecionado não pertence a {obj.adolescente.nome}')
-
 
 def cidade_do_uf(obj):
     '''

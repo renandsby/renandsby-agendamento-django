@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from core.validators import (
     require,
     block_changes,
-    processo_do_adolescente,
+
 )
 
 from .validators import (
@@ -78,17 +78,11 @@ def logica_entrada_em_unidade(obj):
 
 
     # SEMPRE CHECA
-    processo_do_adolescente(obj)
+
     quarto_do_modulo(obj)
     modulo_da_unidade(obj)
 
-def nao_tem_outra_entrada_lotado(adolescente):
-    from unidades.models import EntradaAdolescente
-    # Busca outras entradas em que o adolescente esteja lotado
-    outras_entradas_lotado = EntradaAdolescente.objects.filter(
-        adolescente = adolescente,
-        lotado = True
-    )
+
         
     # Se existir, deve retornar erro.
     if outras_entradas_lotado.exists():

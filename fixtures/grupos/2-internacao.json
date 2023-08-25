@@ -29,48 +29,16 @@
                 ],
                 [
                     "ver_chegadas",
-                    "unidades",
-                    "entradaadolescente"
+                    "unidades"
+                 
                 ],
                 [
                     "ver_saidas",
-                    "unidades",
-                    "entradaadolescente"
+                    "unidades"
                 ],
                 [
                     "editar_entradas",
-                    "unidades",
-                    "entradaadolescente"
-                ],
-                [
-                    "ver_livro_c2",
-                    "livro",
-                    "livro"
-                ],
-                [
-                    "incluir_livro_c2",
-                    "livro",
-                    "livro"
-                ],
-                [
-                    "incluir_livro_modulos",
-                    "livro",
-                    "livro"
-                ],
-                [
-                    "editar_livro_modulos",
-                    "livro",
-                    "livro"
-                ],
-                [
-                    "editar",
-                    "atividades",
-                    "atividade"
-                ],
-                [
-                    "ver",
-                    "solicitacoes",
-                    "solicitacao"
+                    "unidades"
                 ]
             ]
         }
@@ -81,19 +49,12 @@
             "name": "Servidor GESEG Internação",
             "permissions": [
                 [
-                    "editar_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "editar_da_unidade"
+                 
                 ],
                 [
-                    "incluir_livro_modulos",
-                    "livro",
-                    "livro"
-                ],
-                [
-                    "ver_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "ver_da_unidade"
+                 
                 ]
             ]
         }
@@ -104,14 +65,10 @@
             "name": "Gestor GESP Internação",
             "permissions": [
                 [
-                    "editar_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "editar_da_unidade"
                 ],
                 [
-                    "ver_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "ver_da_unidade"
                 ]
             ]
         }
@@ -122,14 +79,10 @@
             "name": "Servidor GESP Internação",
             "permissions": [
                 [
-                    "editar_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "editar_da_unidade"
                 ],
                 [
-                    "ver_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "ver_da_unidade"
                 ]
             ]
         }
@@ -140,14 +93,10 @@
             "name": "Gestor GEAD Internação",
             "permissions": [
                 [
-                    "editar_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "editar_da_unidade"
                 ],
                 [
-                    "ver_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "ver_da_unidade"
                 ]
             ]
         }
@@ -158,14 +107,10 @@
             "name": "Servidor GEAD Internação",
             "permissions": [
                 [
-                    "editar_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "editar_da_unidade"
                 ],
                 [
-                    "ver_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "ver_da_unidade"
                 ]
             ]
         }
@@ -176,24 +121,18 @@
             "name": "Atendimento Inicial",
             "permissions": [
                 [
-                    "editar_todos",
-                    "adolescentes",
-                    "adolescente"
+                    "editar_todos"
+                   
                 ],
                 [
-                    "ver_todos",
-                    "adolescentes",
-                    "adolescente"
+                    "ver_todos"
                 ],
                 [
                     "incluir_entradas_na_unidade",
-                    "unidades",
-                    "entradaadolescente"
+                    "unidades"
                 ],
                 [
-                    "incluir",
-                    "adolescentes",
-                    "adolescente"
+                    "incluir"
                 ]
             ]
         }

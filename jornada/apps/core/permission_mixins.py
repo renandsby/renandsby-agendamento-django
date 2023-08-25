@@ -19,7 +19,6 @@ class SomenteAdministradorECentralMixin(AccessMixin):
         user = request.user
         # Se o usuário for administrador ou central ou superusuário, pode acessar 
         if  (user.groups.filter(name="Administrador").exists() or 
-             user.groups.filter(name="Central").exists() or 
              user.is_superuser):
 
             #TODO tela de acesso negado
@@ -28,20 +27,6 @@ class SomenteAdministradorECentralMixin(AccessMixin):
         else:  
             return self.handle_no_permission()
 
-class FiltraAdolescentes:
-    
-    def get_queryset(self):
-        user = self.request.user
-        queryset = super().get_queryset()
-        
-        if user.has_perm('adolescentes.ver_todos'):
-            return queryset
-        
-        if user.has_perm('adolescentes.ver_da_unidade'):
-            if user.servidor is not None and user.servidor.unidade is not None:
-                ids = user.servidor.unidade.entradas_de_adolescentes.filter(status__in=[1,2,3]).values_list('adolescente__id', flat=True)
-                return queryset.filter(id__in=ids)
-               
         return queryset.none()
 
 class CustomPermissionMixin(PermissionRequiredMixin):

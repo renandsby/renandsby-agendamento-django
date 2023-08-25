@@ -24,13 +24,7 @@ class Command(BaseCommand):
         for servidor in servidores:
             if servidor.codigo_lotacao is not None:
                 match servidor.codigo_lotacao:
-                    case s if s.startswith("33200301"):
-                        unidade = Unidade.objects.get(sigla="NAI")
-                        if unidade:
-                            servidor.unidade = unidade
-                            servidor.save()
-                    
-                        print(f"{servidor.nome=} -> {unidade.sigla}")
+                   
 
                     case s if s.startswith("33200302"): 
                         unidade = Unidade.objects.get(sigla="UIPSS")

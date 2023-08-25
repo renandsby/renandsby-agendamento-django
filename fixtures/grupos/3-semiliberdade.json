@@ -5,44 +5,22 @@
             "name": "Gestor Semiliberdade",
             "permissions": [
                 [
-                    "editar_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "editar_da_unidade"
                 ],
                 [
-                    "ver_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "ver_da_unidade"
                 ],
                 [
                     "ver_chegadas",
-                    "unidades",
-                    "entradaadolescente"
+                    "unidades"
                 ],
                 [
                     "ver_saidas",
-                    "unidades",
-                    "entradaadolescente"
+                    "unidades"
                 ],
                 [
                     "editar_entradas",
-                    "unidades",
-                    "entradaadolescente"
-                ],
-                [
-                    "incluir_livro_modulos",
-                    "livro",
-                    "livro"
-                ],
-                [
-                    "editar",
-                    "atividades",
-                    "atividade"
-                ],
-                [
-                    "ver",
-                    "solicitacoes",
-                    "solicitacao"
+                    "unidades"
                 ]
             ]
         }
@@ -53,34 +31,22 @@
             "name": "Servidor Semiliberdade",
             "permissions": [
                 [
-                    "editar_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "editar_da_unidade"
                 ],
                 [
-                    "ver_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "ver_da_unidade"
                 ],
                 [
                     "ver_chegadas",
-                    "unidades",
-                    "entradaadolescente"
+                    "unidades"
                 ],
                 [
                     "ver_saidas",
-                    "unidades",
-                    "entradaadolescente"
-                ],
-                [
-                    "incluir_livro_modulos",
-                    "livro",
-                    "livro"
+                    "unidades"
                 ],
                 [
                     "editar_entradas",
-                    "unidades",
-                    "entradaadolescente"
+                    "unidades"
                 ]
 
             ]
@@ -92,14 +58,10 @@
             "name": "Administrativo Semiliberdade",
             "permissions": [
                 [
-                    "editar_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "editar_da_unidade"
                 ],
                 [
-                    "ver_da_unidade",
-                    "adolescentes",
-                    "adolescente"
+                    "ver_da_unidade"
                 ]
             ]
         }

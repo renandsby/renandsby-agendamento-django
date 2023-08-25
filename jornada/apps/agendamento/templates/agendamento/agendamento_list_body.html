@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load shared_components %}
+<div class="row justify-content-center mt-4">
+  {% block body %}
+    {% Fieldset titulo="Histórico de Agendamentos" %}
+        
+      <a href="{% url 'agendamento:agendamento-create' %}" class="btn btn-primary color-white mt-4">
+        <i class="fas fa-plus-circle"></i>
+        Registrar Agendamento
+      </a>
+ 
+     
+        <div class="table-responsive mt-5">
+        <table class=" table table-hover  text-center">
+          <thead class="table-blue">
+            <tr>
+              <th scope="col">Criado por</th>
+              <th scope="col">Data/Hora Agendamento</th>
+              <th scope="col">Título</th>
+              <th scope="col">Vaga</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for agendamento in object_list %}
+            <tr>
+              <td>{{agendamento.criado_por}}</td>
+              <td>{{agendamento.titulo}}</td>
+              <td>{{agendamento.vagaEndereco}}</td>
+              <td>{{agendamento.data_disponibilidade}}</td>
+          
+    
+              <td>
+                <a class="mr-2" href="{% url 'agendamento:agendamento-update'  agendamento.uuid  %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
+                  <i class="text-primary fs-5 fa-solid fa-pen-to-square"></i>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% Paginacao %}{% /Paginacao %}
+  
+      {% /Fieldset %}
+    </div>
+    {% endblock %}

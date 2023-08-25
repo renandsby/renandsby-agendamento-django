@@ -1,1 +1,0 @@
-from ._utils import adiciona_vagas, somatorio, somatorio_internacao

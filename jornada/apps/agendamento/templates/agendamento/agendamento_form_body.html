@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load shared_components %}
+
+{% block body %}
+
+ 
+{% Form form=form enctype="multipart/form-data" url_name_prefix="agendamento:agendamento" delete_button="true"%}
+
+<fieldset class="border rounded p-3 bg-light mb-3">
+  <div class="row">
+    <div class="col-md-6 py-1">
+      {% LabeledInput field=form.titulo %}{% /LabeledInput %}
+    </div>
+    <div class="col-md-6 py-1">
+      {% LabeledInput field=form.data_disponibilidade %}{% /LabeledInput %}
+    </div>
+    <div class="col-md-6 py-1">
+      {% LabeledInput field=form.data_fim %}{% /LabeledInput %}
+    </div>
+    <div class="col-md-6 py-1">
+      {% LabeledInput field=form.data_inicio %}{% /LabeledInput %}
+    </div>
+    <div class="col-md-12 py-1">
+      {% LabeledInput field=form.vagaEndereco %}{% /LabeledInput %}
+    </div>
+  </div>
+</fieldset>
+
+
+{% /Form %}
+
+{% endblock %}

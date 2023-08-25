@@ -124,31 +124,12 @@ class PermissaoDeAdolescenteMiddleware:
             return self.get_response(request)
     
         if request.method in ('GET', 'HEAD', 'OPTIONS', 'TRACE'):
-            if request.user.has_perm('adolescentes.ver_todos'):
-                return self.get_response(request)
+            
         
-            if request.user.has_perm('adolescentes.ver_da_unidade'):
-                if hasattr(request.user, 'servidor') and request.user.servidor is not None and request.user.servidor.unidade is not None:
-                    unidade = request.user.servidor.unidade
-                    if unidade.entradas_de_adolescentes.filter(
-                        status__in=[1,2,3], 
-                        adolescente__uuid=resolver_match.kwargs.get('adolescente_uuid')
-                    ).exists():
-                        return self.get_response(request)
+           
             
             return redirect('prontuario:adolescente-list')
                         
         
-        if request.user.has_perm('adolescentes.editar_todos'):
-            return self.get_response(request)
-        
-        if request.user.has_perm('adolescentes.editar_da_unidade'):
-            if hasattr(request.user, 'servidor') and request.user.servidor is not None and request.user.servidor.unidade is not None:
-                unidade = request.user.servidor.unidade
-                if unidade.entradas_de_adolescentes.filter(
-                    status__in=[1,2,3], 
-                    adolescente__uuid=resolver_match.kwargs.get('adolescente_uuid')
-                ).exists():
-                    return self.get_response(request)
         
         return redirect('prontuario:adolescente-list')

@@ -2,7 +2,7 @@ from decimal import Decimal
 from django.test import TestCase
 from geoposition import Geoposition
 from unidades.models import Unidade
-from dominios.models import Uf, Cidade, Bairro, TipoUnidade, RegulamentoInfracoes
+from dominios.models import Uf, Cidade, Bairro
 
 class GeopositionTestCase(TestCase):
     fixtures = ['fixtures/base/1-dominios.json']
@@ -55,15 +55,6 @@ class GeopositionTestCase(TestCase):
         cidade = uf.cidades.first()
         bairro = cidade.bairros.first()
         
-        obj = Unidade.objects.create(
-            nome='Unidade Fake',
-            sigla='UNIFAKE',
-            tipo_unidade = TipoUnidade.objects.first(),
-            uf = uf,
-            cidade = cidade,
-            bairro = bairro,
-            regulamento_infracoes = RegulamentoInfracoes.objects.first(),
-            localizacao=Geoposition(52.5, 13.4)
-        )
+      
         poi = Unidade.objects.get(id=obj.id)
         self.assertIsInstance(poi.localizacao, Geoposition)

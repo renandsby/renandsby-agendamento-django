@@ -12,10 +12,6 @@ LOTACOES_GESTOR_GERAL = [
     "332004020000", # DIMA   
 ]
 
-LOTACOES_CENTRAL_DE_VAGAS = [
-    "332001000000", # COOCV
-    "332001010000", # DISIPIJ
-]
 
 PREFIXO_INTERNACAO = "332003"
 PREFIXO_SEMILIBERDADE = "33200401"
@@ -61,11 +57,7 @@ class Command(BaseCommand):
                 print(f"{servidor.nome} => {group.name}")
                 
             
-            if servidor.codigo_lotacao in LOTACOES_CENTRAL_DE_VAGAS:
-                group = Group.objects.get(name='Central')
-                servidor.user.groups.add(group)
-                print(f"{servidor.nome} => {group.name}")
-            
+     
             if (
                 servidor.codigo_lotacao is not None and  
                 servidor.codigo_lotacao.startswith("33200301")

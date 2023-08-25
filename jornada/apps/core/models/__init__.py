@@ -1,6 +1,5 @@
-from ._models import BaseModel, VinculaPassagemAdolescente
+from ._models import BaseModel
 
 __all__ = [
     "BaseModel", 
-    "VinculaPassagemAdolescente"
 ]

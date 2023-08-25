@@ -34,7 +34,7 @@ class Servidor(BaseModel):
     cargo = models.ForeignKey("dominios.Cargo", verbose_name="Cargo", on_delete=models.SET_NULL, null=True, blank=True)
     codigo_funcao = models.CharField("Código Função", max_length=20, blank=True, null=True)
     denominacao_funcao = models.CharField("Descrição Função", max_length=100, blank=True, null=True)
-    jornada = models.ForeignKey("dominios.JornadaTrabalho", verbose_name="Jornada de Trabalho", on_delete=models.SET_NULL, null=True, blank=True)
+
     plantao = models.PositiveSmallIntegerField(choices=Plantao.choices, blank=True, null=True)
     unidade = models.ForeignKey("unidades.Unidade", verbose_name="Unidade", on_delete=models.SET_NULL, null=True, blank=True, related_name="servidores")
     user = models.OneToOneField("custom_auth.CustomUser", on_delete=models.SET_NULL, related_name="servidor", null=True, blank=True)
