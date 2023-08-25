@@ -5,8 +5,7 @@ import random
 import string
 
 
-def gera_estrutura_de_pastas_com_data():
-    return timezone.now().strftime('%Y/%m/%d/%H/%M/')
+
 
 
 def generate_random_string(size=5):

@@ -1,4 +1,4 @@
-import datetime
+
 from itertools import chain
 
 from core.models import BaseModel
@@ -20,8 +20,10 @@ class UsuarioEmpresa(BaseModel):
     somente_numeros_validator = SomenteNumeros()
     caracter_especial_validator = CaracteresEspeciaisValidator()
 
-    nome = models.CharField(max_length=255, null=True)
-    razao_social = models.CharField(max_length=255, null=True, unique=True)
+    nome = models.CharField(max_length=255, null=True, blank=True)
+    razao_social = models.CharField(max_length=255, null=True, blank=True)
+    redeEmpresas = models.ForeignKey("posicao.RedeEmpresas", verbose_name="Empresas", on_delete=models.SET_NULL, null=True, blank=True, related_name="Servidores")
+    user = models.OneToOneField("custom_auth.CustomUser", on_delete=models.SET_NULL, related_name="usuarioEmpresa", null=True, blank=True)
     cpf = models.CharField(
         "CPF",
         max_length=11,
@@ -38,30 +40,6 @@ class UsuarioEmpresa(BaseModel):
         unique=True,
         validators=[somente_numeros_validator],
     )
-    cep = models.CharField("CEP", max_length=8, blank=True, null=True)
-    logradouro = models.CharField("Logradouro", max_length=255, blank=True, null=True)
-    complemento = models.CharField("Complemento", max_length=255, blank=True, null=True)
-    numero = models.CharField("Número", max_length=50, blank=True, null=True)
-    uf = models.ForeignKey(
-        "dominios.Uf",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=False,
-        verbose_name="UF",
-    )
-    cidade = models.ForeignKey(
-        "dominios.Cidade",
-        on_delete=models.SET_NULL,
-        blank=False,
-        null=True,
-        verbose_name="Cidade",
-    )
-    bairro = models.ForeignKey(
-        "dominios.Bairro",
-        on_delete=models.SET_NULL,
-        blank=False,
-        null=True,
-        verbose_name="Bairro",
-    )
 
-   
+    def __str__(self):
+        return f" {self.nome} ou {self.razao_social} do user {self.user}"

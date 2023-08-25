@@ -2,13 +2,8 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
 from .models import CustomUser
-from servidores.models import Servidor
 
-# Register your models here.
-class ServidorInline(admin.StackedInline):
-    model = Servidor
-    fk_name = "user"
-    extra = 0
+
     
 
 class UserAdmin(BaseUserAdmin):
@@ -31,28 +26,10 @@ class UserAdmin(BaseUserAdmin):
         return form
     
     
-    @admin.display(description='Unidade')
-    def get_unidade(self, obj):
-        return obj.servidor.unidade
 
-    @admin.display(description='Nome')
-    def get_nome(self, obj):
-        return obj.servidor.nome
 
-    @admin.display(description='Denominação Função')
-    def get_denominacao_funcao(self, obj):
-        return obj.servidor.denominacao_funcao
-    
-    @admin.display(description='Matrícula')
-    def get_matricula(self, obj):
-        return obj.servidor.matricula
-    
-    @admin.display(description='Lotação')
-    def get_lotacao(self, obj):
-        if (obj.servidor.codigo_lotacao is not None
-            and obj.servidor.descricao_lotacao is not None ):
-            return obj.servidor.codigo_lotacao + " - " + obj.servidor.descricao_lotacao
-        return None
+
+  
     
     @admin.display(description='Grupos')
     def get_grupos(self, user):
@@ -89,14 +66,14 @@ class UserAdmin(BaseUserAdmin):
         ),
     )
     
-    list_display = ("username", "get_nome", "get_matricula", "get_grupos", "get_unidade", "get_lotacao", 'get_denominacao_funcao')
-    list_filter = ("servidor__unidade__sigla", "groups", "is_staff")
-    search_fields = ("username__icontains","servidor__nome__icontains", "email", "servidor__unidade__sigla__icontains", "servidor__matricula__icontains")
+    list_display = ("username",  "get_grupos")
+    list_filter = ( "groups", "is_staff")
+    search_fields = ("username__icontains", "email",)
     ordering = ("username",)
     filter_horizontal = (
         "groups",
         "user_permissions",
     )
-    inlines = [ServidorInline]
+  
     
 admin.site.register(CustomUser, UserAdmin)

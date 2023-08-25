@@ -1,8 +1,6 @@
 import base64
-from datetime import datetime, timedelta
 import os
 from core.forms import Bootstrap5FormClassInjecter
-from core.utils import formata_idade_de_nascimento
 from django import forms, template
 from django.utils import timezone
 from django import template
@@ -145,30 +143,3 @@ def call_method(obj, method_name, *args):
     return method(*args)
 
 
-@register.filter
-def days_since(date):
-    delta = timezone.now().date() - date
-    return delta.days + 1
-
-
-@register.filter("formata_idade", is_safe=False)
-def formata_idade(value, arg=None):
-    """Format a date as the time since that date (i.e. "4 days, 6 hours")."""
-    if not value:
-        return ""
-    try:
-        if arg:
-            return formata_idade_de_nascimento(value, arg)
-        return formata_idade_de_nascimento(value)
-    except (ValueError, TypeError):
-        return ""
-
-
-@register.filter
-def plus_days(value, days):
-    return value + timedelta(days=days)
-
-
-@register.filter
-def minus_days(value, days):
-    return value - timedelta(days=days)

@@ -13,7 +13,7 @@
   <table class=" table table-hover  text-center">
     <thead class="table-blue">
       <tr>
-        <th scope="col" class="col-2 text-start">Nome</th>
+        <th scope="col" class="col-2 text-start">Nomeaaaa</th>
         <th scope="col" class="col-3 text-start">Tipo de Posição</th>
         <th scope="col" class="col-1 text-start"></th>
       </tr>
@@ -21,7 +21,7 @@
     <tbody>
       {% for obj in object_list %}
       <tr>
-        {{obj}}
+  
         <td class="text-start">{{obj.descricao}}</td>
         <td class="text-start">{{obj.tipo_rede_localizacao}}</td>
         <td>
@@ -53,7 +53,16 @@
         Novo Cadastro
       </a>
     
-      
+      {% Filtros %}{% /Filtros %}
+      <div class="row justify-content-center">
+        <div class="col text-center">
+          {% if not bairro %}
+          <h5 class="fw-bold">Selecione um bairro</h5>
+          {% else %}
+          <h5 class="fw-bold">Bairro: {{bairro}}</h5>
+          {% endif %}
+        </div>
+      </div>
       <div class="geoposition-widget" id="id_localizacao" data-map-widget-height="550" data-map-options="{}" data-marker-options="{}"></div>
 {% /Fieldset %}
 
@@ -79,14 +88,17 @@
         }
 
         $('.geoposition-widget').each(function() {
-
-           
-           
+          alert('{{bairro}}')
+            {% if bairro %}
+            var l_lat = parseFloat('{{bairro.localizacao.latitude|unlocalize}}') || -15.79;
+            var l_lon = parseFloat('{{bairro.localizacao.longitude|unlocalize}}') || -47.88;
+            var l_initialZoom = 14  ;
+            {% else %}
             var l_lat = -15.79;
             var l_lon = -47.88;
             var l_initialZoom = 10;
-           
-           
+            {% endif %}
+
             var $container = $(this),
                 $mapContainer = $('<div class="geoposition-map" />'),
                 $latitudeField = $container.find('input.geoposition:eq(0)'),
@@ -108,7 +120,7 @@
                 mapCustomOptions,
                 map,
                 marker;
-          
+
             $mapContainer.css('height', $container.attr('data-map-widget-height') + 'px');
             mapCustomOptions = JSON.parse($container.attr('data-map-options'));
             $.extend(mapOptions, mapCustomOptions);

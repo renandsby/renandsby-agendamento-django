@@ -1,9 +1,9 @@
-from django.utils import timezone
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager, UnicodeUsernameValidator
 from django.apps import apps
 from django.core.exceptions import ValidationError
+from datetime import datetime
 
 class CustomUserManager(BaseUserManager):
     """Necessária para que o Django saiba como 'trabalhar'
@@ -61,11 +61,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         validators=[username_validator],
     )
 
-    email = models.EmailField(max_length=255, unique=True, null=True, blank=True)
+    email = models.EmailField(max_length=255, unique=False, null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     change_password = models.BooleanField(default=True, verbose_name="Forçar alteração de senha")
-    date_joined = models.DateTimeField(("date joined"), default=timezone.now)
+    date_joined = models.DateTimeField(("date joined"), default=datetime.now)
 
     objects = CustomUserManager()
 

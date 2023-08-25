@@ -1,0 +1,225 @@
+{% extends "dadosEmpresa/base.html" %}
+{% load shared_components %}
+
+{% block submenu %}
+  {% comment %} Mostra o submenu só se estiver editando {% endcomment %}
+  {% if form.instance.id %}
+    {{block.super}}
+  {% endif %}
+{% endblock %}
+
+{% block body %}
+
+
+ 
+
+
+
+  {% Fieldset titulo="Endereços" %} 
+  <a class="btn btn-primary color-white mb-2" href="{% url 'dadosEmpresa:endereco-create' rede.uuid %}">
+    <i class="fas fa-plus-circle"></i>
+    Adicionar Endereço
+  </a>
+  {% Filtros %}{% /Filtros %}
+    <div>
+      <table class="table border table-hover align-middle">
+        <thead class='table-blue'>
+          <tr>
+            <th class="col-3" scope="col">Criado Por:</th>
+            <th class="col-3" scope="col">Descrição</th>
+            <th class="col-5" scope="col">Endereço </th>
+            <th class="col-1 text-center" scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for endereco in endereco_list %}
+          <tr>
+            <td style="text-transform: none;"> 
+              {{endereco.criado_por|default:''}} <small>em {{endereco.criado_em|date:"d/m/Y"}}</small>
+            </td>
+            
+            
+            <td>
+              {{endereco.descricao|default:""}} 
+                {% if endereco.sede %}
+                    <span class="badge bg-success">É sede da empresa?</span>
+                {% endif %}
+            </td>
+            <td>
+            {{endereco.cidade|default:""}}-{{endereco.uf.sigla|default:""}}, {{endereco.logradouro|default:""}}
+            
+
+            </td>
+            <td class="text-center">
+              <a class="mr-2" href="{% url 'dadosEmpresa:endereco-update' rede.uuid endereco.uuid %}" data-bs-toggle="tooltip"
+                data-bs-placement="top" title="Editar">
+
+                <i class="text-primary fs-4 fa-solid fa-pen-to-square"></i>
+
+              </a>
+
+            </td>
+          </tr>
+
+          {% endfor %}
+
+          <div class="geoposition-widget" id="id_localizacao" data-map-widget-height="550" data-map-options="{}" data-marker-options="{}"></div>
+        </tbody>
+      </table>
+    </div>
+    {% /Fieldset %}
+
+{% endblock %}
+
+{% block js %}
+<link href="//unpkg.com/leaflet@1.2.0/dist/leaflet.css" media="all" rel="stylesheet">
+<link href="//unpkg.com/leaflet-control-geocoder@1.5.6/dist/Control.Geocoder.css" media="all" rel="stylesheet">
+<link href="/static/geoposition/geoposition.css" media="all" rel="stylesheet">
+<script src="//unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+<script src="//unpkg.com/leaflet-control-geocoder@1.5.6/dist/Control.Geocoder.js"></script>
+<script type="text/javascript">
+
+  (function() {
+
+  $(document).ready(function() {
+    try {
+      var _ = L; // eslint-disable-line no-unused-vars
+    } catch (ReferenceError) {
+      console.log('geoposition: "L" not defined. You might not be connected to the internet.');
+      return;
+    }
+
+    $('.geoposition-widget').each(function() {
+
+      {% if bairro %}
+      var l_lat = parseFloat('{{bairro.localizacao.latitude|unlocalize}}') || -15.79;
+      var l_lon = parseFloat('{{bairro.localizacao.longitude|unlocalize}}') || -47.88;
+      var l_initialZoom = 14  ;
+      {% else %}
+      var l_lat = -15.79;
+      var l_lon = -47.88;
+      var l_initialZoom = 10;
+      
+
+      var $container = $(this),
+        $mapContainer = $('<div class="geoposition-map" />'),
+        $latitudeField = $container.find('input.geoposition:eq(0)'),
+        $longitudeField = $container.find('input.geoposition:eq(1)'),
+        latitude = parseFloat($latitudeField.val()) || null,
+        longitude = parseFloat($longitudeField.val()) || null,
+        mapOptions = {
+          url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+          maxZoom: 19,
+          dataZoom: 10,
+          initialZoom: l_initialZoom,
+          initialCenter: [l_lat, l_lon],
+          parentSelector: '#tabs',
+          isDjangoAdmin: false
+        },
+        mapNonProviderOptions = ['url', 'dataZoom', 'initialZoom', 'initialCenter'],
+        mapProviderOptions = {},
+        mapCustomOptions,
+        map,
+        marker;
+
+      $mapContainer.css('height', $container.attr('data-map-widget-height') + 'px');
+      mapCustomOptions = JSON.parse($container.attr('data-map-options'));
+      $.extend(mapOptions, mapCustomOptions);
+
+      for (var option in mapOptions) {
+        if (mapNonProviderOptions.includes(option) === false)
+          mapProviderOptions[option] = mapOptions[option];
+      }
+
+      function setLatLng(latLng) {
+        $latitudeField.val(latLng.lat);
+        $longitudeField.val(latLng.lng);
+      }
+
+      function getLatLng() {
+        latitude = parseFloat($latitudeField.val()) || null;
+        longitude = parseFloat($longitudeField.val()) || null;
+        return {lat: latitude, lng: longitude};
+      }
+
+      function mapClickListen(e) {
+        setMarker(e.latlng);
+      }
+
+
+      // create the map
+      $container.append($mapContainer);
+      map = L.map($mapContainer[0]).setView(mapOptions.initialCenter, mapOptions.initialZoom);
+      L.tileLayer(mapOptions.url, mapProviderOptions).addTo(map);
+      map.on('click', mapClickListen);
+
+      // add a search bar
+      L.Control.geocoder({
+        collapsed: false,
+        defaultMarkGeocode: false
+      }).on('markgeocode', function(e) {
+        setMarker(e.geocode.center);
+      }).addTo(map);
+
+      // set marker if model has data already
+      if ($latitudeField.val() && $longitudeField.val()) {
+        setMarker(getLatLng());
+        map.setView(getLatLng(), mapOptions.dataZoom, {animate: false});
+      }
+
+      // listen to keyboard input
+      $latitudeField.add($longitudeField).bind('keyup', function() {
+        setMarker(getLatLng());
+      });
+
+      if (mapOptions.isDjangoAdmin) {
+        // refresh map if active custom tab changed
+        $(mapOptions.parentSelector).on('click', function() {
+          setTimeout(function() {
+            map.invalidateSize();
+          }, 400);
+        });
+      } else {
+        // refresh map if inside jquery ui tabs widget and active tab changed
+        $container.parents(mapOptions.parentSelector).on('tabsactivate', function() {
+          map.invalidateSize();
+        });
+      }
+      {% for rede in object_list %}
+        latitude = parseFloat('{{rede.localizacao.latitude|unlocalize}}') || null;
+        longitude = parseFloat('{{rede.localizacao.longitude|unlocalize}}') || null;
+        
+        {% url 'dadosEmpresa:rede-update' rede.uuid as link_editar %}
+      
+        var myIcon = L.divIcon({className: 'rede-pin', html: "<a href='{{link_editar}}'><i class='shadow-sm text-primary fs-2 fa-solid fa-location-dot'></i></a>"});
+
+        var tooltip = "<b>{{rede.descricao|safe}}</b><br>{{rede.observacoes|safe|linebreaksbr}}";
+        
+        marker = L.marker(
+        {lat:latitude, lng:longitude}, {draggable: false, icon: myIcon} 
+        ).bindTooltip(
+        tooltip, 
+        {
+          permanent: false, 
+          direction: 'left'
+        }
+        ).addTo(map);
+
+        
+        
+        
+        
+        
+      {% endfor %}
+    });
+
+  });
+
+})();
+
+</script>
+
+
+{% endblock %}

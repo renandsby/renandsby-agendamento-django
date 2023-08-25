@@ -2,7 +2,7 @@
     {
         "model": "custom_auth.customuser",
         "fields": {
-            "password": "pbkdf2_sha256$390000$cRpG8yZH5QQaZUff60nJl1$6CSDDafEHKBpJyUCyITXPuskA2lZ00fsOZaihq4/Mxs=",
+            "password": "pbkdf2_sha256$390000$7LmcUjQzBeCkvrMtPaJ6mb$eq2K0W9X/5NFVTNMl33NUCjy6jvUV/ouErsBhj8O56E=",
             "last_login": "2023-05-02T13:46:44.527",
             "is_superuser": true,
             "username": "admin",
@@ -11,6 +11,66 @@
             "is_staff": true,
             "date_joined": "2022-09-23T13:06:22.118",
             "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "custom_auth.customuser",
+        "fields": {
+            "password": "pbkdf2_sha256$390000$cRpG8yZH5QQaZUff60nJl1$6CSDDafEHKBpJyUCyITXPuskA2lZ00fsOZaihq4/Mxs=",
+            "last_login": "2023-05-02T13:46:44.527",
+            "is_superuser": false,
+            "username": "Renan",
+            "email": "",
+            "is_active": true,
+            "is_staff": false,
+            "date_joined": "2022-09-23T13:06:22.118",
+            "groups": "",
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "custom_auth.customuser",
+        "fields": {
+            "password": "pbkdf2_sha256$390000$cRpG8yZH5QQaZUff60nJl1$6CSDDafEHKBpJyUCyITXPuskA2lZ00fsOZaihq4/Mxs=",
+            "last_login": "2023-05-02T13:46:44.527",
+            "is_superuser": false,
+            "username": "Silvia",
+            "email": "",
+            "is_active": true,
+            "is_staff": false,
+            "date_joined": "2022-09-23T13:06:22.118",
+            "groups": "",
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "custom_auth.customuser",
+        "fields": {
+            "password": "pbkdf2_sha256$390000$cRpG8yZH5QQaZUff60nJl1$6CSDDafEHKBpJyUCyITXPuskA2lZ00fsOZaihq4/Mxs=",
+            "last_login": "2023-05-02T13:46:44.527",
+            "is_superuser": false,
+            "username": "UserPessoaFisica",
+            "email": "",
+            "is_active": true,
+            "is_staff": true,
+            "date_joined": "2022-09-23T13:06:22.118",
+            "groups": "",
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "custom_auth.customuser",
+        "fields": {
+            "password": "pbkdf2_sha256$390000$cRpG8yZH5QQaZUff60nJl1$6CSDDafEHKBpJyUCyITXPuskA2lZ00fsOZaihq4/Mxs=",
+            "last_login": "2023-05-02T13:46:44.527",
+            "is_superuser": false,
+            "username": "UserPessoaJuridoca",
+            "email": "",
+            "is_active": true,
+            "is_staff": false,
+            "date_joined": "2022-09-23T13:06:22.118",
+            "groups": "",
             "user_permissions": []
         }
     }

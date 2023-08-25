@@ -44,10 +44,8 @@ class PasswordChangeView(AuthPasswordChangeView):
         return http_respose
 
 class RedirectView(LoginRequiredMixin, View):
-    def _handle_user(self, request):
-                      
-        return redirect('painel_indicadores:home')
+    def _handle_user(self, request):         
+        return redirect('posicao:rede-list')
         
-    
     def get(self, request):
         return self._handle_user(request)

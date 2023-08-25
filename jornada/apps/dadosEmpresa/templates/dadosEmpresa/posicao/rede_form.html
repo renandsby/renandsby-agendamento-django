@@ -1,0 +1,92 @@
+{% extends "dadosEmpresa/base.html" %}
+{% load shared_components %}
+
+{% block submenu %}
+  {% comment %} Mostra o submenu só se estiver editando {% endcomment %}
+{% if form.instance.id %}
+  {{block.super}}
+{% endif %}
+{% endblock %}
+
+
+{% block body %}
+
+
+
+{% comment %} {% Form form=form enctype="multipart/form-data" titulo="" %} {% endcomment %}
+
+
+{% Form form=form enctype="multipart/form-data"  delete_button="true"%}
+
+
+<!-- Dados Gerais -->
+
+<fieldset class="border rounded p-3 bg-light mb-3">
+  <div class="row">
+    <div class="col-md-6">
+      {%LabeledInput field=form.descricao %} {% /LabeledInput %}
+    </div>
+    <div class="col-md-6">
+      {%LabeledInput field=form.tipo_rede_localizacao %} {% /LabeledInput %}
+    </div>
+    <div class="col-md-12">
+      {%LabeledInput field=form.observacoes %}{% /LabeledInput %}
+    </div>
+  </div>
+  
+</fieldset>
+<fieldset class="border rounded p-3 bg-light mb-3">
+  <div class="row">
+    <div class="col-md-12">
+      {%LabeledInput field=form.localizacao %}{% /LabeledInput %}
+    </div>
+      
+  </div>
+</fieldset>
+
+
+
+
+
+
+
+
+{% arg botao_voltar %}
+  {% url 'dadosEmpresa:rede-list' as voltar_url %}
+  {% BotaoVoltar url=voltar_url %}{% /BotaoVoltar %}
+
+{% endarg %}
+
+{% /Form %}
+
+
+{% endblock %}
+
+
+
+{% block js_imports %}
+{{block.super}}
+<script src="{% static 'js/jquery.mask.min.js'%}"></script>
+{% endblock %}
+
+{% block js %}
+<script>
+  $(document).ready(function(){
+    $('[name=cpf]').mask('000.000.000-00');
+  });
+  $("form").submit(function() {
+    $('[name=cpf]').unmask();
+  });
+
+
+ 
+
+ 
+  
+  $( document ).trigger( "inlineformset_added");
+
+
+
+</script>
+{% endblock %}
+

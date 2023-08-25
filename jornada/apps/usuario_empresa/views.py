@@ -22,7 +22,7 @@ from .forms import (
 from core.permission_mixins import CustomPermissionMixin
 
 
-class UsuarioEmpresaListView(CustomPermissionMixin, ListView):
+class UsuarioEmpresaListView( ListView):
     model = UsuarioEmpresa
     template_name = "usuario_empresa/usuario_list.html"
     # permission_required = ["unidades.acessar_todas"]

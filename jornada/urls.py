@@ -8,16 +8,17 @@ urlpatterns = [
         "api/",
         include(
             [   
-                path("unidades/", include("unidades.urls")),
                 path("dominios/", include("dominios.urls")),
             ]
         ),
     ),
     path("", include("custom_auth.urls")),
-    path("painel/", include("painel_indicadores.urls", namespace="painel_indicadores")),
 
     path("posicao/", include("posicao.urls", namespace="posicao")),
+    # path("vagas/", include("vagas.urls", namespace="vagas")),
+    path("dadosEmpresa/", include("dadosEmpresa.urls", namespace="dadosEmpresa")),
     path("usuario_empresa/", include("usuario_empresa.urls", namespace="usuario_empresa")),
+    path("agendamento/", include("agendamento.urls", namespace="agendamento")),
     path("admin/", admin.site.urls),
     path(settings.MEDIA_URL[1:]+'<path:file>', serve_protected_document, name='media_serve'),
 

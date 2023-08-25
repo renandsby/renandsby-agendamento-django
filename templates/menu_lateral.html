@@ -1,8 +1,4 @@
-<li class="nav-item menu-item justify-content-center">
-    <a href="/" class="text-truncate menu-item-text">
-        Home
-    </a>
-</li> 
+
  
 <li class="nav-item menu-item justify-content-center">
     <a href="{% url 'posicao:rede-list' %}" class="text-truncate menu-item-text">
@@ -11,8 +7,20 @@
 </li> 
 
  
-<li class="nav-item menu-item justify-content-center">
+{% comment %} <li class="nav-item menu-item justify-content-center">
     <a href="{% url 'usuario_empresa:usuario-list' %}" class="text-truncate menu-item-text">
         Lista de Empresas
+    </a>
+</li>  {% endcomment %}
+
+<li class="nav-item menu-item justify-content-center">
+    <a href="{% url 'agendamento:agendamento-list' %}" class="text-truncate menu-item-text">
+        Agendamento
+    </a>
+</li> 
+
+<li class="nav-item menu-item justify-content-center">
+    <a href="{% url 'dadosEmpresa:rede-list' %}" class="text-truncate menu-item-text">
+        Dados Empresa
     </a>
 </li> 

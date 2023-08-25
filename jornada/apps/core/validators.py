@@ -61,36 +61,3 @@ def cidade_do_uf(obj):
                 raise_validation_error('cidade', 'A Cidade selecionada não pertence ao UF selecionado')
 
 
-
-def preencheu(obj, campo):
-    '''
-        Checa se o campo foi preenchido
-    '''
-    if hasattr(obj, campo) and getattr(obj, campo) is None:
-        raise ValidationError({f'{campo}':f'Favor informar {obj._meta.get_field(campo).verbose_name}'})
-
-
-
-def adolescente_esta_lotado_em_alguma_unidade(obj):
-    if not obj.adolescente.possui_entrada_ativa:
-        raise ValidationError(
-                f"O adolescente {obj.adolescente} não está em nenhuma unidade.")
-
-
-def adolescente_nao_esta_lotado_em_nenhuma_unidade(obj):
-    if obj.adding:
-        if obj.adolescente is not None and obj.adolescente.possui_entrada_ativa:
-            raise ValidationError(
-                f"O adolescente {obj.adolescente} já está na unidade {obj.adolescente.unidade_atual}")
-
-
-def adolescente_nao_tem_saida_pendente(obj):
-    if obj.adolescente.tem_saida_pendente:
-        raise ValidationError(
-            f"O adolescente {obj.adolescente} tem Saída Pendente na unidade {obj.adolescente.unidade_saida_pendente}")
-
-
-def adolescente_nao_tem_entrada_pendente(obj):
-    if obj.adolescente.tem_entrada_pendente:
-        raise ValidationError(
-            f"O adolescente {obj.adolescente} tem Entrada Pendente na unidade {obj.adolescente.unidade_entrada_pendente}")

@@ -45167,147 +45167,7 @@
             "localizacao": "-15.859375144876813,-48.012056350708015"
         }
     },
-   
-    {
-        "model": "dominios.cargo",
-        "pk": "054100101",
-        "fields": {
-            "descricao": "ESOCIO - ADMINISTRADOR"
-        }
-    },
-    {
-        "model": "dominios.cargo",
-        "pk": "054100102",
-        "fields": {
-            "descricao": "ESOCIO - DIREITO E LEGISL."
-        }
-    },
-    {
-        "model": "dominios.cargo",
-        "pk": "054100103",
-        "fields": {
-            "descricao": "ESOCIO - ASSISTENTE SOCIAL"
-        }
-    },
-    {
-        "model": "dominios.cargo",
-        "pk": "054100105",
-        "fields": {
-            "descricao": "ESOCIO - PEDAGOGO"
-        }
-    },
-    {
-        "model": "dominios.cargo",
-        "pk": "054100106",
-        "fields": {
-            "descricao": "ESOCIO - PSICOLOGO"
-        }
-    },
-    {
-        "model": "dominios.cargo",
-        "pk": "054100107",
-        "fields": {
-            "descricao": "ESOCIO - EDUCADOR SOCIAL"
-        }
-    },
-    {
-        "model": "dominios.cargo",
-        "pk": "054100108",
-        "fields": {
-            "descricao": "ESOCIO - TEC. ASS. EDUCAC."
-        }
-    },
-    {
-        "model": "dominios.cargo",
-        "pk": "054100111",
-        "fields": {
-            "descricao": "ESOCIO - ESTATISTICO"
-        }
-    },
-    {
-        "model": "dominios.cargo",
-        "pk": "054100112",
-        "fields": {
-            "descricao": "ESOCIO - EDUCACAO FISICA"
-        }
-    },
-    {
-        "model": "dominios.cargo",
-        "pk": "054100113",
-        "fields": {
-            "descricao": "ESOCIO - ARTES CENICAS"
-        }
-    },
-    {
-        "model": "dominios.cargo",
-        "pk": "054100114",
-        "fields": {
-            "descricao": "ESOCIO - ARTES MUSICA"
-        }
-    },
-    {
-        "model": "dominios.cargo",
-        "pk": "054100115",
-        "fields": {
-            "descricao": "ESOCIO - ARTES PLASTICAS"
-        }
-    },
-    {
-        "model": "dominios.cargo",
-        "pk": "054200201",
-        "fields": {
-            "descricao": "AGENTE SOCIOEDUCATIVO"
-        }
-    },
-    {
-        "model": "dominios.cargo",
-        "pk": "054300300",
-        "fields": {
-            "descricao": "TECNICO SOCIOEDUCATIVO"
-        }
-    },
-    {
-        "model": "dominios.cargo",
-        "pk": "054300301",
-        "fields": {
-            "descricao": "TSOCIO - AGENTE SOCIAL"
-        }
-    },
-    {
-        "model": "dominios.cargo",
-        "pk": "054300302",
-        "fields": {
-            "descricao": "TSOCIO - MOTORISTA"
-        }
-    },
-    {
-        "model": "dominios.cargo",
-        "pk": "054300303",
-        "fields": {
-            "descricao": "TSOCIO - AG. ADMINISTRATIVO"
-        }
-    },
-    {
-        "model": "dominios.cargo",
-        "pk": "054300307",
-        "fields": {
-            "descricao": "TSOCIO - OPERADOR GRAFICO"
-        }
-    },
-    {
-        "model": "dominios.cargo",
-        "pk": "054400400",
-        "fields": {
-            "descricao": "AUXILIAR SOCIOEDUCATIVO"
-        }
-    },
-    {
-        "model": "dominios.cargo",
-        "pk": "AA01012",
-        "fields": {
-            "descricao": "GESTOR POL PUB E GEST GOV"
-        }
-    },
+
 
     {
         "model": "dominios.tiporedeapoio",
@@ -45336,40 +45196,12 @@
         "fields": {
             "descricao": "Profissionalização"
         }
-    },
+    }
    
    
     
    
-  
-    {
-        "model": "dominios.tipounidade",
-        "pk": 1,
-        "fields": {
-            "descricao": "Internação"
-        }
-    },
-    {
-        "model": "dominios.tipounidade",
-        "pk": 3,
-        "fields": {
-            "descricao": "Semiliberdade"
-        }
-    },
-    {
-        "model": "dominios.tipounidade",
-        "pk": 4,
-        "fields": {
-            "descricao": "Meio Aberto"
-        }
-    },
-    {
-        "model": "dominios.tipounidade",
-        "pk": 5,
-        "fields": {
-            "descricao": "Atendimento Inicial"
-        }
-    }
+
 
    
    

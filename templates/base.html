@@ -12,7 +12,7 @@
 
 
         {% block css_imports %}
-            <link href="{% static 'images/favicon.svg' %}" rel="shortcut icon">
+            <link href="{% static 'images/favicon.png' %}" rel="shortcut icon">
             <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
             <link href="{% static 'css/bootstrap/bootstrap.min.css'%}" rel="stylesheet" type="text/css">
             
@@ -33,7 +33,7 @@
             {# Extra header stuff (scripts, styles, metadata, etc) #}
         {% endblock %}
 
-        <title>{% block page_title %}Jornada{% endblock %}</title>
+        <title>{% block page_title %}Imagem{% endblock %}</title>
     </head>
     <body>
 
@@ -60,7 +60,8 @@
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
                         <a class="active" aria-current="page" href="/">
-                            <img class="logo-jornada active" src="{% static '/images/Logo Jornada Verde Branco.svg' %}" alt="logo jornada" height="36">
+                            
+                            <img src="{% static '/images/logo-imagem-w.png' %}" alt="logo jornada" height="56">
                         </a>
                     </li>
                 </ul>
@@ -71,19 +72,7 @@
 
 
                 <div class="navbar-user-info d-flex">
-                        <div class="dropdown position-relative me-3 nav-menu-button">
-                            <a class="dropdown-toggle text-decoration-none color-white" id="dropdownMenuOffset" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="navbar" role="button">
-                                <div class="d-inline-flex align-items-center">
-                                    <div class="me-2">
-                                        Ajuda
-                                    </div>
-                                    <i class="fa-solid fa-circle-info"></i>
-                                </div>
-                            </a>
-                            
-                            
-                        
-                        </div>
+                       
 
                         {% if request.user.is_authenticated %}
                             <div class="dropdown position-relative me-3 nav-menu-button">
@@ -172,6 +161,7 @@
         
         {% autoescape off %}
             {% block js %}
+            
             {% endblock %}
         {% endautoescape %}
 
@@ -180,7 +170,7 @@
 
         {# Shared data for javascript #}
         <script type="text/javascript">
-            
+      
             window._sharedData = {
                 {% autoescape off %}
                     {% block shared_data %}

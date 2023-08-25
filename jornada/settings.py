@@ -45,22 +45,21 @@ INSTALLED_APPS = [
     "fontawesomefree",
     "django_extensions",
     "simple_history",
-  
+
     "core",
     "custom_auth",
     "django_component",
     "geoposition",
 
-
-    "unidades",
     "dominios",
-    "servidores",
-    "painel_indicadores",
+  
+    "agendamento",
     "shared_components",
   
     "logs",
     "usuario_empresa",
     "posicao",
+    "dadosEmpresa",
 ]
 
 MIDDLEWARE = [
@@ -74,8 +73,6 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # My Middleware
     "core.middleware.AuthoringMiddleware",
-    "core.middleware.PermissaoDeUnidadeMiddleware",
-    "core.middleware.PermissaoDeAdolescenteMiddleware",
     "logs.middleware.RequestLogMiddleware",
     # "django_plotly_dash.middleware.BaseMiddleware",
 ]

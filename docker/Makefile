@@ -4,7 +4,7 @@ ifneq ($(filter $(MAKECMDGOALS), dump app test module),)
 	$(eval $(ARG):;@:)
 endif
 
-setup: destroy destroy_db build start remove_migrations migrations migrate populate_grupos populate_base vincula_randomicos testa_aplicacao
+setup: destroy destroy_db build start remove_migrations migrations migrate populate_base vincula_randomicos testa_aplicacao
 	@echo "Local deploy set up!!"
 
 build:

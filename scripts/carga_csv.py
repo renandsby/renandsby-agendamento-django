@@ -1,10 +1,9 @@
 import csv
 from datetime import datetime
-from servidores.models import Servidor
+
 from custom_auth.models import CustomUser
 from dominios.models import Cargo
 
-from unidades.models import Unidade, EntradaAdolescente
 # SCRIPT DE CARGA CSV
 
 
@@ -20,27 +19,27 @@ from unidades.models import Unidade, EntradaAdolescente
 
 
 # CARREGANDO SERVIDORES E CARGOS
-with open('/app/scripts/SERVIDORES28-07.csv', newline='\n') as csvfile:
-    reader = csv.DictReader(csvfile, delimiter=';')
-    for row in reader:
+# with open('/app/scripts/SERVIDORES28-07.csv', newline='\n') as csvfile:
+#     reader = csv.DictReader(csvfile, delimiter=';')
+#     for row in reader:
 
-        try:
-            servidor = Servidor.objects.get(matricula__icontains=row['MATRICULA'])
-            servidor.codigo_lotacao = row['LOTACAO']
-            servidor.descricao_lotacao = row['DESCRICAO LOTACAO']
+#         try:
+#             servidor = Servidor.objects.get(matricula__icontains=row['MATRICULA'])
+#             servidor.codigo_lotacao = row['LOTACAO']
+#             servidor.descricao_lotacao = row['DESCRICAO LOTACAO']
 
-            if row['CARGO']:
-                cargo = Cargo.objects.filter(codigo=row['CARGO'])
-                if cargo.exists():
-                    servidor.cargo = cargo.first()
-                else: 
-                    print('CARGO NÃO ENCONTRADO!', row['CARGO'], row['DENOMINACAO'])
+#             if row['CARGO']:
+#                 cargo = Cargo.objects.filter(codigo=row['CARGO'])
+#                 if cargo.exists():
+#                     servidor.cargo = cargo.first()
+#                 else: 
+#                     print('CARGO NÃO ENCONTRADO!', row['CARGO'], row['DENOMINACAO'])
                 
-            servidor.codigo_funcao = row['CODIGO FUNCAO']
-            servidor.denominacao_funcao = row['DENOMINACAO FUNCAO']
-            servidor.save()
-        except Servidor.DoesNotExist:
-            print('NÃO ENCONTRADO! ->', row['NOME'], row['MATRICULA'])
+#             servidor.codigo_funcao = row['CODIGO FUNCAO']
+#             servidor.denominacao_funcao = row['DENOMINACAO FUNCAO']
+#             servidor.save()
+#         except Servidor.DoesNotExist:
+#             print('NÃO ENCONTRADO! ->', row['NOME'], row['MATRICULA'])
             
         
 
